@@ -35,8 +35,8 @@ Template Name: Введення прихільника
     */  ?>
       <?php // Выводим форму ?>
       <form method="post" enctype="multipart/form-data" id="add_object">
-      	<label> Призвіще <input type="text" name="ufamily" /></label>
-      	<label> Ім'''я <input name="uname" required/></label>
+      	<label> Призвіще <input type="text" name="ufamily" required/></label>
+      	<label> Ім\\'я <input name="uname" required/></label>
       	<label>По-батькові <input type="text" name="ubatk"/></label>
       	<label>Телефон <input name="tel"/></label>
       	<label id="first_img" class='imgs'>Дополнительные фото(произвольное): <input type='file' name='imgs[]'/></label>

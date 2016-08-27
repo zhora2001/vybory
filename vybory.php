@@ -327,7 +327,7 @@ else
       return $query;
   }
 
-  add_filter('pre_get_posts', 'posts_for_current_author');
+//  add_filter('pre_get_posts', 'posts_for_current_author');
 
 add_action('add_meta_boxes', 'my_extra_fields', 1);
 

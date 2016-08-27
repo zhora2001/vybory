@@ -27,6 +27,6 @@ jQuery(document).ready(function(){ // после загрузки страниц
 
   jQuery('#add_img').click(function(e){ // по клику на ссылку "Добавить еще фото"
     e.preventDefault(); // выключим стандартное поведение ссылки
-    jQuery(this).before("<label class='imgs'>Дополнительные фото(произвольное) <input type='file' name='imgs[]'/></label>"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+    jQuery(this).before("<tr> <td><label class='imgs'>Дополнительные фото(произвольное) </label> </td> <td>   <input type='file' name='imgs[]'/></td></tr>"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
   });
 });

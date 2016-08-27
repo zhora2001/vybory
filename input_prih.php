@@ -5,13 +5,21 @@ Template Name: Введення прихільника
 
 
  get_header(); ?>
+
  <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
  </script>
+ <style>
+<!---- input {display:block; float:left;}
+table, td, tr { border: 0px;
+border-collapse: collapse;
+}
+ </style>
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
 
     <div style="margin-left:10px; border:none;">
+
 
       <?php
       /*// подготовим актуальные данные таксономий
@@ -35,15 +43,45 @@ Template Name: Введення прихільника
     */  ?>
       <?php // Выводим форму ?>
       <form method="post" enctype="multipart/form-data" id="add_object">
-      	<label> Призвіще <input type="text" name="ufamily" required/></label>
-      	<label> Ім\\'я <input name="uname" required/></label>
-      	<label>По-батькові <input type="text" name="ubatk"/></label>
-      	<label>Телефон <input name="tel"/></label>
-      	<label id="first_img" class='imgs'>Дополнительные фото(произвольное): <input type='file' name='imgs[]'/></label>
-      	<a href="#" id="add_img">Загрузить еще фото</a>
-      	<input type="submit" name="button" value="Отправить" id="sub"/>
-      	<div id="output"></div> <?php // сюда будем выводить ответ ?>
-
+      <table>
+  <tr>     <td>
+      <label for="ufamily" > Призвіще </label></td>
+         <td><input type="text" id="ufamily" required/> </td>
+         <td>
+             <label for="pasport_copy" > Призвіще </label></td>
+                <td><input type='file' id="pasport_copy" required/> </td>
+</tr>
+ <tr>     <td>	<label for="uid"> Ім'я </label></td>
+    <td><input type="text" id="uname" required/></td>
+</tr>
+      <tr>  <td>	<label for="ubatk">По-батькові </label></td>
+        <td><input type="text" type="text" id="ubatk" required/></td>
+</tr>
+	<tr><td> <label for="tel_o">Телефон (основний) </label></td>
+    <td><input type="tel" id="tel_o" required/></td>
+</tr>
+      <tr><td>  <label for="tel_dod">Телефон (додатковий)</label></td>
+        <td><input type="tel" id="tel_dod"/></td>
+</tr>
+      <tr><td> <label for="sotc_merega">Профиль в соцмережах або скайп</label></td>
+         <td><input type="text" id="sotc_merega"/></td>
+</tr>
+     <tr><td>  <label for="adressa">Адреса </label></td>
+       <td><input type="text"  id="adressa" required/></td>
+</tr>
+   <tr>  <td> <label for="beathday">Дата народження </label></td>
+      <td><input type="date"  id="beathday" required/></td>
+</tr>
+    <tr>  <td colspan="4">
+    	<label id="first_img" class='imgs'>Дополнительные фото(произвольное):
+        <input type='file' id='imgs[]'/></label>
+        <a href="#" id="add_img">Загрузить еще фото</a>
+</td>
+</tr colspan="4">
+   <td>	<input type="submit" name="button" value="Отправить" id="sub"/> </td>
+</tr colspan="4">
+   	<div id="output"></div> <?php // сюда будем выводить ответ ?>
+</tr> </table>
  </div>
 </div><!-- #content -->
 </div><!-- #primary -->

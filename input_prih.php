@@ -6,22 +6,43 @@ Template Name: Введення прихільника
 
  get_header(); ?>
 
- <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
+ <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
  </script>
- <style>
-<!---- input {display:block; float:left;}
-table, td, tr { border: 0px;
+  <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
+ </script>
+  <style>
+table.input_prihil, td, tr{ border: 0px;
 border-collapse: collapse;
 }
- </style>
+input, textarea {
+  border:none;
+  border-bottom: 1px solid;
+    border-top:0px; width:100%;
+    margin-bottom:2px;
+    font-weight:bold;}
+.im_data
+{width:15%;
+text-align: right;
+padding-right: 10px;
+padding-top:10px;
+padding-bottom:10px;
+vertical-align: bottom;}
+
+.val_data
+{vertical-align: bottom;
+  width:35%;
+};
+.adres
+{
+vertical-align: top;
+}
+
+</style>
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
 
-    <div style="margin-left:10px; border:none;">
-
-
-      <?php
+        <?php
       /*// подготовим актуальные данные таксономий
       $childs = "";
       $parents ="";
@@ -43,46 +64,59 @@ border-collapse: collapse;
     */  ?>
       <?php // Выводим форму ?>
       <form method="post" enctype="multipart/form-data" id="add_object">
-      <table>
-  <tr>     <td>
-      <label for="ufamily" > Призвіще </label></td>
-         <td><input type="text" id="ufamily" required/> </td>
-         <td>
-             <label for="pasport_copy" > Призвіще </label></td>
-                <td><input type='file' id="pasport_copy" required/> </td>
+      <table class="input_prihil">
+        <tr>
+          <td class="im_data">
+            <label for="ufamily" > Призвіще </label>
+          </td>
+            <td class="val_data">
+              <input type="text" id="ufamily" required/>
+             </td>
+
+        </tr>
+ <tr>     <td class="im_data">	<label for="uid"> Ім'я </label></td>
+    <td class="val_data">	<input  type="text" id="uname" required/></td>
+    <td class="im_data">
+      <label for="pasport_copy" > Копія паспорта </label>
+    </td>
+    <td class="val_data">
+     <input type='file' id='pasport_copy[]' />
+     <a href="#" id="passport">Завантажити ще</a>
+   </td>
 </tr>
- <tr>     <td>	<label for="uid"> Ім'я </label></td>
-    <td><input type="text" id="uname" required/></td>
+      <tr>  <td class="im_data">	<label for="ubatk">По-батькові </label></td>
+        <td class="val_data">	<input  type="text" type="text" id="ubatk" required/></td>
 </tr>
-      <tr>  <td>	<label for="ubatk">По-батькові </label></td>
-        <td><input type="text" type="text" id="ubatk" required/></td>
+<tr>  <td class="im_data"> <label for="beathday">Дата народження </label></td>
+   <td class="val_data">	<input  type="text"  id="beathday" required/></td>
 </tr>
-	<tr><td> <label for="tel_o">Телефон (основний) </label></td>
-    <td><input type="tel" id="tel_o" required/></td>
+
+<tr> <td class="im_data"> <label for="tel_o">Телефон (осн.) </label></td>
+    <td class="val_data">	<input  type="text" id="tel_o" required/></td>
 </tr>
-      <tr><td>  <label for="tel_dod">Телефон (додатковий)</label></td>
-        <td><input type="tel" id="tel_dod"/></td>
+      <tr> <td class="im_data">  <label for="tel_dod">Телефон (дод.)</label></td>
+        <td class="val_data">	<input  type="text" id="tel_dod"/></td>
 </tr>
-      <tr><td> <label for="sotc_merega">Профиль в соцмережах або скайп</label></td>
-         <td><input type="text" id="sotc_merega"/></td>
+<tr>
+  <td class="im_data" rowspan="2">  <label for="adressa">Адреса </label>
+  </td>
+  <td class="adres" rowspan="2"><textarea type="text"  id="adressa" required/></textarea>
+    </td>
 </tr>
-     <tr><td>  <label for="adressa">Адреса </label></td>
-       <td><input type="text"  id="adressa" required/></td>
+      <tr> <td class="im_data"> <label for="sotc_merega">Профиль в соцмережах або скайп</label></td>
+         <td class="val_data">	<input  type="text" id="sotc_merega"/></td>
 </tr>
-   <tr>  <td> <label for="beathday">Дата народження </label></td>
-      <td><input type="date"  id="beathday" required/></td>
-</tr>
-    <tr>  <td colspan="4">
+
+  <tr>  <td colspan="4">
     	<label id="first_img" class='imgs'>Дополнительные фото(произвольное):
         <input type='file' id='imgs[]'/></label>
-        <a href="#" id="add_img">Загрузить еще фото</a>
+        <a href="#1" id="add_img">Загрузить еще фото</a>
 </td>
 </tr colspan="4">
    <td>	<input type="submit" name="button" value="Отправить" id="sub"/> </td>
 </tr colspan="4">
    	<div id="output"></div> <?php // сюда будем выводить ответ ?>
 </tr> </table>
- </div>
 </div><!-- #content -->
 </div><!-- #primary -->
  <?php get_sidebar( 'content' ); ?>

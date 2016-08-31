@@ -43,5 +43,12 @@ jQuery(document).ready(function(){
     jQuery(this).before("<input type='file' id='pasport_copy[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
   });
 
+  jQuery('#dod_declar').click(function(ff){ // по клику на ссылку "Добавить еще фото"
+    ff.preventDefault(); // выключим стандартное поведение ссылки
+    jQuery(this).before("<input type='file' id='declar[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+  });
+  jQuery('#btn_prihil').on('click',(function(ffа){ // по клику на ссылку "Добавить еще фото"
+	jQuery('#input_prihil').toggle('slow');
+  }));
 
 });

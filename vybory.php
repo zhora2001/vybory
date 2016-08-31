@@ -3,7 +3,7 @@
 Plugin Name: 1Vybory Organizer
 Description: Организация виборчої компании
 Version: 0.01
-Author: Жувак Юра
+Author: Івасик Телесик
 Author URI:
 include ('my_wydget.php');
 */
@@ -690,3 +690,131 @@ add_action( 'widgets_init', 'btru_load_widget' );
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+// Введення прихільник через АЯКС
+add_action( 'wp_ajax_nopriv_add_object_ajax', 'add_object' ); // крепим на событие wp_ajax_nopriv_add_object_ajax, где add_object_ajax это параметр action, который мы добавили в перехвате отправки формы, add_object - ф-я которую надо запустить
+add_action('wp_ajax_add_object_ajax', 'add_object'); // если нужно чтобы вся бадяга работала для админов
+
+function add_object() {
+	$errors = 'dddd'; // сначала ошибок нет
+
+	$nonce = $_POST['nonce']; // берем переданную формой строку проверки
+	if (!wp_verify_nonce($nonce, 'add_object')) { // проверяем nonce код, второй параметр это аргумент из wp_create_nonce
+		$errors .= 'Данные отправлены с левой страницы '; // пишим ошибку
+	}
+
+	// запишем все поля
+  $n_dil = trim(strip_tags($_POST['n_dil'])); // переданный id термина таксономии с вложенностью (родитель)
+  $ufamily = trim(strip_tags($_POST['ufamily'])); // переданный id термина таксономии с вложенностью (родитель)
+	$uname =  trim(strip_tags($_POST['uname'])); // id термина таксономии с вложенностью (его дочка)
+	$ubatk = trim(strip_tags($_POST['ubatk'])); // id обычной таксономии
+  $beathday = strip_tags($_POST['beathday']); // id обычной таксономии
+
+	$tel_o = $_POST['tel_o']; // запишем название поста
+  $tel_dod = $_POST['tel_dod']; // запишем название поста
+  $sotc_merega = strip_tags($_POST['sotc_merega']); // id обычной таксономии
+	$adressa = wp_kses_post($_POST['adressa']); // контент
+
+	$string_field = strip_tags($_POST['string_field']); // произвольное поле типа строка
+	$text_field = wp_kses_post($_POST['text_field']); // произвольное поле типа текстарея
+
+  $likar = $_POST['likar'];
+  $deputat = $_POST['deputat'];
+
+if ($ufamily == '' ||
+    $uname == '' ||
+    $ubatk == '' ||
+    $adressa == '' ||
+    $n_dil == ''||
+    $beathday == '' )
+     $errors .= 'Не всі обовязкові поля заповненні';
+
+	// проверим заполненность, если пусто добавим в $errors строку
+  /*  if (!$child_cat) $errors .= 'Не выбрано "Кастом категория-ребенок xD"';
+    if (!$tag) $errors .= 'Не выбрано "Кастом тэг"';
+    if (!$title) $errors .= 'Не заполнено поле "Тайтл"';
+    if (!$content) $errors .= 'Не заполнено поле "Пост контент"';
+*/
+  $max_file_size = 2;
+    // далее проверим все ли нормально с картинками которые нам отправили
+    if ($_FILES['auto_b']) { // если была передана миниатюра
+   		if ($_FILES['auto_b']['error']) $errors .= "Ошибка загрузки: " . $_FILES['img']['error'].". (".$_FILES['img']['name'].") "; // серверная ошибка загрузки
+    	$type = $_FILES['auto_b']['type'];
+      $size = $_FILES['auto_b']['size'];
+		if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/png"))
+    $errors .= "Формат файла может быть только jpg или png. (".$_FILES['auto_b']['name'].")"; // неверный формат
+    if ( $size >  $max_file_size*1024*1024)
+    $errors .= "Об єм файла більше ніж ".$max_file_size."Мбайт."; // неверный формат
+  }
+
+//Копія кода
+if ($_FILES['id_kod_copy']) { // если была передана миниатюра
+  if ($_FILES['id_kod_copy']['error']) $errors .= "Ошибка загрузки: " . $_FILES['img']['error'].". (".$_FILES['img']['name'].") "; // серверная ошибка загрузки
+  $type = $_FILES['id_kod_copy']['type'];
+  $size = $_FILES['id_kod_copy']['size'];
+if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/png"))
+$errors .= "Формат файла может быть только jpg или png. (".$_FILES['id_kod_copy']['name'].")"; // неверный формат
+if ( $size >  $max_file_size*1024*1024)
+$errors .= "Об'єм файла більше ніж ".$max_file_size."Мбайт."; // неверный формат
+}
+
+  if ($_FILES['declar']) { // если была передана миниатюра
+    if ($_FILES['declar']['error']) $errors .= "Ошибка загрузки: " . $_FILES['img']['error'].". (".$_FILES['img']['name'].") "; // серверная ошибка загрузки
+    $type = $_FILES['declar']['type'];
+    $size = $_FILES['declar']['size'];
+  if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/png"))
+  $errors .= "Формат файла может быть только jpg или png. (".$_FILES['declar']['name'].")"; // неверный формат
+  if ( $size >  $max_file_size*1024*1024)
+  $errors .= "Об'єм файла більше ніж ".$max_file_size."Мбайт."; // неверный формат
+}
+
+	if ($_FILES['imgs']) { // если были переданны дополнительные картинки, пробежимся по ним в цикле и проверим тоже самое
+		foreach ($_FILES['imgs']['name'] as $key => $array) {
+			if ($_FILES['imgs']['error'][$key]) $errors .= "Ошибка загрузки: " . $_FILES['imgs']['error'][$key].". (".$key.$_FILES['imgs']['name'][$key].") ";
+    		$type = $_FILES['imgs']['type'][$key];
+			if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/png")) $errors .= "Формат файла может быть только jpg или png. (".$_FILES['imgs']['name'][$key].")";
+		}
+	}
+
+	if (!$errors) { // если с полями все ок, значит можем добавлять пост
+		$fields = array( // подготовим массив с полями поста, ключ это название поля, значение - его значение
+			'post_type' => 'my_custom_post_type', // нужно указать какой тип постов добавляем, у нас это my_custom_post_type
+	    	'post_title'   => $title, // заголовок поста
+	        'post_content' => $content, // контент
+	    );
+	    $post_id = wp_insert_post($fields); // добавляем пост в базу и получаем его id
+
+	  //update_post_meta($post_id, 'string_field', $string_field); // заполняем произвольное поле типа строка
+	  //  update_post_meta($post_id, 'text_field', $text_field); // заполняем произвольное поле типа текстарея
+
+	  //  wp_set_object_terms($post_id, $parent_cat, 'custom_tax_like_cat', true); // привязываем к пост к таксономиям, третий параметр это слаг таксономии
+	  //  wp_set_object_terms($post_id, $child_cat, 'custom_tax_like_cat', true);
+	  //  wp_set_object_terms($post_id, $tag, 'custom_tax_like_tag', true);
+
+	  //  if ($_FILES['img']) { // если основное фото было загружено
+   	//		$attach_id_img = media_handle_upload( 'img', $post_id ); // добавляем картинку в медиабиблиотеку и получаем её id
+   	//		update_post_meta($post_id,'_thumbnail_id',$attach_id_img); // привязываем миниатюру к посту
+	//	}
+
+		if ($_FILES['imgs']) { // если дополнительные фото были загружены
+			$imgs = array(); // из-за того, что дефолтный массив с загруженными файлами в пхп выглядит не так как нужно, а именно вся инфа о файлах лежит в разных массивах но с одинаковыми ключами, нам нужно создать свой массив с блэкджеком, где у каждого файла будет свой массив со всеми данными
+			foreach ($_FILES['imgs']['name'] as $key => $array) { // пробежим по массиву с именами загруженных файлов
+				$file = array( // пишем новый массив
+					'name' => $_FILES['imgs']['name'][$key],
+					'type' => $_FILES['imgs']['type'][$key],
+					'tmp_name' => $_FILES['imgs']['tmp_name'][$key],
+					'error' => $_FILES['imgs']['error'][$key],
+					'size' => $_FILES['imgs']['size'][$key]
+				);
+				$_FILES['imgs'.$key] = $file; // записываем новый массив с данными в глобальный массив с файлами
+		//		$imgs[] = media_handle_upload( 'imgs'.$key, $post_id ); // добавляем текущий файл в медиабиблиотека, а id картинки суем в другой массив
+			}
+		//	update_post_meta($post_id,'multifile_field',$imgs); // привязываем все картинки к посту
+		}
+	}
+
+	if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
+	else wp_send_json_success('Все прошло отлично! Добавлено ID:'.$post_id); // если все ок, выводим ответ в формате json с success = true и умираем
+
+	die(); // умрем еще раз на всяк случ
+}

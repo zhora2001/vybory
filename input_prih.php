@@ -6,10 +6,12 @@ Template Name: Введення прихільника
 
  get_header(); ?>
 
+ <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
  <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
  </script>
   <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
  </script>
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
   <style>
 h1 {margin-left: 50px;
 margin-bottom: 20px;}
@@ -206,8 +208,8 @@ margin-bottom: 20px;
                   <label for="passport[]" class='imgs'>Копія паспорта:</label>
                   </td>
                   <td class="val_data">
-                    <input type='file' name='passport[]' id='passport[]'/>
-                       <a href="#1" id="passport">додати ще</a>
+                    <input type='file' name='passport[]' id='passport'/>
+                       <a href="#" id="pass">додати ще</a>
                      </td>
               </tr>
               <tr>
@@ -278,8 +280,66 @@ margin-bottom: 20px;
 </table>
 <div id="output"></div> <?php // сюда будем выводить ответ ?>
 </div>
+<div>
+<?php
+
+$params = array(
+    //'where'   => 't.name LIKE "%rings%"',
+    //'limit'   => -1  // Return all rows
+);
+
+// Create and find in one shot
+$prihil = pods( 'add_prhilnyk', $params );
+$f = array('ufamily', 'uname', 'ubatk');
+if ( 0 < $prihil->total() ) {
+    while ( $prihil->fetch() ) {
+$id = $prihil->id();
+?>
+
+    <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>"><?php echo $id." ".$prihil->display( 'ufamily')." ".
+                  $prihil->display( 'uname')." ".
+                  $prihil->display( 'ubatk')." "." ".
+                  $prihil->display( 'beathday').
+                  $prihil->display( 'adressa') ; ?></a>
+    <p style = "display:none;"><?php echo $prihil->display( 'id'); ?><p>
+     <button type="button" id="change_prihil"> Змінити </button>
+    <br />
+
+
+
+<?php
+}
+}
+/*
+<p>Author: <?php echo $prihil->display( 'the_author' ); ?></p>
+<br />
+<p>Category: <?php echo $prihil->display( 'category' ); ?></p>
+*/
+/*
+
+
+
+$q = array('post_type'=>'add_prhilnyk');
+$my_posts = get_posts($q);
+foreach ($my_posts as $post) :
+setup_postdata($post);
+?>
+<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+</h2>
+<?php echo $post->ID; ?>
+<?php print_r(get_post_meta($post->ID, 'ufamily')); ?>
+<?php print_r(get_post_custom()); ?>
+
+<h2 class="entry-title"><?php the_content(); ?>><?php  ?>
+</h2>
+
+<?php endforeach; */?>
+</div>
+
 </div><!-- #content -->
 </div><!-- #primary -->
+
+
  <?php get_sidebar( 'content' ); ?>
 </div><!-- #main-content -->
 

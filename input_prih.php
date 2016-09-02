@@ -36,7 +36,7 @@ vertical-align: bottom;}
 .val_data
 {vertical-align: bottom;
   width:30%;
-};
+}
 .adres
 {
 vertical-align: top;

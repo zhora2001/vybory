@@ -9,6 +9,20 @@ function response_go(out)  { // ф-я обработки ответа от wp, �
 }
 
 jQuery(document).ready(function(){
+
+  jQuery(".various").fancybox({
+  		maxWidth	: 800,
+  		maxHeight	: 600,
+  		fitToView	: false,
+//  		width		: '70%',
+//  		height		: '70%',
+  		autoSize	: true,
+  		closeClick	: true,
+  		openEffect	: 'none',
+  		closeEffect	: 'none'
+  	});
+    jQuery('a.iframe').fancybox();
+	jQuery('#input_prihil').hide();
   jQuery(function(u){
      jQuery("#beathday").mask("99/99/9999",{placeholder:"дд.мм.рррр"});
      jQuery("#tel_o").mask("(999) 999-9999");
@@ -32,23 +46,28 @@ jQuery(document).ready(function(){
   };
   add_form.ajaxForm(options); // подрубаем плагин jquery form с опциями на нашу форму
 
-  jQuery('#add_img').click(function(e){ // по клику на ссылку "Добавить еще фото"
-    e.preventDefault(); // выключим стандартное поведение ссылки
-    jQuery(this).before("<tr> <td><label class='imgs'>Дополнительные фото(произвольное) </label> </td> \
-     <td>   <input type='file' name='imgs[]'/></td></tr>"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
-  });
-
-  jQuery('#passport').click(function(gg){ // по клику на ссылку "Добавить еще фото"
+  jQuery('#pass').click(function(gg){ // по клику на ссылку "Добавить еще фото"
     gg.preventDefault(); // выключим стандартное поведение ссылки
-    jQuery(this).before("<input type='file' id='pasport_copy[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+    jQuery(this).before("<input type='file' name='passport[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
   });
 
   jQuery('#dod_declar').click(function(ff){ // по клику на ссылку "Добавить еще фото"
     ff.preventDefault(); // выключим стандартное поведение ссылки
-    jQuery(this).before("<input type='file' id='declar[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+    jQuery(this).before("<input type='file' name='declar[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
   });
+
   jQuery('#btn_prihil').on('click',(function(ffа){ // по клику на ссылку "Добавить еще фото"
-	jQuery('#input_prihil').toggle('slow');
+	if(jQuery('#input_prihil').is(':hidden'))
+		{
+		jQuery('#input_prihil').show('slow');
+		}
+     else
+		{
+		jQuery('#input_prihil').hide('slow');
+		}
+
+
+
   }));
 
 });

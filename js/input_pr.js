@@ -2,6 +2,15 @@ function ajax_go(data, jqForm, options) { //ф-я перед отправкой 
   	jQuery('#output').html('Отправляем...'); // в див для ответа напишем "отправляем.."
   	jQuery('#sub').attr("disabled", "disabled"); // кнопку выключим
 }
+
+function response_go_ch (out)
+{
+  //  jQuery(this).html(out.data.ID);
+    jQuery('#output').html(out.data.ID);
+        jQuery('#output').text(out.data.ID);
+        	console.log(out);
+}
+
 function response_go(out)  { // ф-я обработки ответа от wp, в out будет элемент success(bool), который зависит от ф-и вывода которую мы использовали в обработке(wp_send_json_error() или wp_send_json_success()), и элемент data в котором будет все что мы передали аргументом к ф-и wp_send_json_success() или wp_send_json_error()
 	console.log(out); // для дебага
 	jQuery('#sub').prop("disabled", false); // кнопку включим
@@ -10,6 +19,14 @@ function response_go(out)  { // ф-я обработки ответа от wp, �
 
 jQuery(document).ready(function(){
 
+jQuery(".prihil_nyk").mouseover(function(){
+    jQuery(this).find(".change_prihil").show();
+
+});
+jQuery(".prihil_nyk").mouseout(function(){
+    jQuery(this).find(".change_prihil").hide();
+
+});
   jQuery(".various").fancybox({
   		maxWidth	: 800,
   		maxHeight	: 600,
@@ -66,8 +83,23 @@ jQuery(document).ready(function(){
 		jQuery('#input_prihil').hide('slow');
 		}
 
+//Зміна данних прихільника
+      }));
 
 
-  }));
+      jQuery(".change_prihil").click(function(ggg){ // по клику на ссылку "Добавить еще фото"
+  ggg.preventDefault(); // выключим стандартное поведение ссылки
+var a1 = jQuery(this);
+    jQuery.ajax({
+          url: ajaxchange.url,
+          data: { // дополнительные параметры для отправки вместе с данными формы
+            action : 'change_object_ajax', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
+            nonce: ajaxchange.nonce // строка для проверки, что форма отправлена откуда надо
+          },
+      dataType: 'json',
+      success:  response_go_ch,
+      //  jQuery(this).before("<input type='file' name='passport[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+      });
 
+});
 });

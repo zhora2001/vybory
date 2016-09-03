@@ -431,10 +431,10 @@ add_action('admin_head', 'wph_ban_color_scheme');
 function gb_disable_user_profile() {
 
 $user = wp_get_current_user();
- if( IS_PROFILE_PAGE === true )
+ //if( IS_PROFILE_PAGE === true )
  {
-if ( !in_array('administrator', $user->roles ))
-  wp_die( 'Пожалуйста, свяжитесь с администрацией сайта, если хотите отредактировать свой профиль.' );
+//if ( !in_array('administrator', $user->roles ))
+//  wp_die( 'Пожалуйста, свяжитесь с администрацией сайта, если хотите отредактировать свой профиль.' );
  }
 
 
@@ -457,7 +457,7 @@ add_action( 'wp_before_admin_bar_render', 'gb_admin_bar_render' );
 
 function gb_login_redirect( $redirect_to, $user )
 {
- //global $user;
+ global $user;
 
 if ( $user->user_login != 'admin' ){
  $redirect_to = '/';
@@ -687,6 +687,7 @@ add_action( 'widgets_init', 'btru_load_widget' );
 add_action( 'wp_ajax_nopriv_add_object_ajax', 'add_object' ); // крепим на событие wp_ajax_nopriv_add_object_ajax, где add_object_ajax это параметр action, который мы добавили в перехвате отправки формы, add_object - ф-я которую надо запустить
 add_action('wp_ajax_add_object_ajax', 'add_object'); // если нужно чтобы вся бадяга работала для админов
 
+
 function add_object() {
 	$errors = ''; // сначала ошибок нет
 
@@ -696,7 +697,8 @@ function add_object() {
 	}
 
 	// запишем все поля
-  $n_dil = trim(strip_tags($_POST['n_dil'])); // переданный id термина таксономии с вложенностью (родитель)
+  $n_diln = trim(strip_tags($_POST['n_diln'])); // переданный id термина таксономии с вложенностью (родитель)
+  $n_prih = trim(strip_tags($_POST['n_prih'])); // переданный id термина таксономии с вложенностью (родитель)
   $ufamily = trim(strip_tags($_POST['ufamily'])); // переданный id термина таксономии с вложенностью (родитель)
 	$uname =  trim(strip_tags($_POST['uname'])); // id термина таксономии с вложенностью (его дочка)
 	$ubatk = trim(strip_tags($_POST['ubatk'])); // id обычной таксономии
@@ -726,7 +728,7 @@ if ($ufamily == '' ||
     $uname == '' ||
     $ubatk == '' ||
     $adressa == '' ||
-    $n_dil == ''||
+    $n_diln == ''||
     $beathday == '' )
      $errors .= 'Не всі обовязкові поля заповненні';
 
@@ -785,11 +787,15 @@ $errors .= "Об'єм файла більше ніж ".$max_file_size."Мбай�
   //    save_post () ;
 
 // Створюємо новий обєкт pods
+if ($n_prih != '-1' && $n_prih != '')
+  $pod = pods( 'add_prhilnyk' , $n_prih);
+else
   $pod = pods( 'add_prhilnyk' );
-  $fil_url = $_FILES['id_kod_copy']['tmp_name'];
- $title = $fil_url;
+
+ $title = $ufamily." ".$uname." ".$ubatk;
   $data = array(
-    'id' => '233',
+    //'id' => $n_prih,
+    'n_diln' => $n_diln,
     'title' =>  $title ,
     'ufamily'=> $ufamily, // заполняем произвольное поле типа строка
     'uname'=>  $uname, // заполняем произвольное поле типа строка
@@ -813,9 +819,14 @@ $errors .= "Об'єм файла більше ніж ".$max_file_size."Мбай�
       'pidpr'=>  $pidpr,
        //'id_kod_copy' => pods_attachment_import ( $fil_url)
 );
-
+if ($pod != '')
+{
+  $post_id = $pod->id();
+if( $post_id != $n_prih)
 $post_id = $pod->add( $data );
-
+else {
+  $pod->save( $data );
+}
   /*   'likar'=>  $likar);
      'deputat'=>  $deputat);
      'derzh_sl'=> $derzh_sl);
@@ -858,8 +869,7 @@ $post_id = $pod->add( $data );
 	  //  wp_set_object_terms($post_id, $parent_cat, 'custom_tax_like_cat', true); // привязываем к пост к таксономиям, третий параметр это слаг таксономии
 	  //  wp_set_object_terms($post_id, $child_cat, 'custom_tax_like_cat', true);
 	  //  wp_set_object_terms($post_id, $tag, 'custom_tax_like_tag', true);
-
-	  if ($_FILES['auto_b']) { // если основное фото было загружено
+  if ($_FILES['auto_b']) { // если основное фото было загружено
   		$attach_id_img = media_handle_upload( 'auto_b', $post_id ); // добавляем картинку в медиабиблиотеку и получаем её id
   		update_post_meta($post_id,'auto_b',$attach_id_img); // привязываем миниатюру к посту
 		}
@@ -902,8 +912,34 @@ $post_id = $pod->add( $data );
 }
 
 }
+}
+else
+$errors .= "Трапилась помилка при додавані. Перевірте значення полів.";
 	if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
-	else wp_send_json_success('Все прошло отлично! Добавлено ID:'.$post_id); // если все ок, выводим ответ в формате json с success = true и умираем
+	else wp_send_json_success('Все прошло отлично! Добавлено ID:'.$post_id.' '.$n_prih); // если все ок, выводим ответ в формате json с success = true и умираем
+
+	die(); // умрем еще раз на всяк случ
+}
+
+add_action( 'wp_ajax_nopriv_change_object_ajax', 'change_object' ); // крепим на событие wp_ajax_nopriv_add_object_ajax, где add_object_ajax это параметр action, который мы добавили в перехвате отправки формы, add_object - ф-я которую надо запустить
+add_action('wp_ajax_change_object_ajax', 'change_object'); // если нужно чтобы вся бадяга работала для админов
+
+function change_object() {
+	$errors = ''; // сначала ошибок нет
+
+	$nonce = $_REQUEST['nonce']; // берем переданную формой строку проверки
+	if (!wp_verify_nonce($nonce, 'change_object')) { // проверяем nonce код, второй параметр это аргумент из wp_create_nonce
+		$errors .= 'Данные отправлены с левой страницы '; // пишим ошибку
+	}
+
+  $return = array(
+  	'message'   => 'Сохранено',
+  	'ID'        => 1
+  );
+	// запишем все поля
+  $id_p = trim(strip_tags($_REQUEST['id_p'])); // переданный id термина таксономии с вложенностью (родитель)
+  if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
+	else wp_send_json_success($return); // если все ок, выводим ответ в формате json с success = true и умираем
 
 	die(); // умрем еще раз на всяк случ
 }

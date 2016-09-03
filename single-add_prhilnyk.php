@@ -22,6 +22,7 @@ require_once __DIR__.'/header-add_prhilnyk.php';
 					$prihil = pods('add_prhilnyk', $post->ID );
 //					$prihil = pods('add_prhilnyk',$post->ID);
 ?>
+					<h2>Дільниця № <?php echo  $prihil->display( 'n_diln');?> </h2>
 					<table class="input_prihil" >
 					<tr>
 						<td class="im_data">

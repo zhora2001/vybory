@@ -65,7 +65,25 @@ margin-bottom: 20px;
 }
  input.btn1{width: 75%;}
  .n_dil {margin-bottom: 15px;}
+ .prihil_nyk {height: 40px;}
+ .prihil_nyk p {
+   line-height: 1;
+   margin-bottom: 0px;
+   margin-top: 0px;
+   -webkit-margin-before:0em;
+  -webkit-margin-after:0em;
+}
+  .prihil_nyk a {
+    line-height: 1;
+  }
+  .change_prihil
+  {
+    margin-top: -2px;
+    margin-left: 15px;
+    font-weight: bold;
+  font-size: 0.8em;}
 </style>
+
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
@@ -91,10 +109,11 @@ margin-bottom: 20px;
     */  ?>
       <?php // Выводим форму ?>
 <button id="btn_prihil" type="button"> Додати прихільника </button>
+<div id="output"></div>
 
         <div id="input_prihil">
         <h1>Ведення прихільника</h1>
-    <br/>
+    <br>
       <form method="post" enctype="multipart/form-data" id="add_object">
     <table class="input_prihil">
         <tr>
@@ -102,7 +121,8 @@ margin-bottom: 20px;
             Номер дільниці:
           </td>
           <td  id="nom_dil">
-              <input type="text" id="n_dil" name="n_dil" value = "1" required/>
+              <input type="text" id="n_diln" name="n_diln" value = "1" required/>
+              <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
           </td>          <td>
           </td>
           <td>
@@ -274,13 +294,13 @@ margin-bottom: 20px;
           <div >
           <input class = "btn1" type="submit" name="button" value="Отправить" id="sub"/>
           </div>
-
         </td>
 </tr>
 </table>
-<div id="output"></div> <?php // сюда будем выводить ответ ?>
-</div>
+</form>
 <div>
+
+
 <?php
 
 $params = array(
@@ -295,15 +315,19 @@ if ( 0 < $prihil->total() ) {
     while ( $prihil->fetch() ) {
 $id = $prihil->id();
 ?>
-
+<?php // сюда будем выводить ответ ?>
+</div>
+<div class="prihil_nyk">
     <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>"><?php echo $id." ".$prihil->display( 'ufamily')." ".
                   $prihil->display( 'uname')." ".
                   $prihil->display( 'ubatk')." "." ".
                   $prihil->display( 'beathday').
                   $prihil->display( 'adressa') ; ?></a>
-    <p style = "display:none;"><?php echo $prihil->display( 'id'); ?><p>
-     <button type="button" id="change_prihil"> Змінити </button>
-    <br />
+    <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
+     <p>
+       <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
+     </p>
+</div>
 
 
 

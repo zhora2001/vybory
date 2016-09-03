@@ -9,6 +9,10 @@ function response_go_ch (out)
     jQuery('#output').html(out.data.ID);
         jQuery('#output').text(out.data.ID);
         	console.log(out);
+	jQuery('#input_prihil').show('slow');
+
+  jQuery('#uname').val(out.data.uname);
+  jQuery('#uname').val(out.data.uname);
 }
 
 function response_go(out)  { // ф-я обработки ответа от wp, в out будет элемент success(bool), который зависит от ф-и вывода которую мы использовали в обработке(wp_send_json_error() или wp_send_json_success()), и элемент data в котором будет все что мы передали аргументом к ф-и wp_send_json_success() или wp_send_json_error()
@@ -90,11 +94,14 @@ jQuery(".prihil_nyk").mouseout(function(){
       jQuery(".change_prihil").click(function(ggg){ // по клику на ссылку "Добавить еще фото"
   ggg.preventDefault(); // выключим стандартное поведение ссылки
 var a1 = jQuery(this);
+var a2 = a1.closest('.prihil_nyk').find('.id_p');
+console.log(a2);
     jQuery.ajax({
           url: ajaxchange.url,
           data: { // дополнительные параметры для отправки вместе с данными формы
             action : 'change_object_ajax', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
-            nonce: ajaxchange.nonce // строка для проверки, что форма отправлена откуда надо
+            nonce: ajaxchange.nonce, // строка для проверки, что форма отправлена откуда надо
+            id_p: a2.text(),
           },
       dataType: 'json',
       success:  response_go_ch,

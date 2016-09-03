@@ -932,14 +932,50 @@ function change_object() {
 		$errors .= 'Данные отправлены с левой страницы '; // пишим ошибку
 	}
 
-  $return = array(
-  	'message'   => 'Сохранено',
-  	'ID'        => 1
-  );
+
 	// запишем все поля
   $id_p = trim(strip_tags($_REQUEST['id_p'])); // переданный id термина таксономии с вложенностью (родитель)
+  if ($id_p  > 0)
+    $pod = pods( 'add_prhilnyk' , $id_p);
+
+
+if (isset($pod))
+{
+/*  $return = array(
+  'n_diln' => $n_diln,
+  'title' =>  $title ,
+  'ufamily'=> $ufamily, // заполняем произвольное поле типа строка
+  'uname'=>  $uname, // заполняем произвольное поле типа строка
+   'ubatk'=>  $ubatk, // заполняем произвольное поле типа строка
+   'tel_o'=>  $tel_o, // заполняем произвольное поле типа строка
+   'tel_dod'=>  $tel_dod, // заполняем произвольное поле типа строка
+   'sotc_merega'=>  $sotc_merega, // заполняем произвольное поле типа строка
+   'adressa'=>  $adressa, // заполняем произвольное поле типа строка
+   'beathday'=>  $beathday, // заполняем произвольное поле типа строка
+   'id_kod'=>  $id_kod, // заполняем произвольное поле типа строка
+   'beathday'=>  $beathday, // заполняем произвольное поле типа строка
+   'likar'=>  $likar,
+    'deputat'=>  $deputat,
+    'derzh_sl'=> $derzh_sl,
+    'bezrob'=>  $bezrob,
+    'pensioner'=>  $pensioner,
+    'ato'=>  $ato,
+    'invalid'=>  $invalid,
+    'autoritet'=>  $autoritet,
+    'uchitel'=>  $uchitel,
+    'pidpr'=>  $pidpr,
+);
+*/
+$return = array(
+  'message'   => 'Сохранено',
+  'ID'        => 1
+);
+}
+else {
+  $errors.= "Не вірний код.";
+}
   if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
-	else wp_send_json_success($return); // если все ок, выводим ответ в формате json с success = true и умираем
+	else wp_send_json_success($pod->export()); // если все ок, выводим ответ в формате json с success = true и умираем
 
 	die(); // умрем еще раз на всяк случ
 }

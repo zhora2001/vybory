@@ -298,7 +298,8 @@ margin-bottom: 20px;
 </tr>
 </table>
 </form>
-<div>
+
+</div>
 
 
 <?php
@@ -316,7 +317,6 @@ if ( 0 < $prihil->total() ) {
 $id = $prihil->id();
 ?>
 <?php // сюда будем выводить ответ ?>
-</div>
 <div class="prihil_nyk">
     <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>"><?php echo $id." ".$prihil->display( 'ufamily')." ".
                   $prihil->display( 'uname')." ".
@@ -358,10 +358,10 @@ setup_postdata($post);
 </h2>
 
 <?php endforeach; */?>
-</div>
 
+</div>
 </div><!-- #content -->
-</div><!-- #primary -->
+<!-- #primary -->
 
 
  <?php get_sidebar( 'content' ); ?>

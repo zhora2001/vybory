@@ -11,8 +11,26 @@ function response_go_ch (out)
         	console.log(out);
 	jQuery('#input_prihil').show('slow');
 
+  jQuery('#ufamily').val(out.data.ufamily);
   jQuery('#uname').val(out.data.uname);
+  jQuery('#ubatk').val(out.data.ubatk);
   jQuery('#uname').val(out.data.uname);
+  jQuery('#tel_o').val(out.data.tel_o); // заполняем произвольное поле типа строка
+  jQuery('#tel_dod').val(out.data.tel_dod); // заполняем произвольное поле типа строка
+  jQuery('#sotc_merega').val(out.data.sotc_merega); // заполняем произвольное поле типа строка
+  jQuery('#adressa').val(out.data.adressa); // заполняем произвольное поле типа строка
+  jQuery('#beathday').val(out.data.beathday); // заполняем произвольное поле типа строка
+  jQuery('#id_kod').val(out.data.id_kod); // заполняем произвольное поле типа строка
+  jQuery('#likar').val(out.data.likar);
+  jQuery('#deputat').val(out.data.deputat);
+  jQuery('#derzh_sl').val(out.data.derzh_sl);
+  jQuery('#bezrob').val(out.data.bezrob);
+  jQuery('#pensioner').val(out.data.pensioner);
+  jQuery('#ato').val(out.data.ato);
+  jQuery('#invalid').val(out.data.invalid);
+  jQuery('#autoritet').val(out.data.autoritet);
+  jQuery('#uchitel').val(out.data.uchitel);
+  jQuery('#pidpr').val(out.data.pidpr);
 }
 
 function response_go(out)  { // ф-я обработки ответа от wp, в out будет элемент success(bool), который зависит от ф-и вывода которую мы использовали в обработке(wp_send_json_error() или wp_send_json_success()), и элемент data в котором будет все что мы передали аргументом к ф-и wp_send_json_success() или wp_send_json_error()

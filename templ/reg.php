@@ -5,7 +5,7 @@ Template Name: Вхід користувача
 
 
  get_header(); ?>
- <script src="<?php echo get_template_directory_uri() ?>/js/check_pr.js">
+ <script src="<?php echo get_template_directory_uri() ?>/js/for_users.js">
  </script>
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area">

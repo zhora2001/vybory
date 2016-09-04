@@ -27,5 +27,5 @@ $creds = array( // создаем массив с данными для логи
 );
 $user = wp_signon( $creds, false ); // пробуем залогинется
 if (is_wp_error($user)) wp_send_json_error(array('message' => 'Ошибочное логин/email или пароль.', 'redirect' => false)); // если вернулся объект с ошибкой  - умираем и пешем ошибку, уточнять не будем
-else wp_send_json_success(array('message' => 'Приветик '.$user->display_name.'. Загрузка ...', 'redirect' => $redirect_to)); // иначе все прошло ок и юзера залогинили пишем что все ок и отпраляем
+else wp_send_json_success(array('message' => 'Раді Вас бачити...'.$user->display_name.'. Завантажуємось ...', 'redirect' => $redirect_to)); // иначе все прошло ок и юзера залогинили пишем что все ок и отпраляем
 ?>

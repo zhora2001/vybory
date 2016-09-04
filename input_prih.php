@@ -65,7 +65,7 @@ margin-bottom: 20px;
 }
  input.btn1{width: 75%;}
  .n_dil {margin-bottom: 15px;}
- .prihil_nyk {height: 40px;}
+ .prihil_nyk {height: 20px;}
  .prihil_nyk p {
    line-height: 1;
    margin-bottom: 0px;
@@ -75,13 +75,24 @@ margin-bottom: 20px;
 }
   .prihil_nyk a {
     line-height: 1;
+//    text-decoration: underline;
   }
-  .change_prihil
+  .change_prihil, .view_prihil
   {
     margin-top: -2px;
     margin-left: 15px;
     font-weight: bold;
-  font-size: 0.8em;}
+    font-size: 0.8em;
+    text-decoration: underline
+}
+.various
+{
+  margin-left: 15px;
+//  font-weight: bold;
+//  font-size: 0.8em;
+//  text-decoration: underline
+}
+
 </style>
 
  <div id="main-content" class="main-content">
@@ -292,7 +303,7 @@ margin-bottom: 20px;
      </td>
         <td>
           <div >
-          <input class = "btn1" type="submit" name="button" value="Отправить" id="sub"/>
+          <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
           </div>
         </td>
 </tr>
@@ -318,15 +329,22 @@ $id = $prihil->id();
 ?>
 <?php // сюда будем выводить ответ ?>
 <div class="prihil_nyk">
-    <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>"><?php echo $id." ".$prihil->display( 'ufamily')." ".
-                  $prihil->display( 'uname')." ".
-                  $prihil->display( 'ubatk')." "." ".
-                  $prihil->display( 'beathday').
-                  $prihil->display( 'adressa') ; ?></a>
+    <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>">
+        <?php echo
+                  "Дільниця № ".$prihil->display( 'n_diln')." &nbsp&nbsp".
+                  $prihil->display( 'ufamily')." &nbsp&nbsp".
+                  $prihil->display( 'uname')." &nbsp&nbsp".
+                  $prihil->display( 'ubatk')." &nbsp&nbsp".
+                  $prihil->display( 'beathday')." &nbsp&nbsp".
+                  $prihil->display( 'adressa')."&nbsp&nbsp" ; ?></a>
+                  <span>
+                    <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>" style = "display:none;" class="view_prihil"> Перегляд </a>
+                  </span>
+                  <span>
+                    <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
+                  </span>
     <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
-     <p>
-       <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
-     </p>
+
 </div>
 
 

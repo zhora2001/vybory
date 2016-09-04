@@ -8,6 +8,7 @@ Author URI:
 include ('my_wydget.php');
 */
 
+require_once dirname(__DIR__) . '/login/route.php'; // подключаем распределитель дел
 
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 { die('You are not allowed to call this page directly.'); }

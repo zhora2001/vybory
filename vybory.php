@@ -295,132 +295,30 @@ add_user_meta( $user_ID, "kusch", $_POST['ksch'],false );
 // Обмеження для своїх постів
 
   function posts_for_current_author($query) {
-      global $pagenow;
-      global $pagenow;
+//      global $pagenow;
+       global $pagenow;
 
       if ( !is_user_logged_in() )
-      {
+{
 //   if ( $query->is_front_page() && $query->is_main_query() )
-  $query->set('author',7);
-	register_nav_menus(
-		array( // создаём любое количество областей
-		  'false_menu' => 'Главное меню', // 'имя' => 'описание'
-		  	)
-	);
-// wp_nav_menu('menu=false_menu');
-//  wp_nav_menu( array( 'menu' => 'false_menu' ) );
+  $query->set('author','7');
 }
 else
 {
   $current_user = wp_get_current_user();
     if ( $current_user->ID !=7 )
     $query->set('author__not_in',array(7));
-
       if( 'edit.php' != $pagenow || !$query->is_admin )
           return $query;
-
       if( !current_user_can( 'edit_others_posts' ) ) {
           global $user_ID;
           $query->set('author', $user_ID);
             }
-
-}
+          }
       return $query;
   }
+//add_filter('pre_get_posts', 'posts_for_current_author');
 
-//  add_filter('pre_get_posts', 'posts_for_current_author');
-
-add_action('add_meta_boxes', 'my_extra_fields', 1);
-
-function my_extra_fields() {
-	add_meta_box( 'extra_fields', 'Дополнительные поля', 'extra_fields_box_func', 'post', 'normal', 'high'  );
-}
-
-// код блока
-function extra_fields_box_func( $post ){
-	?>
-
-
-	  <table class="form-table" id="dn">
-	      <tr class="form-field">
-	          <th> <p>Дільниці </p></th>
-	          <td>
-	                  <select name="extra[diln]">
-	                      <?php
-	                      $var3 = '1';
-	                      $result = file(__DIR__.'/diln.txt');
-	                      $key = 'diln';
-	                      $var2 = get_user_meta( $user->ID, $key, true );
-												$var4 = get_post_meta($post->ID, 'diln', 1);
-	                      foreach($result as $var1)
-	                      {
-	                        if( trim($var1) == trim($var4))
-	                        {
-	                        echo "<option value=".$var1." selected>Дільниця № $var1 </option>";
-	                        $var3 = '2';
-	                        }
-	                        else {
-	                          echo "<option value=".$var1.">Дільниця № $var1 </option>";
-
-	                        }
-	                      }
-	                      if ($var3 == '1')
-	                    echo " <option disabled selected>Выберіть дільницю</option>
-	                    ";
-	                    ?>
-	                  </select>
-	          </td>
-	      </tr>
-	  </table>
-
-	<p><label><input type="text" name="extra[title]" value="<?php echo get_post_meta($post->ID, 'title', 1); ?>" style="width:50%" /> ? заголовок страницы (title)</label></p>
-
-	<p>Описание статьи (description):
-		<textarea type="text" name="extra[description]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'description', 1); ?></textarea>
-	</p>
-
-	<p>Видимость поста: <?php $mark_v = get_post_meta($post->ID, 'robotmeta', 1); ?>
-		 <label><input type="radio" name="extra[robotmeta]" value="" <?php checked( $mark_v, '' ); ?> /> index,follow</label>
-		 <label><input type="radio" name="extra[robotmeta]" value="nofollow" <?php checked( $mark_v, 'nofollow' ); ?> /> nofollow</label>
-		 <label><input type="radio" name="extra[robotmeta]" value="noindex" <?php checked( $mark_v, 'noindex' ); ?> /> noindex</label>
-		 <label><input type="radio" name="extra[robotmeta]" value="noindex,nofollow" <?php checked( $mark_v, 'noindex,nofollow' ); ?> /> noindex,nofollow</label>
-	</p>
-
-	<p><select name="extra[select]" />
-			<?php $sel_v = get_post_meta($post->ID, 'select', 1); ?>
-			<option value="0">----</option>
-			<option value="1" <?php selected( $sel_v, '1' )?> >Выбери меня</option>
-			<option value="2" <?php selected( $sel_v, '2' )?> >Нет, меня</option>
-			<option value="3" <?php selected( $sel_v, '3' )?> >Лучше меня</option>
-		</select> ? выбор за вами</p>
-
-	<input type="hidden" name="extra_fields_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
-	<?php
-}
-
-// включаем обновление полей при сохранении
-add_action('save_post', 'my_extra_fields_update', 0);
-
-/* Сохраняем данные, при сохранении поста */
-function my_extra_fields_update( $post_id ){
-	if ( !wp_verify_nonce($_POST['extra_fields_nonce'], __FILE__) ) return false; // проверка
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE  ) return false; // если это автосохранение
-	if ( !current_user_can('edit_post', $post_id) ) return false; // если юзер не имеет право редактировать запись
-
-	if( !isset($_POST['extra']) ) return false;
-
-	// Все ОК! Теперь, нужно сохранить/удалить данные
-	$_POST['extra'] = array_map('trim', $_POST['extra']);
-	foreach( $_POST['extra'] as $key=>$value ){
-		if( empty($value) ){
-			delete_post_meta($post_id, $key); // удаляем поле если значение пустое
-			continue;
-		}
-
-		update_post_meta($post_id, $key, $value); // add_post_meta() работает автоматически
-	}
-	return $post_id;
-}
 
 function wph_ban_color_scheme() {
     global $_wp_admin_css_colors;
@@ -828,43 +726,6 @@ $post_id = $pod->add( $data );
 else {
   $pod->save( $data );
 }
-  /*   'likar'=>  $likar);
-     'deputat'=>  $deputat);
-     'derzh_sl'=> $derzh_sl);
-     'bezrob'=>  $bezrob);
-     'pensioner'=>  $pensioner);
-     'ato'=>  $ato);
-     'invalid', $invalid);
-     'autoritet', $autoritet);
-     'uchitel', $uchitel);
-     'pidpr', $pidpr);
-    $post_id = wp_insert_post($fields); // добавляем пост в базу и получаем его id
-    $fields = array( // подготовим массив с полями поста, ключ это название поля, значение - его значение
-      'ufamily' => $ufamily, // нужно указать какой тип постов добавляем, у нас это my_custom_post_type
-        '$uname'   => $uname, // заголовок поста
-          );
-	    update_post_meta($post_id, 'ufamily', $ufamily); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'uname', $uname); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'ubatk', $ubatk); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'tel_o', $tel_o); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'tel_dod', $tel_dod); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'sotc_merega', $sotc_merega); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'adressa', $adressa); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'beathday', $beathday); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'id_kod', $id_kod); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'beathday', $beathday); // заполняем произвольное поле типа строка
-    update_post_meta($post_id, 'likar', $likar);
-    update_post_meta($post_id, 'deputat', $deputat);
-    update_post_meta($post_id, 'derzh_sl',$derzh_sl);
-    update_post_meta($post_id, 'bezrob', $bezrob);
-    update_post_meta($post_id, 'pensioner', $pensioner);
-    update_post_meta($post_id, 'ato', $ato);
-    update_post_meta($post_id, 'invalid', $invalid);
-    update_post_meta($post_id, 'autoritet', $autoritet);
-    update_post_meta($post_id, 'uchitel', $uchitel);
-    update_post_meta($post_id, 'pidpr', $pidpr);
-*/
-
     //  update_post_meta($post_id, 'text_field', $text_field); // заполняем произвольное поле типа текстарея
 
 	  //  wp_set_object_terms($post_id, $parent_cat, 'custom_tax_like_cat', true); // привязываем к пост к таксономиям, третий параметр это слаг таксономии
@@ -942,31 +803,6 @@ function change_object() {
 
 if (isset($pod))
 {
-/*  $return = array(
-  'n_diln' => $n_diln,
-  'title' =>  $title ,
-  'ufamily'=> $ufamily, // заполняем произвольное поле типа строка
-  'uname'=>  $uname, // заполняем произвольное поле типа строка
-   'ubatk'=>  $ubatk, // заполняем произвольное поле типа строка
-   'tel_o'=>  $tel_o, // заполняем произвольное поле типа строка
-   'tel_dod'=>  $tel_dod, // заполняем произвольное поле типа строка
-   'sotc_merega'=>  $sotc_merega, // заполняем произвольное поле типа строка
-   'adressa'=>  $adressa, // заполняем произвольное поле типа строка
-   'beathday'=>  $beathday, // заполняем произвольное поле типа строка
-   'id_kod'=>  $id_kod, // заполняем произвольное поле типа строка
-   'beathday'=>  $beathday, // заполняем произвольное поле типа строка
-   'likar'=>  $likar,
-    'deputat'=>  $deputat,
-    'derzh_sl'=> $derzh_sl,
-    'bezrob'=>  $bezrob,
-    'pensioner'=>  $pensioner,
-    'ato'=>  $ato,
-    'invalid'=>  $invalid,
-    'autoritet'=>  $autoritet,
-    'uchitel'=>  $uchitel,
-    'pidpr'=>  $pidpr,
-);
-*/
 $return = array(
   'message'   => 'Сохранено',
   'ID'        => 1

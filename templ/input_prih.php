@@ -13,8 +13,11 @@ Template Name: Введення прихільника
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
   <style>
-h1 {margin-left: 50px;
-margin-bottom: 20px;}
+h1 {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    }
 
 .input_prihil {width: 97%;}
 table.input_prihil, td, tr{ border: 0px;
@@ -31,7 +34,7 @@ input, textarea {
 {width:20%;
 text-align: right;
 padding-right: 10px;
-padding-top:10px;
+padding-top:0px;
 padding-bottom:10px;
 vertical-align: bottom;}
 
@@ -58,11 +61,17 @@ margin-left: 5px;
 }
 .btn1 {
 //  width: 50%;
-  margin-top: 30px;
- margin-left: 20px;
- margin-right: 20px;
+   margin-top: 30px;
+   margin-left: 20px;
+   margin-right: 20px;
+   margin-bottom: 20px;
+}
+#btn_prihil
+{
+margin-left: 700px;
 margin-bottom: 20px;
 }
+
  input.btn1{width: 75%;}
  .n_dil {margin-bottom: 15px;}
  .prihil_nyk {height: 20px;}
@@ -96,8 +105,8 @@ margin-bottom: 20px;
 </style>
 
  <div id="main-content" class="main-content">
-   <div id="primary" class="content-area">
-    <div id="content" class="site-content" role="main">
+   <div id="primary" class="content-area" style="padding-top:18px;">
+   <div id="content" class="site-content" role="main">
            <?php
       /*// подготовим актуальные данные таксономий
       $childs = "";
@@ -118,10 +127,15 @@ margin-bottom: 20px;
         $tags .= '<label><input type="radio" name="tag" value="'.$tag->term_id.'">'.$tag->name.'</label>'; // суем все в radio баттоны
       }
     */  ?>
-      <?php // Выводим форму ?>
-<button id="btn_prihil" type="button"> Додати прихільника </button>
-<div id="output"></div>
+      <?php // Выводим форму
+if(is_user_logged_in())
+{
+    $current_user = wp_get_current_user();
+    $var2 = get_user_meta( $current_user->ID);
 
+      ?>
+<button id="btn_prihil" type="button"> Відкрити форму</button>
+<div id="output"></div>
         <div id="input_prihil">
         <h1>Ведення прихільника</h1>
     <br>
@@ -315,12 +329,15 @@ margin-bottom: 20px;
 
 <?php
 
+echo print_r($var2);
+
 $params = array(
-    //'where'   => 't.name LIKE "%rings%"',
+    'where'   => 't.meta_value LIKE "%',
     //'limit'   => -1  // Return all rows
 );
 
 // Create and find in one shot
+
 $prihil = pods( 'add_prhilnyk', $params );
 $f = array('ufamily', 'uname', 'ubatk');
 if ( 0 < $prihil->total() ) {
@@ -375,14 +392,17 @@ setup_postdata($post);
 <h2 class="entry-title"><?php the_content(); ?>><?php  ?>
 </h2>
 
-<?php endforeach; */?>
+<?php endforeach; */
+}
+?>
 
 </div>
 </div><!-- #content -->
 <!-- #primary -->
 
 
- <?php get_sidebar( 'content' ); ?>
+ <?php
+ get_sidebar( 'content' ); ?>
 </div><!-- #main-content -->
 
 <?php

@@ -6,8 +6,8 @@ function ajax_go(data, jqForm, options) { //ф-я перед отправкой 
 function response_go_ch (out)
 {
   //  jQuery(this).html(out.data.ID);
-        jQuery('#output').html(out.data.ID);
-        jQuery('#output').text(out.data.ID);
+//      jQuery('#output').html(out.data.ID);
+//        jQuery('#output').text(out.data.ID);
         	console.log(out);
 	      jQuery('#input_prihil').show('slow');
         jQuery('#ufamily').val(out.data.ufamily);
@@ -31,6 +31,9 @@ function response_go_ch (out)
         jQuery('#uchitel').val(out.data.uchitel);
         jQuery('#pidpr').val(out.data.pidpr);
         jQuery('#n_prih').text(out.data.id);
+//        jQuery("#content").animate({scrollTop:0},"slow");
+        jQuery(document).scrollTop();
+        jQuery('html, body').animate({scrollTop: 0},500);
 
 }
 
@@ -110,15 +113,18 @@ jQuery(document).ready(function(){
     jQuery(this).before("<input type='file' name='declar[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
   });
 
-  jQuery('#btn_prihil').on('click',(function(ffа){ // по клику на ссылку "Добавить еще фото"
-	if(jQuery('#input_prihil').is(':hidden'))
-		{
-		jQuery('#input_prihil').show('slow');
-		}
-     else
-		{
-		jQuery('#input_prihil').hide('slow');
-		}
+    jQuery('#btn_prihil').on('click',(function(ffа)
+        { // по клику на ссылку "Добавить еще фото"
+              if(jQuery('#input_prihil').is(':hidden'))
+		                {
+		                    jQuery('#input_prihil').show('slow');
+                        jQuery('#btn_prihil').text("Закрити форму");
+                    }
+                    else
+		                {
+		                    jQuery('#input_prihil').hide('slow');
+                        jQuery('#btn_prihil').text("Відкрити форму");
+		                  }
 
 //Зміна данних прихільника
       }));

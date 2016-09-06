@@ -128,7 +128,19 @@ margin-bottom: 20px;
       }
     */  ?>
       <?php // Выводим форму
-if(is_user_logged_in())
+      function is_user_role( $role, $user_id = null ) {
+      	$user = is_numeric( $user_id ) ? get_userdata( $user_id ) : wp_get_current_user();
+
+      	if( ! $user )
+      		return false;
+
+      	return in_array( $role, (array) $user->roles );
+      }
+
+
+if(is_user_logged_in() && (is_user_role('dilnich')
+|| is_user_role("kusch")
+|| is_user_role("raion")) )
 {
     $current_user = wp_get_current_user();
     $var2 = get_user_meta( $current_user->ID);
@@ -329,10 +341,16 @@ if(is_user_logged_in())
 
 <?php
 
-echo print_r($var2);
+// echo print_r($var2);
+
 
 $params = array(
-    'where'   => 't.meta_value LIKE "%',
+//'join' => 'LEFT JOIN `ds_postmeta` as `d1`  ON `d1`.`post_id` = `t`.`id`',
+//    'where' => "d1.meta_key = 'n_diln'  and d1.meta_value = '1'",
+'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
+    'where' => "`d`.meta_key = 'n_diln' and meta_value = '5'",
+
+
     //'limit'   => -1  // Return all rows
 );
 

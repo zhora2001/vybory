@@ -30,7 +30,7 @@ function response_go_ch (out)
         jQuery('#autoritet').val(out.data.autoritet);
         jQuery('#uchitel').val(out.data.uchitel);
         jQuery('#pidpr').val(out.data.pidpr);
-        jQuery('#n_prih').text(out.data.id);
+        jQuery('#n_prih').attr('value',out.data.id);
 //        jQuery("#content").animate({scrollTop:0},"slow");
         jQuery(document).scrollTop();
         jQuery('html, body').animate({scrollTop: 0},500);
@@ -41,6 +41,7 @@ function response_go(out)  { // ф-я обработки ответа от wp, �
 	console.log(out); // для дебага
 	jQuery('#sub').prop("disabled", false); // кнопку включим
 	jQuery('#output').html(out.data); // выведем результат
+  jQuery("form")[0].reset();;
 }
 
 jQuery(document).ready(function(){

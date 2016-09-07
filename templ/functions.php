@@ -547,4 +547,5 @@ function include_scripts(){
 		    'url' => admin_url('admin-ajax.php'), // и сунем в него путь до AJAX обработчика
 			)
 		    );
+
 }

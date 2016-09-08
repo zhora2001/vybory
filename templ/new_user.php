@@ -5,7 +5,7 @@ Template Name: Реєстрація нового користувача
 
 
  get_header(); ?>
- <script src="<?php echo get_template_directory_uri() ?>/js/for_reg_users.js">
+ <script src="<?php echo get_template_directory_uri() ?>/js/reg_new_users.js">
  </script>
  <style>
  ul {
@@ -37,23 +37,15 @@ list-style-type: none;
 
  <?php
 
- function is_user_role( $role, $user_id = null ) {
-   $user = is_numeric( $user_id ) ? get_userdata( $user_id ) : wp_get_current_user();
-
-   if( ! $user )
-     return false;
-
-   return in_array( $role, (array) $user->roles );
- }
-	$current_user = wp_get_current_user();
-   if(is_user_logged_in() && ( current_user_can('manage_options') || is_user_role("raion")))
+ 	 if(is_user_logged_in() && ( current_user_can('manage_options') || is_user_role("raion")))
    {
  	$current_user = wp_get_current_user(); // получим данные о текущем залогиненом юзере else { // если не залогинен, покажем форму для логина
     ?>
 
 
 
-<form name="registrationform" id="registrationform" method="post" class="userform" action=""> <!-- обратите внимание на класс, по этому классу на форму вешается обработка из первой статьи -->
+<form name="new_user_form" id="new_user_form" method="post" class="userform" action="">
+  <!-- обратите внимание на класс, по этому классу на форму вешается обработка из первой статьи -->
 <ul>
         <li class="im_data">
         <label for="ufamily"> Призвіще </label>
@@ -94,7 +86,7 @@ list-style-type: none;
             <label for="uid"> Е-майл </label>
           </li>
          <li class="val_data">
-               <input  type="text" name="email" id="email"
+               <input  type="text" name="user_email" id="user_email"
                value = "<?php echo wp_generate_password(8, false).
                '@'.wp_generate_password(8, false).'.com'; ?>" required/>
              </input>
@@ -240,8 +232,8 @@ list-style-type: none;
   <li class="val_data">
   <input type="submit" value="Зареєструвати"> <!-- субмит -->
   </li>
-</ul><input type="hidden" name="nonce" value="<?php echo wp_create_nonce('register_me_nonce'); ?>"> <!-- поле со строкой безопасности, будем проверять её в обработчике чтобы убедиться, что форма отправлена откуда надо -->
-	<input type="hidden" name="action" value="register_me"> <!-- обязательное поле, по нему запустится нужная функция -->
+  <!--- </ul><input type="hidden" name="nonce" value="<?php echo wp_create_nonce('register_me_nonce'); ?>"> --><!-- поле со строкой безопасности, будем проверять её в обработчике чтобы убедиться, что форма отправлена откуда надо -->
+	<!--- <input type="hidden" name="action" value="register_me"> -->
 	<div class="response"></div> <!-- ну сюда будем пихать ответ от сервера -->
  </form>
  <?php }

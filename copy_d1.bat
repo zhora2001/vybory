@@ -5,4 +5,4 @@ xcopy /D  /Y d:\vybory\diln.csv d:\usr\www\s1.localhost\wp-content\plugins\vybor
 xcopy /D  /Y d:\vybory\login\*.* d:\usr\www\s1.localhost\wp-content\plugins\vybory\login\
 xcopy /D  /Y d:\vybory\test.php d:\usr\www\s1.localhost\
 xcopy /D  /Y d:\vybory\diln.csv d:\usr\www\s1.localhost\
-
+xcopy /D  /Y d:\vybory\*.php d:\usr\www\s1.localhost\wp-content\plugins\vybory\

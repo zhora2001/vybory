@@ -12,4 +12,3 @@ add_action('wp_ajax_logout_me', 'logout_me'); // повесим функцию �
 function logout_me() { // logout
    require_once dirname(__FILE__) . '/logout.php';  // подключим нужный обработчик
 }
-

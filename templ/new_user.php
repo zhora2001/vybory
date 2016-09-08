@@ -5,7 +5,11 @@ Template Name: Реєстрація нового користувача
 
 
  get_header(); ?>
- <script src="<?php echo get_template_directory_uri() ?>/js/reg_new_users.js">
+ <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js">
+ </script>
+ <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
+ </script>
+<script  src="<?php echo get_template_directory_uri() ?>/js/new_users.js">
  </script>
  <style>
  ul {
@@ -23,6 +27,12 @@ li.im_data
    list-style-type: none;
    float:left;
  }
+ .response
+ {
+margin-top: 10px;
+color: red;
+ }
+ 
  li.val_data
  {
 float:none;
@@ -88,7 +98,7 @@ list-style-type: none;
          <li class="val_data">
                <input  type="text" name="user_email" id="user_email"
                value = "<?php echo wp_generate_password(8, false).
-               '@'.wp_generate_password(8, false).'.com'; ?>" required/>
+               '@'.wp_generate_password(2, false).'me.ua'; ?>" required/>
              </input>
          </li>
        </ul>
@@ -100,11 +110,11 @@ list-style-type: none;
         </p>
         </li>
           <li class="val_data">
-              <input id="r_diln" type="radio" name="radio" checked />
+              <input id="r_diln" type="radio" name="r_diln"/>
               <label for="r_diln">Дільничний</label>
             </li>
         <li class="val_data">
-              <input id="r_kusch" type="radio" name="radio" />
+              <input id="r_kusch" type="radio" name="r_kusch" />
               <label for="r_kusch">Кущовий</label>
           </li>
 
@@ -186,27 +196,24 @@ list-style-type: none;
                 }
             }
             if ($var3 == '1')
-          echo " <option disabled selected>Выберіть дільницю</option>
-          ";
+          echo ' <option value="" selected>Выберіть дільницю</option>';
           ?>
         </select>
   </label>
   <label for="ksch">
     <select id = "vv1" name="ksch" hidden="">
-      <option disabled selected>Виберіть кущ</option>
+      <option  value="" selected>Виберіть кущ</option>
       <?php
 
         $i=1;
 
         $key = 'kusch';
-        $var2 = get_user_meta( $user->ID, $key, true );
-
         foreach($kus as $var1)
         {
         $q0=$var1['kusch'];
-        $q1=$var1['n_diln'];
+        $q1=trim($var1['n_diln']);
 
-        echo "<option value=".$var1['n_diln']."><strong>$q0</strong> - дільниці ($q1])</option>";
+        echo '<option value='.'"'.$q1.'"'."><strong>$q0</strong> - дільниці ($q1)</option>";
         $i++;
       }
       ?>

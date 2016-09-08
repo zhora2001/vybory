@@ -21,8 +21,9 @@ add_action('wp_ajax_add_object_ajax', 'add_object'); // если нужно чт
 //require_once dirname(__FILE__).'/reg_user.php'; // подключаем регистрация новых пользователей
 //require_once dirname(__FILE__).'/register.php'; // подключаем распределитель дел
 
-add_action('wp_ajax_reg_new_user_ajax', 'reg_new_user'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
-function reg_new_user() { // внутри функции подключаем нужный файл с обработкой
+add_action('wp_ajax_nopriv_new_user', 'new_user'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
+add_action('wp_ajax_new_user', 'new_user'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
+function new_user() { // внутри функции подключаем нужный файл с обработкой
     require_once dirname(__FILE__) . '/reg_new_user.php';
 }
 

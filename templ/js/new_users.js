@@ -20,8 +20,12 @@ function req_come(data, statusText, xhr, form) { // ф-я срабатывающ
 				form.find('input[type="submit"]').prop('disabled', false).val('Отправить'); // снова включим кнопку
 		}
 		form.find('.response').html(response); // выводим ответ
-		if (data.data.redirect) window.location.href = data.data.redirect; // если передан redirect, делаем перенаправление
 		ajaxgo = false; // аякс запрос выполнен можно выполнять следующий
+        setTimeout(function() {
+            // Ваш скрипт
+        }, 3000);
+        if (data.data.redirect) window.location.href = data.data.redirect; // если передан redirect, делаем перенаправление
+
 }
 
 
@@ -29,16 +33,20 @@ function req_come(data, statusText, xhr, form) { // ф-я срабатывающ
 jQuery(document).ready(function() { // после загрузки DOM
 
     jQuery('#r_diln').attr('checked', true);
+    jQuery('#r_kusch').attr('checked', false);
     jQuery('#vv').show();
     jQuery('#vv1').hide();
 
+    jQuery("#tel").mask("(999) 999-9999");
 
     jQuery('#r_kusch').on('change', function() {
+        jQuery('#r_diln').attr('checked', false);
         jQuery('#vv1').show();
         jQuery('#vv').hide();
     });
 
     jQuery('#r_diln').on('change', function() {
+        jQuery('#r_kusch').attr('checked', false);
         jQuery('#vv').show();
         jQuery('#vv1').hide();
     });
@@ -46,13 +54,15 @@ jQuery(document).ready(function() { // после загрузки DOM
 
      var options = { // опции для отправки формы с помощью jquery form
         data: { // дополнительные параметры для отправки вместе с данными формы
-            action: 'reg_nuser', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
-            nonce: reg_nuser.nonce ,// строка для проверки, что форма отправлена откуда надо
-						nonce1: reg_nuser.nonce1 // строка для проверки, что форма отправлена откуда надо
-        },
+            action: 'new_user', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
+            wnonce: reg_nuser.wnonce, // строка для проверки, что форма отправлена откуда надо
+            dl_chk: jQuery('#r_diln').attr('checked'),
+            ks_chk: jQuery('#r_kusch').attr('checked'),
+                },
         dataType: 'json', // ответ ждем в json формате
-//  beforeSubmit: ajax_go, // перед отправкой вызовем функцию ajax_go()
-//        success: response_go, // после получения ответа вызовем response_go()
+        beforeSubmit: req_go, // перед отправкой вызовем функцию ajax_go()
+        success: req_come, // после получения ответа вызовем response_go()
+
         error: function(request, status, error) { // в случае ошибки
             console.log(arguments); // напишем все в консоль
         },

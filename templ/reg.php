@@ -27,6 +27,11 @@ Template Name: Вхід користувача
  	<input type="hidden" name="action" value="login_me"> <!-- обязательное поле, по нему запустится нужная функция -->
  	<div class="response"></div> <!-- ну сюда будем пихать ответ от сервера -->
  </form>
+<form name="sms_form" id="sms_form" method="post" class="sms_userform" action="" hidden=""> <!-- обычная форма, по сути нам важен только класс -->
+  	<input type="text" name="sms" id="sms" placeholder="Ввідіть код з СМС"> <!-- сюда будут писать логин или email -->
+  		<input type="submit" value="Підтвердити" disabled=""> <!-- субмит -->
+  	<div class="response1"></div> <!-- ну сюда будем пихать ответ от сервера -->
+  </form>
  <?php }  ?>
  </div>
 </div><!-- #content -->

@@ -30,19 +30,8 @@ get_header(); ?>
 
 		<?php
 
-global $wpdb, $post;
-
-$db_query = "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE post_type = 'news' AND post_status = 'publish'"; // все опубликованные записи
-$db_results = $wpdb->get_results($db_query);
-foreach($db_results as $post) {
-	setup_postdata($post); 
-	
-	echo '<a href="' . get_permalink() . '">' . get_the_title() . ' дупа </a>';
-					get_template_part( 'content', get_post_format() );
-
-}
-wp_reset_postdata();
-
+if (!is_user_logged_in())
+{
 
 			if ( have_posts() ) :
 				// Start the Loop.
@@ -64,6 +53,24 @@ wp_reset_postdata();
 				get_template_part( 'content', 'none' );
 
 			endif;
+}
+else
+{
+
+global $wpdb, $post;
+
+$db_query = "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE post_type = 'news' AND post_status = 'publish'"; // все опубликованные записи
+$db_results = $wpdb->get_results($db_query);
+foreach($db_results as $post) {
+	setup_postdata($post); 
+	
+	echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+					get_template_part( 'content', get_post_format() );
+
+}
+wp_reset_postdata();
+
+}
 		?>
 
 		</div><!-- #content -->

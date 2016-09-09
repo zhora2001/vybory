@@ -24,7 +24,8 @@ function req_come(data, statusText, xhr, form) { // ф-я срабатывающ
         setTimeout(function() {
             // Ваш скрипт
         }, 3000);
-        if (data.data.redirect) window.location.href = data.data.redirect; // если передан redirect, делаем перенаправление
+        if (data.data.redirect) window.location.href = data.data.redirect;
+         // если передан redirect, делаем перенаправление
 
 }
 

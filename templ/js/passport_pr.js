@@ -1,5 +1,5 @@
 function ajax_go(data, jqForm, options) { //ф-я перед отправкой запроса
-    jQuery('#output').html('Отправляем...'); // в див для ответа напишем "отправляем.."
+    jQuery('#output').html('Відправляємо...'); // в див для ответа напишем "отправляем.."
     jQuery('#sub').attr("disabled", "disabled"); // кнопку выключим
 }
 
@@ -42,10 +42,19 @@ function response_go(out) { // ф-я обработки ответа от wp, в
     console.log(out); // для дебага
     jQuery('#sub').prop("disabled", false); // кнопку включим
     jQuery('#output').html(out.data); // выведем результат
-    jQuery("form")[0].reset();;
+    setTimeout(function() {
+        if (data.data.redirect) window.location.href = data.data.redirect;
+    // Ваш скрипт
+    }, 3000);
+    //jQuery("form")[0].reset();;
 }
 
 jQuery(document).ready(function() {
+
+    jQuery("#spys_diln").change(function() {
+        jQuery("#n_diln").val(jQuery(this).val());
+        });
+    jQuery("#n_diln").val(jQuery("#spys_diln").val());
 
     jQuery(".prihil_nyk").mouseover(function() {
         jQuery(this).find(".change_prihil").show();
@@ -94,14 +103,17 @@ jQuery(document).ready(function() {
     add_form = jQuery('#add_passport'); // запишем форму в переменную
     var options = { // опции для отправки формы с помощью jquery form
         data: { // дополнительные параметры для отправки вместе с данными формы
-            action: 'add_passport_ajax', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
-            nonce: ajaxdata.nonce // строка для проверки, что форма отправлена откуда надо
+            action: 'add_passport',
+            nonce: ajaxpassport.nonce,
+            nazva: jQuery('#spys_diln').text() // строка для проверки, что форма отправлена откуда надо
         },
         dataType: 'json', // ответ ждем в json формате
         beforeSubmit: ajax_go, // перед отправкой вызовем функцию ajax_go()
         success: response_go, // после получении ответа вызовем response_go()
         error: function(request, status, error) { // в случае ошибки
-            console.log(arguments); // напишем все в консоль
+            console.log(arguments);
+            jQuery('#output').html(out.data.message);
+            // напишем все в консоль
         },
         url: ajaxdata.url // куда слать форму, переменную с url мы определили вывели в нулевом шаге
     };

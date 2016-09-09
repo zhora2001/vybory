@@ -80,6 +80,7 @@ else {
 }
 add_user_meta( $user_id, "tel", $user_login,true );
 
-wp_send_json_success(array('message' => 'Користувач зареєстрований.', 'redirect' => true)); // говорим что все прошло ок, если нужен редирект то вместо false поставьте $redirect_to
+wp_send_json_success(array('message' => 'Користувач зареєстрований.', 'redirect' => 'http://vybory.el/?page_id=100'));
+ // говорим что все прошло ок, если нужен редирект то вместо false поставьте $redirect_to
 
 ?>

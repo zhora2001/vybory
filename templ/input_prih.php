@@ -108,37 +108,17 @@ margin-bottom: 20px;
    <div id="primary" class="content-area" style="padding-top:18px;">
    <div id="content" class="site-content" role="main">
            <?php
-      /*// подготовим актуальные данные таксономий
-      $childs = "";
-      $parents ="";
-      $tags = "";
-
-      $cats = get_terms('custom_tax_like_cat', 'orderby=name&hide_empty=0&parent=0'); // получим все термины(элементы) таксономии с иерархией
-      foreach ($cats as $cat) { // пробежим по каждому полученному термину
-          $parents.="<option value='$cat->term_id' />$cat->name</option>"; // суем id и название термина в строку для вывода внутри тэга select
-          $childs_array = get_terms('custom_tax_like_cat', 'orderby=name&hide_empty=0&parent='.$cat->term_id); // возьмем все дочерние термины к текущему
-      	foreach ($childs_array as $child){
-      		$childs.="<option value='$child->term_id' class='$cat->term_id' />$child->name</option>"; // делаем то же самое, класс должен быть равным id родительского термина чтобы плагин chained работал
-      	}
-      }
-
-      $tags_array = get_terms('custom_tax_like_tag', 'orderby=none&hide_empty=0&parent=0'); // получим все термины таксономии без вложенности
-      foreach ($tags_array as $tag) { // пробежим по каждому
-        $tags .= '<label><input type="radio" name="tag" value="'.$tag->term_id.'">'.$tag->name.'</label>'; // суем все в radio баттоны
-      }
-    */  ?>
-      <?php // Выводим форму
 
 if(is_user_logged_in() && (is_user_role('dilnich')
 || is_user_role("kusch")
-|| is_user_role("raion")) )
+|| is_user_role("raion")
+|| current_user_can('manage_options') ) )
 {
     $current_user = wp_get_current_user();
     $var2 = get_user_meta( $current_user->ID);
 
       ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
-<div id="output"></div>
         <div id="input_prihil">
         <h1>Ведення прихільника</h1>
     <br>
@@ -149,9 +129,37 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             Номер дільниці:
           </td>
           <td  id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" value = "1" required/>
+              <input type="text" id="n_diln" name="n_diln" value = "" disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
-          </td>          <td>
+          <select id = "spys_diln" name="dl">
+                  <?php
+            $var3 = '1';
+
+            $key = 'diln';
+            $var2 = get_user_meta(   $current_user->id, $key, true );
+            foreach($dil as $var1)
+            {
+              if( trim($var1['n_diln']) == trim($var2))
+              {
+                $a =  $var1['n_diln']." ".$var1['diln'];
+              echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
+              $var3 = '2';
+              }
+              else {
+                if (current_user_can('manage_options'))
+                {
+                $a =  $var1['n_diln']." ".$var1['diln'];
+                echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+              }
+                }
+            }
+            if ($var3 == '1')
+          echo ' <option value="" selected>Выберіть дільницю</option>';
+          ?>
+        </select>
+
+          </td>
+            <td>
           </td>
           <td>
                   </td>
@@ -326,7 +334,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 </tr>
 </table>
 </form>
-
+<div id="output"></div>
 </div>
 
 
@@ -403,6 +411,10 @@ setup_postdata($post);
 
 <?php endforeach; */
 }
+else {
+echo " <p> У Вас недостатньо повноважень!</p>";
+ }
+
 ?>
 
 </div>

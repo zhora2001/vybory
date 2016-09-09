@@ -1,4 +1,4 @@
-<?php
+  <?php
 /*
 Template Name: Паспорт ДВК
  */
@@ -112,26 +112,54 @@ margin-bottom: 20px;
 
 if(is_user_logged_in() && (is_user_role('dilnich')
 || is_user_role("kusch")
-|| is_user_role("raion")) )
+|| is_user_role("raion")
+|| current_user_can('manage_options')) )
 {
     $current_user = wp_get_current_user();
     $var2 = get_user_meta( $current_user->ID);
 
       ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
-<div id="output"></div>
         <div id="input_prihil">
         <h1>Паспорт ДВК</h1>
     <br>
-      <form method="post" enctype="multipart/form-data" id="add_object">
+      <form method="post" enctype="multipart/form-data" id="add_passport">
     <table class="input_prihil">
         <tr>
-          <td class="im_data">
+          <td class="adres">
             Номер дільниці:
           </td>
           <td  id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" value = "1" required/>
+              <input type="text" id="n_diln" name="n_diln" value = "1" disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
+
+              <select id = "spys_diln" name="dl">
+                      <?php
+                $var3 = '1';
+
+                $key = 'diln';
+                $var2 = get_user_meta(   $current_user->id, $key, true );
+                foreach($dil as $var1)
+                {
+                  if( trim($var1['n_diln']) == trim($var2))
+                  {
+                    $a =  $var1['n_diln']." ".$var1['diln'];
+                  echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
+                  $var3 = '2';
+                  }
+                  else {
+                    if (current_user_can('manage_options'))
+                    {
+                    $a =  $var1['n_diln']." ".$var1['diln'];
+                    echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+                  }
+                    }
+                }
+                if ($var3 == '1')
+              echo ' <option value="" selected>Выберіть дільницю</option>';
+              ?>
+            </select>
+
           </td>
           <td>
                   </td>
@@ -178,7 +206,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
            <label for="pidpryems">Основні підприємства</label><br /><br />
           </td>
           <td class="val_data" rowspan="2">
-            <textarea type="text"  name="pidpryems" id="pidpryems" required/></textarea>
+            <textarea type="text"  name="pidpryems" id="pidpryems"/></textarea>
           </td>
           <td class="im_data"  rowspan="2">
              <label for="misce_zustr">Місце зустрічі з людьми</label>
@@ -193,7 +221,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
          <label for="spysok_boss">Список найбільш впливових людей</label><br /><br />
         </td>
         <td class="val_data" rowspan="2">
-          <textarea type="text"  name="spysok_boss" id="spysok_boss" required/></textarea>
+          <textarea type="text"  name="spysok_boss" id="spysok_boss"/></textarea>
         </td>
         <td class="im_data"  rowspan="2">
            <label for="misce_zustr1"></label>
@@ -202,7 +230,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             <textarea   type="text"  name="misce_zustr1" id="misce_zustr1" hidden/></textarea>
         </td>
     </tr>
-  <tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+<tr>
     <td>
 
     </td>
@@ -214,6 +243,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
      </td>
         <td>
           <div >
+            <div id="output"></div>
+            <br />
           <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
           </div>
         </td>
@@ -242,23 +273,29 @@ $params = array(
 // Create and find in one shot
 
 $prihil = pods( 'pasport_dvk', $params );
+if($prihil)
+{
 $f = array('ufamily', 'uname', 'ubatk');
-if ( 0 < $prihil->total() ) {
+if ( $prihil->total() ) {
     while ( $prihil->fetch() ) {
 $id = $prihil->id();
 ?>
-<?php // сюда будем выводить ответ ?>
 <div class="prihil_nyk">
-    <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>">
-        <?php echo
-                  "Дільниця № ".$prihil->display( 'n_diln')." &nbsp&nbsp".
-                  $prihil->display( 'ufamily')." &nbsp&nbsp".
-                  $prihil->display( 'uname')." &nbsp&nbsp".
-                  $prihil->display( 'ubatk')." &nbsp&nbsp".
-                  $prihil->display( 'beathday')." &nbsp&nbsp".
-                  $prihil->display( 'adressa')."&nbsp&nbsp" ; ?></a>
-                  <span>
-                    <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>" style = "display:none;" class="view_prihil"> Перегляд </a>
+    <a class="various" data-fancybox-type="iframe"
+    href=<?php echo '"'.get_post_permalink($id).'"';?>
+    >
+    <?php
+        echo " Дільниця № ".$prihil->display( 'n_dbk')." &nbsp&nbsp".
+                  $prihil->display( 'nazva')." &nbsp&nbsp".
+                  //$prihil->display( 'adressa')." &nbsp&nbsp".
+                  //$prihil->display( 'ubatk')." &nbsp&nbsp".
+                  //$prihil->display( 'beathday')." &nbsp&nbsp".
+                  $prihil->display( 'adressa');
+                  ?>
+              </a>
+                <span>
+                    <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>"
+                      style = "display:none;" class="view_prihil"> Перегляд </a>
                   </span>
                   <span>
                     <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
@@ -268,8 +305,8 @@ $id = $prihil->id();
 </div>
 
 
-
 <?php
+}
 }
 }
 /*

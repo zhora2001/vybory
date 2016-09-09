@@ -24,10 +24,10 @@ jQuery(document).ready(function() { // после загрузки DOM
         }
         form.find('.response').html(response); // выводим ответ
         setTimeout(function() {
+        if (data.data.redirect) window.location.href = data.data.redirect;
             // Ваш скрипт
-        }, 5000);
-
-        if (data.data.redirect) window.location.href = data.data.redirect; // если передан redirect, делаем перенаправление
+        }, 3000);
+         // если передан redirect, делаем перенаправление
         ajaxgo = false; // аякс запрос выполнен можно выполнять следующий
     }
 

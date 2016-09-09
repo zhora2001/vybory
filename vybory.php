@@ -898,7 +898,7 @@ else {
 else
 $errors .= "Трапилась помилка при додавані. Перевірте значення полів.";
 	if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
-	else wp_send_json_success('Все прошло отлично! Добавлено ID:'.$post_id.' '.$n_prih); // если все ок, выводим ответ в формате json с success = true и умираем
+	else wp_send_json_success('Данні про прихільника успішно внесені:'.$post_id); // если все ок, выводим ответ в формате json с success = true и умираем
 
 	die(); // умрем еще раз на всяк случ
 }

@@ -64,7 +64,7 @@ $db_results = $wpdb->get_results($db_query);
 foreach($db_results as $post) {
 	setup_postdata($post); 
 	
-	echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+//	echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
 					get_template_part( 'content', get_post_format() );
 
 }

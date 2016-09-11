@@ -56,7 +56,9 @@ if ($n_prih != '-1' && $n_prih != '')
 	'mezhi' => $mezhi,
 	'pidpryems' => $pidpryems,
 	'misce_zustr' => $misce_zustr,
-	'spysok_boss' => $spysok_boss
+	'spysok_boss' => $spysok_boss,
+	'tochka_rostu' => $tochka_rostu
+
 );
 
 

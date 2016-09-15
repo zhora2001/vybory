@@ -85,7 +85,7 @@ jQuery(document).ready(function() {
 
 
     jQuery('a.iframe').fancybox();
-    jQuery('#input_prihil').hide();
+//    jQuery('#input_prihil').hide();
     jQuery(function(u) {
         jQuery("#beathday").mask("99/99/9999", {
             placeholder: "дд.мм.рррр"

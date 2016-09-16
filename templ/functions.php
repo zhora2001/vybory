@@ -530,39 +530,45 @@ function include_scripts(){
         wp_enqueue_script('jquery-form'); // добавим плагин jQuery forms, встроен в WP
         wp_enqueue_script('jquery-chained', '//www.appelsiini.net/projects/chained/jquery.chained.min.js'); // добавим плагин для связанных селект листов
 
-        wp_localize_script( 'jquery', 'ajaxdata', // функция для передачи глобальных js переменных на страницу, первый аргумент означет перед каким скриптом вставить переменные, второй это название глобального js объекта в котором эти переменные будут храниться, последний аргумент это массив с самими переменными
-			array(
-   				'url' => admin_url('admin-ajax.php'), // передадим путь до нативного обработчика аякс запросов в wp, в js можно будет обратиться к ней так: ajaxdata.url
-   				'nonce' => wp_create_nonce('add_object') // передадим уникальную строку для механизма проверки аякс запроса, ajaxdata.nonce
+wp_localize_script( 'jquery', 'ajaxdata',
+	array(
+   				'url' => admin_url('admin-ajax.php'),
+   				'nonce' => wp_create_nonce('add_object')
 			)
 		);
 
-		wp_localize_script( 'jquery', 'ajaxpassport', // функция для передачи глобальных js переменных на страницу, первый аргумент означет перед каким скриптом вставить переменные, второй это название глобального js объекта в котором эти переменные будут храниться, последний аргумент это массив с самими переменными
+		wp_localize_script( 'jquery', 'ajaxpassport',
 	array(
-			'url' => admin_url('admin-ajax.php'), // передадим путь до нативного обработчика аякс запросов в wp, в js можно будет обратиться к ней так: ajaxdata.url
-			'nonce' => wp_create_nonce('add_passport') // передадим уникальную строку для механизма проверки аякс запроса, ajaxdata.nonce
+			'url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('add_passport')
 	)
 );
 
-	 wp_localize_script( 'jquery', 'ajaxchange', // функция для передачи глобальных js переменных на страницу, первый аргумент означет перед каким скриптом вставить переменные, второй это название глобального js объекта в котором эти переменные будут храниться, последний аргумент это массив с самими переменными
+	 wp_localize_script( 'jquery', 'ajaxchange',
 			array(
-   				'url' => admin_url('admin-ajax.php'), // передадим путь до нативного обработчика аякс запросов в wp, в js можно будет обратиться к ней так: ajaxdata.url
-   				'nonce' => wp_create_nonce('change_object') // передадим уникальную строку для механизма проверки аякс запроса, ajaxdata.nonce
+   				'url' => admin_url('admin-ajax.php'),
+   				'nonce' => wp_create_nonce('change_object')
 			)
 		);
 
-	wp_localize_script( 'jquery', 'ajax_var', // ������� ������ � ����������� JS �����������
+	wp_localize_script( 'jquery', 'ajax_var',
 		array(
-		    'url' => admin_url('admin-ajax.php'), // � ����� � ���� ���� �� AJAX �����������
+		    'url' => admin_url('admin-ajax.php'),
 			)
 		    );
 
-	wp_localize_script( 'jquery', 'reg_nuser', // функция для передачи глобальных js переменных на страницу, первый аргумент означет перед каким скриптом вставить переменные, второй это название глобального js объекта в котором эти переменные будут храниться, последний аргумент это массив с самими переменными
+	wp_localize_script( 'jquery', 'reg_nuser',
 			 		array(
-			 				'url' => admin_url('admin-ajax.php'), // передадим путь до нативного обработчика аякс запросов в wp, в js можно будет обратиться к ней так: ajaxdata.url
-			 				'wnonce' => wp_create_nonce('wregser')// передадим уникальную строку для механизма проверки аякс запроса, ajaxdata.nonce
+			 				'url' => admin_url('admin-ajax.php'),
+			 				'wnonce' => wp_create_nonce('wregser')
 			 		)
   		);
+	wp_localize_script( 'jquery', 'reg_problema',
+					 		array(
+					 				'url' => admin_url('admin-ajax.php'),
+					 				'nonce' => wp_create_nonce('problema')
+	 		)
+		  		);
 }
 
 function is_user_role( $role, $user_id = null ) {

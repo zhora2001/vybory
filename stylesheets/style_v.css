@@ -1,0 +1,181 @@
+/* line 1, ../sass/style_v.scss */
+div.form_input {
+  margin-left: 10px;
+  border: none;
+}
+/* line 3, ../sass/style_v.scss */
+div.form_input .im_data {
+  width: 20%;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+/* line 12, ../sass/style_v.scss */
+div.form_input input, div.form_input textarea {
+  background-color: lightgrey;
+}
+/* line 16, ../sass/style_v.scss */
+div.form_input .adres {
+  vertical-align: top;
+  height: 5.8em;
+}
+/* line 23, ../sass/style_v.scss */
+div.form_input h1 {
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+/* line 28, ../sass/style_v.scss */
+div.form_input .input_chk {
+  width: auto;
+  padding: 5px;
+}
+
+/* line 31, ../sass/style_v.scss */
+input, textarea {
+  border: none;
+  border-bottom: 1px solid;
+  border-top: 0px;
+  width: 100%;
+  margin-bottom: 2px;
+  font-weight: bold;
+  height: auto;
+}
+
+/* line 39, ../sass/style_v.scss */
+textarea {
+  height: 8.8em;
+}
+
+/* line 44, ../sass/style_v.scss */
+table.input_prihil {
+  width: 97%;
+}
+/* line 48, ../sass/style_v.scss */
+table.input_prihil td, table.input_prihil tr {
+  border: 0px;
+  border-collapse: collapse;
+}
+/* line 52, ../sass/style_v.scss */
+table.input_prihil .im_data {
+  vertical-align: bottom;
+}
+/* line 57, ../sass/style_v.scss */
+table.input_prihil .val_data {
+  vertical-align: bottom;
+  width: 30%;
+}
+
+/* line 64, ../sass/style_v.scss */
+.check_b {
+  text-align: right;
+}
+
+/* line 66, ../sass/style_v.scss */
+.check_b label {
+  display: block;
+  margin-right: 15px;
+}
+
+/* line 70, ../sass/style_v.scss */
+.check_b1 {
+  text-align: left;
+}
+
+/* line 72, ../sass/style_v.scss */
+.check_b1 label {
+  display: block;
+  margin-left: 5px;
+}
+
+/* line 76, ../sass/style_v.scss */
+.btn1 {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 83, ../sass/style_v.scss */
+#btn_prihil {
+  margin-left: 700px;
+  margin-bottom: 20px;
+}
+
+/* line 89, ../sass/style_v.scss */
+input.btn1 {
+  width: 75%;
+}
+
+/* line 90, ../sass/style_v.scss */
+.n_dil {
+  margin-bottom: 15px;
+}
+
+/* line 91, ../sass/style_v.scss */
+.prihil_nyk {
+  height: 20px;
+}
+
+/* line 92, ../sass/style_v.scss */
+.prihil_nyk p {
+  line-height: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+/* line 99, ../sass/style_v.scss */
+.prihil_nyk a {
+  line-height: 1;
+}
+
+/* line 103, ../sass/style_v.scss */
+.change_prihil, .view_prihil {
+  margin-top: -2px;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 0.8em;
+  text-decoration: underline;
+}
+
+/* line 111, ../sass/style_v.scss */
+.various {
+  margin-left: 15px;
+}
+
+/* line 118, ../sass/style_v.scss */
+.val_input {
+  width: 70%;
+}
+
+/* line 123, ../sass/style_v.scss */
+ul.new_input {
+  list-style: none !important;
+  float: none;
+}
+/* line 127, ../sass/style_v.scss */
+ul.new_input li.im_data {
+  float: left;
+}
+/* line 131, ../sass/style_v.scss */
+ul.new_input li.val_data {
+  float: none;
+}
+/* line 134, ../sass/style_v.scss */
+ul.new_input li.val_data > input {
+  width: auto;
+}
+/* line 139, ../sass/style_v.scss */
+ul.new_input .btn1 {
+  margin-left: 65%;
+  width: 15%;
+}
+
+/* line 153, ../sass/style_v.scss */
+.response {
+  margin-top: 10px;
+  color: red;
+}

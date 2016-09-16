@@ -43,7 +43,7 @@ list-style-type: none;
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
-    <div style="margin-left:10px; border:none;">
+    <div class="form_input">
 
  <?php
 
@@ -56,7 +56,7 @@ list-style-type: none;
 
 <form name="new_user_form" id="new_user_form" method="post" class="userform" action="">
   <!-- обратите внимание на класс, по этому классу на форму вешается обработка из первой статьи -->
-<ul>
+<ul class="new_input">
         <li class="im_data">
         <label for="ufamily"> Призвіще </label>
         </li>

@@ -1,0 +1,157 @@
+div.form_input
+  {
+.im_data
+{
+  width:20%;
+  text-align: right;
+  padding-right: 10px;
+  padding-top:0px;
+  padding-bottom:10px;
+}
+
+input, textarea
+{
+background-color: lightgrey;
+}
+.adres
+{
+vertical-align: top;
+height: 5.8em;
+}
+     margin-left:10px;
+     border:none;
+    h1 {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+      }
+      .input_chk {width: auto; padding: 5px;}
+    }
+
+    input, textarea {
+      border:none;
+      border-bottom: 1px solid;
+        border-top:0px; width:100%;
+        margin-bottom:2px;
+        font-weight:bold;
+      height: auto;
+    }
+        textarea
+        {
+          height: 8.8em;
+        }
+
+table.input_prihil
+  {
+  //  <!--- .input_prihil tr {height: 2.8em;} --->
+    width: 97%;
+    td, tr{ border: 0px;
+    border-collapse: collapse;
+        }
+
+  .im_data
+  {
+  vertical-align: bottom;
+  }
+
+  .val_data
+  {
+    vertical-align: bottom;
+    width:30%;
+  }
+}
+
+.check_b {
+text-align: right;}
+.check_b label {
+display: block;
+margin-right: 15px;
+}
+.check_b1 {
+text-align: left;}
+.check_b1 label {
+display: block;
+margin-left: 5px;
+}
+.btn1 {
+//  width: 50%;
+   margin-top: 30px;
+   margin-left: 20px;
+   margin-right: 20px;
+   margin-bottom: 20px;
+}
+#btn_prihil
+{
+margin-left: 700px;
+margin-bottom: 20px;
+}
+
+ input.btn1{width: 75%;}
+ .n_dil {margin-bottom: 15px;}
+ .prihil_nyk {height: 20px;}
+ .prihil_nyk p {
+   line-height: 1;
+   margin-bottom: 0px;
+   margin-top: 0px;
+   -webkit-margin-before:0em;
+  -webkit-margin-after:0em;
+}
+  .prihil_nyk a {
+    line-height: 1;
+//    text-decoration: underline;
+  }
+  .change_prihil, .view_prihil
+  {
+    margin-top: -2px;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-decoration: underline
+}
+.various
+{
+  margin-left: 15px;
+//  font-weight: bold;
+//  font-size: 0.8em;
+//  text-decoration: underline
+}
+.val_input
+{
+  width: 70%;
+}
+
+ul.new_input
+    {
+   list-style: none !important;
+  float: none;
+    li.im_data
+    {
+    float:left;
+    }
+    li.val_data
+    {
+    float:none;
+    >input
+      {
+      width: auto;
+      }
+    }
+    .btn1
+    {
+        margin-left: 65%;
+        width: 15%;
+    }
+  }
+input
+{
+//  'text']
+//  {
+//  width: 370px;
+//  }
+}
+
+  .response
+  {
+  margin-top: 10px;
+  color: red;
+  }

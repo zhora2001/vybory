@@ -2,147 +2,15 @@
 /*
 Template Name: Введення проблеми на дільниці
  */
-
-
  get_header(); ?>
 
  <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
  <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
  </script>
-  <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
+  <script src="<?php echo get_template_directory_uri() ?>/js/input_problema.js">
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
-  <style>
-h1 {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-bottom: 10px;
-    }
-
-.input_prihil {width: 97%;}
-<!--- .input_prihil tr {height: 2.8em;} --->
-table.input_prihil, td, tr{ border: 0px;
-border-collapse: collapse;
-}
-input, textarea {
-  border:none;
-  border-bottom: 1px solid;
-    border-top:0px; width:100%;
-    margin-bottom:2px;
-    font-weight:bold;
-  height: auto;}
-textarea {height: 12.8em};
-.input_chk {width: auto; padding: 5px;}
-.im_data
-{width:20%;
-text-align: right;
-padding-right: 10px;
-padding-top:0px;
-padding-bottom:10px;
-vertical-align: bottom;}
-
-.val_data
-{vertical-align: bottom;
-  width:30%;
-}
-.adres
-{
-vertical-align: top;
-height: 5.8em;
-}
-.check_b {
-text-align: right;}
-
-.check_b label {
-display: block;
-margin-right: 15px;
-}
-.check_b1 {
-text-align: left;}
-.check_b1 label {
-display: block;
-margin-left: 5px;
-}
-.btn1 {
-//  width: 50%;
-   margin-top: 30px;
-   margin-left: 20px;
-   margin-right: 20px;
-   margin-bottom: 20px;
-}
-#btn_prihil
-{
-margin-left: 700px;
-margin-bottom: 20px;
-}
-
- input.btn1{width: 75%;}
- .n_dil {margin-bottom: 15px;}
- .prihil_nyk {height: 20px;}
- .prihil_nyk p {
-   line-height: 1;
-   margin-bottom: 0px;
-   margin-top: 0px;
-   -webkit-margin-before:0em;
-  -webkit-margin-after:0em;
-}
-  .prihil_nyk a {
-    line-height: 1;
-//    text-decoration: underline;
-  }
-  .change_prihil, .view_prihil
-  {
-    margin-top: -2px;
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 0.8em;
-    text-decoration: underline
-}
-.various
-{
-  margin-left: 15px;
-//  font-weight: bold;
-//  font-size: 0.8em;
-//  text-decoration: underline
-}
-.val_input
-{
-  width: 70%;
-}
-
-ul {
-  list-style-type: none;
-  float: none;
-}
-input['text']
-{
-//  width: 370px;
-}
-li.im_data
-{
-  width: 170px;
- // margin-left: 15px;
-  list-style-type: none;
-  float:left;
-}
-.response
-{
-margin-top: 10px;
-color: red;
-}
-
-li.val_data
-{
-float:none;
-list-style-type: none;
-width: auto;
-}
-li>input
-{
-width: auto;
-}
-
-</style>
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area" style="padding-top:18px;">
@@ -160,9 +28,9 @@ if(is_user_logged_in() && (is_user_role('dilnich')
     $terms = get_terms("status_p", 'orderby=term_id&hide_empty=0');
         ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
-        <div id="input_prihil">
+        <div id="input_prihil" class="form_input">
 <form method="post" enctype="multipart/form-data" id="add_object">
-    <ul>
+    <ul class="new_input">
           <li class="im_data">
           <label>  Номер дільниці:</label>
           </li>
@@ -196,22 +64,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           ?>
         </select>
       </li>
-      <br />
       <h1>Внесення проблеми</h1>
-  <br />
-
       <li class="im_data">
         <label for="title_p" > Назва проблеми </label>
       </li>
       <li class="val_data">
-        <input type="text" class="val_input" name="title_p" id="title_p" required/>
+        <input type="text" class="val_input" name="title_p" id="title_p" required/>asdf asdf asdf
       </li>
-  </tr>
-<br />
       <li class="im_data">
       <label for="status_p"> Статус проблеми </label>
       </li>
-        <li class="val_data">
+        <li class="val_data" style="float:left;">
           <?php
           echo '<select id = "status_p" name="status_p">';
            $count = count($terms);
@@ -224,7 +87,6 @@ if(is_user_logged_in() && (is_user_role('dilnich')
            echo "</select>";
           ?>
       </li>
-      <br />
       <li class="im_data">
       <label for="vyd_problemy"> Вид проблеми </label>
       </li>
@@ -240,14 +102,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             echo "</select>";
           ?>
       </li>
-<br />
-      <li class="im_data" >
+      <br />
+    <li class="im_data" >
      <label for="opys_p">Опис проблеми </label><br /><br />
    </li>
     <li class="val_data">
-      <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/></textarea>
+      <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/> asdf asd f</textarea>
     </li>
-<br />
     <li class="im_data" >
       <label for="declar" > Фото (jpg) </label>
     </li>
@@ -256,7 +117,6 @@ if(is_user_logged_in() && (is_user_role('dilnich')
     </input>
        <a href="#" id="dod_declar">додати ще</a>
     </li>
-    <br />
     <li class="im_data" >
       <label for="smi" > Висвітлення в ЗМІ </label>
     </li>
@@ -264,7 +124,6 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <textarea type="text"  class="val_input" style="height:5em;" name="smi" id="smi"/>
     </textarea>
     </li>
-<br />
 <li class="im_data" >
   <label for="kontakt" > Контакти </label>
 </li>
@@ -272,23 +131,16 @@ if(is_user_logged_in() && (is_user_role('dilnich')
   <input type="text"  class="val_input" name="kontakt" id="kontakt"/>
 </input>
 </li>
-<br />
 <li class="im_data" >
 <label for="propos_v">Пропозиції щодо вирішення </label><br /><br />
 </li>
 <li class="val_data">
-<textarea type="text" class="val_input" name="propos_v" id="propos_v" required/></textarea>
+<textarea type="text" class="val_input" name="propos_v" id="propos_v" /></textarea>
 </li>
-<br />
-
+<li>
+  <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
+</li>
 </ul>
-<table>
-        <td>
-          <div >
-          <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
-          </div>
-        </td>
-</table>
 </form>
 <div id="output"></div>
 </div>

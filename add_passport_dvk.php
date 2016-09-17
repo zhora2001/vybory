@@ -70,7 +70,7 @@ else {
   $pod->save( $data );
 }
 
-
+wp_set_object_terms( $post_id, $n_diln, 'dvk', false );
 
 wp_send_json_success(array('message' => 'Дані про дільницю успішно внесено!', 'redirect' => $redirect_to));
 //wp_send_json_success($data);

@@ -13,7 +13,7 @@ div.form_input .im_data {
 }
 /* line 12, ../sass/style_v.scss */
 div.form_input input, div.form_input textarea {
-  background-color: lightgrey;
+  background-color:  #F2F2F2;
 }
 /* line 16, ../sass/style_v.scss */
 div.form_input .adres {

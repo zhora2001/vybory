@@ -52,9 +52,9 @@ function response_go(out) { // ф-я обработки ответа от wp, в
 jQuery(document).ready(function() {
 
     jQuery("#spys_diln").change(function() {
-        jQuery("#n_diln").val(jQuery(this).val());
+        jQuery("#n_diln").attr('value',jQuery(this).val());
         });
-    jQuery("#n_diln").val(jQuery("#spys_diln").val());
+    jQuery("#n_diln").attr('value',jQuery("#spys_diln").val());
 
     jQuery(".prihil_nyk").mouseover(function() {
         jQuery(this).find(".change_prihil").show();

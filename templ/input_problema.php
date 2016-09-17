@@ -35,7 +35,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           <label>  Номер дільниці:</label>
           </li>
           <li  class="val_data" id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" value = "" disabled required/>
+              <input type="text" id="n_diln" name="n_diln" disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
           <select id = "spys_diln" name="dl">
                   <?php
@@ -69,7 +69,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <label for="title_p" > Назва проблеми </label>
       </li>
       <li class="val_data">
-        <input type="text" class="val_input" name="title_p" id="title_p" required/>asdf asdf asdf
+        <input type="text" class="val_input" name="title_p" id="title_p" required/>
       </li>
       <li class="im_data">
       <label for="status_p"> Статус проблеми </label>

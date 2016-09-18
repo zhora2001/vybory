@@ -288,8 +288,18 @@ $id = $prihil->id();
                     <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
                   </span>
                   <p>
-                  <?php echo
-                    $prihil->display( 'author');
+                  <?php
+                  $auth = $prihil->display( 'author');
+                 echo $prihil->display('post_author');
+                      $a = "Додано: ".get_the_author_meta( 'first_name', $auth)." ".
+                      get_the_author_meta( 'last_name', $auth)." ".
+                      get_the_author_meta( 'login', $auth)." ".
+                      $prihil->display( 'date');
+
+
+                  echo $a;
+
+                    // get_the_author_meta( $field, $userID );$prihil->display( 'author');
                     ?>
                   </p>
     <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>

@@ -52,7 +52,7 @@ $userdata = array(
 		'user_pass'  => $_POST['pass1'],
 		'user_email' => $_POST['user_email'],
 		'first_name' => $_POST['ufamily'],
-		'nickname'   => $_POST['uname'],
+		'last_name'   => $_POST['uname'],
 		'role'			 => $role
 	);
 // теперь проверим все ли ок с паролями

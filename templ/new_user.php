@@ -194,7 +194,14 @@ list-style-type: none;
 	<!--- <input type="hidden" name="action" value="register_me"> -->
 	<div class="response"></div> <!-- ну сюда будем пихать ответ от сервера -->
  </form>
- <?php }
+ <?php
+
+$blogusers = get_users(array('role__in' => array('dilnich','kusch')));
+	foreach ($blogusers as $user) {
+		//echo '<li>' . $user->first_name.' '.$user->last_name. '</li>';
+    print_r($user);
+	}
+ }
  else {
 
 echo " <p> У Вас недостатньо повноважень!</p>";

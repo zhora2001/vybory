@@ -162,7 +162,7 @@ ul.new_input .btn1 {
 /* line 149, ../sass/style_v.scss */
 .prihil_nyk {
   float: none;
-  height: 20px;
+  /* height: 20px;*/
 }
 /* line 152, ../sass/style_v.scss */
 .prihil_nyk p {

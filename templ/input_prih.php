@@ -12,97 +12,7 @@ Template Name: Введення прихільника
   <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
-  <style>
-h1 {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-bottom: 10px;
-    }
-
-.input_prihil {width: 97%;}
-table.input_prihil, td, tr{ border: 0px;
-border-collapse: collapse;
-}
-input, textarea {
-  border:none;
-  border-bottom: 1px solid;
-    border-top:0px; width:100%;
-    margin-bottom:2px;
-    font-weight:bold;}
-.input_chk {width: auto; padding: 5px;}
-.im_data
-{width:20%;
-text-align: right;
-padding-right: 10px;
-padding-top:0px;
-padding-bottom:10px;
-vertical-align: bottom;}
-
-.val_data
-{vertical-align: bottom;
-  width:30%;
-}
-.adres
-{
-vertical-align: top;
-}
-.check_b {
-text-align: right;}
-
-.check_b label {
-display: block;
-margin-right: 15px;
-}
-.check_b1 {
-text-align: left;}
-.check_b1 label {
-display: block;
-margin-left: 5px;
-}
-.btn1 {
-//  width: 50%;
-   margin-top: 30px;
-   margin-left: 20px;
-   margin-right: 20px;
-   margin-bottom: 20px;
-}
-#btn_prihil
-{
-margin-left: 700px;
-margin-bottom: 20px;
-}
-
- input.btn1{width: 75%;}
- .n_dil {margin-bottom: 15px;}
- .prihil_nyk {height: 20px;}
- .prihil_nyk p {
-   line-height: 1;
-   margin-bottom: 0px;
-   margin-top: 0px;
-   -webkit-margin-before:0em;
-  -webkit-margin-after:0em;
-}
-  .prihil_nyk a {
-    line-height: 1;
-//    text-decoration: underline;
-  }
-  .change_prihil, .view_prihil
-  {
-    margin-top: -2px;
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 0.8em;
-    text-decoration: underline
-}
-.various
-{
-  margin-left: 15px;
-//  font-weight: bold;
-//  font-size: 0.8em;
-//  text-decoration: underline
-}
-
-</style>
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area" style="padding-top:18px;">
@@ -119,7 +29,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
       ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
-        <div id="input_prihil">
+        <div id="input_prihil" class="form_input">
         <h1>Ведення прихільника</h1>
     <br>
       <form method="post" enctype="multipart/form-data" id="add_object">
@@ -129,7 +39,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             Номер дільниці:
           </td>
           <td  id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" value = "" disabled required/>
+              <input type="text" id="n_diln" name="n_diln" value = "" hidden disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
           <select id = "spys_diln" name="dl">
                   <?php
@@ -377,6 +287,11 @@ $id = $prihil->id();
                   <span>
                     <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
                   </span>
+                  <p>
+                  <?php echo
+                    $prihil->display( 'author');
+                    ?>
+                  </p>
     <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
 
 </div>

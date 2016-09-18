@@ -9,9 +9,10 @@ div.form_input
   padding-bottom:10px;
 }
 
-input, textarea
+input, textarea, select
 {
-background-color:  #F2F2F2;
+background-color:  #FAFAFA;
+margin-bottom: 18px;
 }
 .adres
 {
@@ -30,7 +31,7 @@ height: 5.8em;
 
     input, textarea {
       border:none;
-      border-bottom: 1px solid;
+      border-bottom: 0px solid;
         border-top:0px; width:100%;
         margin-bottom:2px;
         font-weight:bold;
@@ -43,6 +44,7 @@ height: 5.8em;
 
 table.input_prihil
   {
+    border: 0px;
   //  <!--- .input_prihil tr {height: 2.8em;} --->
     width: 97%;
     td, tr{ border: 0px;
@@ -51,7 +53,7 @@ table.input_prihil
 
   .im_data
   {
-  vertical-align: bottom;
+  vertical-align: center;
   }
 
   .val_data
@@ -88,18 +90,7 @@ margin-bottom: 20px;
 
  input.btn1{width: 75%;}
  .n_dil {margin-bottom: 15px;}
- .prihil_nyk {height: 20px;}
- .prihil_nyk p {
-   line-height: 1;
-   margin-bottom: 0px;
-   margin-top: 0px;
-   -webkit-margin-before:0em;
-  -webkit-margin-after:0em;
-}
-  .prihil_nyk a {
-    line-height: 1;
-//    text-decoration: underline;
-  }
+
   .change_prihil, .view_prihil
   {
     margin-top: -2px;
@@ -133,7 +124,7 @@ ul.new_input
     float:none;
     >input
       {
-      width: auto;
+//      width: auto;
       }
     }
     .btn1
@@ -155,3 +146,18 @@ input
   margin-top: 10px;
   color: red;
   }
+.prihil_nyk {
+  float: none;
+  height: 20px;
+   p {
+    line-height: 1;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    -webkit-margin-before:0em;
+   -webkit-margin-after:0em;
+  }
+   a {
+     line-height: 1;
+
+   }
+}

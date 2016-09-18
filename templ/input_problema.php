@@ -30,17 +30,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 <button id="btn_prihil" type="button"> Відкрити форму</button>
         <div id="input_prihil" class="form_input">
 <form method="post" enctype="multipart/form-data" id="add_object">
+  <h1>Внесення проблеми</h1>
     <ul class="new_input">
           <li class="im_data">
           <label>  Номер дільниці:</label>
           </li>
           <li  class="val_data" id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" disabled required/>
+              <input type="text" id="n_diln" name="n_diln" disabled hidden="" required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
           <select id = "spys_diln" name="dl">
                   <?php
             $var3 = '1';
-
             $key = 'diln';
             $var2 = get_user_meta(   $current_user->id, $key, true );
             foreach($dil as $var1)
@@ -64,7 +64,6 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           ?>
         </select>
       </li>
-      <h1>Внесення проблеми</h1>
       <li class="im_data">
         <label for="title_p" > Назва проблеми </label>
       </li>
@@ -107,7 +106,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
      <label for="opys_p">Опис проблеми </label><br /><br />
    </li>
     <li class="val_data">
-      <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/> asdf asd f</textarea>
+      <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/>
+      </textarea>
     </li>
     <li class="im_data" >
       <label for="declar" > Фото (jpg) </label>
@@ -150,74 +150,40 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
 // echo print_r($var2);
 
-
-$params = array(
-//'join' => 'LEFT JOIN `ds_postmeta` as `d1`  ON `d1`.`post_id` = `t`.`id`',
-//    'where' => "d1.meta_key = 'n_diln'  and d1.meta_value = '1'",
-//'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
-//    'where' => "`d`.meta_key = 'n_diln' and meta_value = '5'",
-
-
-    //'limit'   => -1  // Return all rows
-);
-
 // Create and find in one shot
 
-$prihil = pods( 'add_prhilnyk', $params );
-$f = array('ufamily', 'uname', 'ubatk');
-if ( 0 < $prihil->total() ) {
-    while ( $prihil->fetch() ) {
-$id = $prihil->id();
-?>
-<?php // сюда будем выводить ответ ?>
-<div class="prihil_nyk">
-    <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>">
-        <?php echo
-                  "Дільниця № ".$prihil->display( 'n_diln')." &nbsp&nbsp".
-                  $prihil->display( 'ufamily')." &nbsp&nbsp".
-                  $prihil->display( 'uname')." &nbsp&nbsp".
-                  $prihil->display( 'ubatk')." &nbsp&nbsp".
-                  $prihil->display( 'beathday')." &nbsp&nbsp".
-                  $prihil->display( 'adressa')."&nbsp&nbsp" ; ?></a>
-                  <span>
-                    <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>" style = "display:none;" class="view_prihil"> Перегляд </a>
-                  </span>
-                  <span>
-                    <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
-                  </span>
-    <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
 
+    global $post;
+
+    $args = array(
+    	'post_type'=> 'problemy',
+      );
+
+    $myposts = new WP_Query( $args );
+    //$myposts = get_posts('post_type=problemy');
+
+    if ( $myposts->have_posts() ) :
+    				// Start the Loop.
+    				while ( $myposts->have_posts() ) : $myposts->the_post();
+            ?>
+                        <div class="prihil_nyk">
+                            <a class="various" data-fancybox-type="iframe" href="<?php echo get_permalink(); ?>"></a>
+
+            <?php
+            get_template_part( 'content', get_post_format() );
+?>
 </div>
-
-
-
 <?php
-}
-}
-/*
-<p>Author: <?php echo $prihil->display( 'the_author' ); ?></p>
-<br />
-<p>Category: <?php echo $prihil->display( 'category' ); ?></p>
-*/
-/*
+  				endwhile;
+  				// Previous/next post navigation.
+  				twentyfourteen_paging_nav();
 
+  			else :
+  				// If no content, include the "No posts found" template.
+  				get_template_part( 'content', 'none' );
 
+  			endif;
 
-$q = array('post_type'=>'add_prhilnyk');
-$my_posts = get_posts($q);
-foreach ($my_posts as $post) :
-setup_postdata($post);
-?>
-<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-</h2>
-<?php echo $post->ID; ?>
-<?php print_r(get_post_meta($post->ID, 'ufamily')); ?>
-<?php print_r(get_post_custom()); ?>
-
-<h2 class="entry-title"><?php the_content(); ?>><?php  ?>
-</h2>
-
-<?php endforeach; */
 }
 else {
 echo " <p> У Вас недостатньо повноважень!</p>";

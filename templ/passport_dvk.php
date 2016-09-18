@@ -12,97 +12,9 @@ Template Name: Паспорт ДВК
   <script src="<?php echo get_template_directory_uri() ?>/js/passport_pr.js">
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
-  <style>
-h1 {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-bottom: 10px;
-    }
 
-.input_prihil {width: 97%;}
-table.input_prihil, td, tr{ border: 0px;
-border-collapse: collapse;
-}
-input, textarea, select {
-  border:none;
-  border-bottom: 1px solid;
-    border-top:0px; width:100%;
-    margin-bottom:2px;
-    font-weight:bold;}
-.input_chk {width: auto; padding: 5px;}
-.im_data
-{width:20%;
-text-align: right;
-padding-right: 10px;
-padding-top:0px;
-padding-bottom:10px;
-vertical-align: bottom;}
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
-.val_data
-{vertical-align: bottom;
-  width:30%;
-}
-.adres
-{
-vertical-align: top;
-}
-.check_b {
-text-align: right;}
-
-.check_b label {
-display: block;
-margin-right: 15px;
-}
-.check_b1 {
-text-align: left;}
-.check_b1 label {
-display: block;
-margin-left: 5px;
-}
-.btn1 {
-//  width: 50%;
-   margin-top: 30px;
-   margin-left: 20px;
-   margin-right: 20px;
-   margin-bottom: 20px;
-}
-#btn_prihil
-{
-margin-left: 700px;
-margin-bottom: 20px;
-}
-
- input.btn1{width: 75%;}
- .n_dil {margin-bottom: 15px;}
- .prihil_nyk {height: 20px;}
- .prihil_nyk p {
-   line-height: 1;
-   margin-bottom: 0px;
-   margin-top: 0px;
-   -webkit-margin-before:0em;
-  -webkit-margin-after:0em;
-}
-  .prihil_nyk a {
-    line-height: 1;
-//    text-decoration: underline;
-  }
-  .change_prihil, .view_prihil
-  {
-    margin-top: -2px;
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 0.8em;
-    text-decoration: underline
-}
-.various
-{
-  margin-left: 15px;
-//  font-weight: bold;
-//  font-size: 0.8em;
-//  text-decoration: underline
-}
-
-</style>
 
  <div id="main-content" class="main-content">
    <div id="primary" class="content-area" style="padding-top:18px;">
@@ -120,17 +32,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
       ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
-        <div id="input_prihil">
+        <div id="input_prihil" class="form_input">
         <h1>Паспорт ДВК</h1>
     <br>
       <form method="post" enctype="multipart/form-data" id="add_passport">
     <table class="input_prihil">
         <tr>
-          <td class="adres">
+          <td class="im_data">
             Номер дільниці:
           </td>
-          <td  id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" value = "1" disabled required/>
+          <td  id="nom_dil" class="val_data">
+              <input type="text" id="n_diln" name="n_diln" value = "1" hidden="" disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
 
               <select id = "spys_diln" name="dl">
@@ -161,38 +73,26 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             </select>
 
           </td>
-          <td>
-                  </td>
-                  <td>
+          <td class="im_data">
+              <label for="vyd" > Вид </label>
+                    </td>
+                    <td class="val_data">
+                      <select id = "vv1" name="ksch">
+                        <option  value="0" selected>Сільська</option>
+                        <option value='1'>Міська </option>
+                        <option value='2'>Районна </option>
+                      </select>
+
                   </td>
         </tr>
 
-        <tr>
-            <td class="im_data">
-              <label for="vyd" > Вид </label>
-            </td>
-            <td class="val_data">
-              <select id = "vv1" name="ksch">
-                <option  value="0" selected>Сільська</option>
-                <option value='1'>Міська </option>
-                <option value='2'>Районна </option>
-              </select>
-                 </td>
-             <td class="im_data">
-               <label for="ustanov"> Установи в межах ДВК </label>
-             </td>
-            <td class="val_data">
-                  <textarea  type="text" name="ustanovy" id="ustanovy" /></textarea>
-            </td>
-        </tr>
-          <tr>
-          <td class="im_data" rowspan="2">
+                  <td class="im_data" rowspan="2">
              <label for="adressa">Адреса </label><br /><br />
             </td>
             <td class="adres val_data" rowspan="2">
               <textarea type="text"  name="adressa" id="adressa" required/></textarea>
             </td>
-            <td class="im_data" rowspan="2">
+           <td class="im_data" rowspan="2">
                <label for="mezhi">Межі ДВК</label>
             </td>
             <td class="val_data"  rowspan="2">
@@ -208,13 +108,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           <td class="val_data" rowspan="2">
             <textarea type="text"  name="pidpryems" id="pidpryems"/></textarea>
           </td>
-          <td class="im_data"  rowspan="2">
-             <label for="misce_zustr">Місце зустрічі з людьми</label>
+          <td class="im_data">
+            <label for="ustanov"> Установи в межах ДВК </label>
           </td>
-          <td class="val_data"  rowspan="2">
-              <textarea   type="text"  name="misce_zustr" id="misce_zustr"/></textarea>
-          </td>
-      </tr>
+         <td class="val_data">
+               <textarea  type="text" name="ustanovy" id="ustanovy" /></textarea>
+         </td>
+          </tr>
       <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
       <tr>
       <td class="im_data" rowspan="2">
@@ -224,12 +124,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           <textarea type="text"  name="spysok_boss" id="spysok_boss"/></textarea>
         </td>
         <td class="im_data"  rowspan="2">
-           <label for="misce_zustr1"></label>
-        </td>
-        <td class="val_data"  rowspan="2">
-            <textarea   type="text"  name="misce_zustr1" id="misce_zustr1" hidden/></textarea>
-        </td>
-    </tr>
+             <label for="misce_zustr">Місце зустрічі з людьми</label>
+          </td>
+          <td class="val_data"  rowspan="2">
+              <textarea   type="text"  name="misce_zustr" id="misce_zustr"/></textarea>
+          </td>
+      </tr>
     <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
 <tr>
     <td>

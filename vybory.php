@@ -88,7 +88,7 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 { die('You are not allowed to call this page directly.'); }
 
 register_activation_hook (__FILE__, 'tvk_activated');
-register_deactivation_hook (__FILE__, 'tvk_deactivated');
+//register_deactivation_hook (__FILE__, 'tvk_deactivated');
 
 
 function tvk_activated ()
@@ -118,6 +118,7 @@ function tvk_activated ()
   $result = add_role(
     'raion', 'Районний',
     array(
+      'create_posts'         => true,
       'read'         => true,  // true разрешает эту возможность
       'edit_posts'   => true,  // true разрешает редактировать посты
       'delete_posts' => true, // false запрещает удалять посты
@@ -145,9 +146,9 @@ wp_clear_scheduled_hook('wp_update_themes');
 add_filter('manage_users_columns', 'add_users_comm_column', 4);
 function add_users_comm_column( $columns ){
 	$columns['diln'] = 'Дільниця.';
-	$columns['kusch'] = 'Кущ'; // добавляет дату реги
+	$columns['kusch'] = 'Кущ';
+  $columns['raion'] = 'Район'; // добавляет дату реги
 	//unset( $columns['posts'] ); // удаляет колонку посты
-
 	return $columns;
 }
 
@@ -176,6 +177,10 @@ function fill_users_comm_column( $foo, $column_name, $user_id ) {
 		$w = get_user_meta( $user_id, 'kusch', true );
 		$out = $w? '<p>'. $w .'</p>' : '';
 	}
+  elseif( $column_name == 'raion' ){
+		$w = get_user_meta( $user_id, 'raion', true );
+		$out = $w? '<p>'. $w .'</p>' : '';
+	}
 
 	return $out;
 }
@@ -199,33 +204,11 @@ wp_enqueue_script('my-plugin-script');
         ?>
         <script  type="text/javascript">
           jQuery(function(){
-            var endings = ["mail.ru", "list.ru", "rambler.ru", "yandex.ru", "gmail.com"],
-                symbols = "qwertyuiopasdfghjklzxcvbnm1234567890";
-            function rand(min, max) {
-                return (min + Math.random() * (max - min + 1)) | 0;
-                  }
-
-                    function getRandomStr(len) {
-                        var ret = ""
-                          for (var i = 0; i < len; i++)
-                            ret += symbols[rand(0, symbols.length - 1)];
-                              return ret;
-                            }
-
-                              function getEmail() {
-                                  var a = getRandomStr(rand(3, 5)),
-                                  b = getRandomStr(rand(3, 5));
-                                  return a + "." + b + "@" + endings[rand(0, endings.length - 1)];
-                                }
-
-
           jQuery("#url").parent().parent().hide();
           jQuery("#send_user_notification").prop("checked",false);
           jQuery("#send_user_notification").parent().parent().parent().hide();
-          if(jQuery("#email").val.Trim() != '')
-          jQuery("#email").val(getEmail);
-
-          </script>
+          });
+              </script>
         <table class="form-table" id="dn">
             <tr class="form-field">
                 <th scope="row"><label for="mail_chimp">Дільниці </label></th>
@@ -234,63 +217,16 @@ wp_enqueue_script('my-plugin-script');
 		                  <select id = "vv" name="dl">
  		                        <?php
                             $var3 = '1';
-                            $result = csv_to_array(__DIR__.'/diln.csv',';');
-
-
-                            $kus = array();
-                            $tmp_kus = array();
-                            $temp_a = array();
-                            $dil = array();
-                            $rayon = array();
-                            $tmp_rayon = array();
-                            //echo print_r($result);
-                            foreach($result as $var11)
-                              {
-                            //echo ($var11[1]); //
-                                array_push($tmp_kus, $var11['kusch']);
-                                array_push($tmp_rayon, $var11['rayon']);
-                                $temp_a[0] = ['diln'=>$var11['diln'], 'n_diln'=>$var11['n_diln']];
-                                //$new_kusch[$i] = ['kusch'=>$var1, 'n_diln'=>$q];
-                                array_push($dil,$temp_a[0]);
-                              }
-                            $tmp_kus = array_unique($tmp_kus);
-                            $tmp_rayon = array_unique($tmp_rayon);
-                            $temp_a = array();
-
-                            foreach($tmp_kus as $var1)
-                                {
-                                  $q = ''; $i = 0;
-                                      foreach ($result as $var11) {
-                                      if ($var11['kusch'] == $var1)
-                                      $q .= $var11['n_diln'].", ";
-                                  }
-                            $temp_a[0] = ['kusch'=>$var1, 'n_diln'=>$q];
-                            //$new_kusch[$i] = ['kusch'=>$var1, 'n_diln'=>$q];
-                            array_push($kus,$temp_a[0]);
-                            $i += 1;
-                            }
-
-                            foreach($tmp_rayon as $var1)
-                                {
-                                  $q = ''; $i = 0;
-                                      foreach ($result as $var11) {
-                                      if ($var11['rayon'] == $var1)
-                                      $q .= $var11['n_diln'].", ";
-                                  }
-                            $temp_a[0] = ['rayon'=>$var1, 'n_diln'=>$q];
-                            //$new_kusch[$i] = ['kusch'=>$var1, 'n_diln'=>$q];
-                            array_push($rayon,$temp_a[0]);
-                            $i += 1;
-                            }
-
-                            $key = 'diln';
                             $var2 = get_user_meta( $user->ID, $key, true );
+                            $kus = get_dil('kusch');
+                            $dil = get_dil('diln');
+                            $raion = get_dil('raion');
 
                             foreach($dil as $var1)
                             {
                               if( trim($var1['n_diln']) == trim($var2))
                               {
-                              $a = $var1['diln'];
+                              $a = $var1['n_diln']."".$var1['diln'];
                               echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
                               $var3 = '2';
                               }
@@ -337,18 +273,51 @@ wp_enqueue_script('my-plugin-script');
                 </td>
 
         </table>
+        <table class="form-table" id="raion">
+          <tr class="form-field">
+                <th scope="row"><label for="mail_chimp">Виберіть район </label></th>
+                <td>
+                <label for="uraion">
+                    <select id = "uraion" name="uraion">
+                      <option disabled selected>Виберіть район</option>
+                      <?php
+                        $i=1;
+                        $key = 'raion';
+                        $var2 = get_user_meta( $user->ID, $key, true );
+
+                        foreach($raion as $var1)
+                        {
+                        $q0=$var1['raion'];
+                        $q1=$var1['n_diln'];
+
+                        echo "<option value=".$q1."><strong>$q0</strong> район - дільниці ($q1)</option>";
+                        $i++;
+                      }
+                      ?>
+                    </select>
+                  </label>
+                </td>
+
+        </table>
+        <p id="new-email" hidden>
+          <?php echo wp_generate_password(8, false).'@'.wp_generate_password(2, false).'me.ua'; ?>
+        </p>
         <script  type="text/javascript">
+
+        var a1 = jQuery('#new-email').text();
+        jQuery('#email').attr('value',a1);
 
         jQuery("#dn").hide();
         jQuery("#kusch").hide();
+        jQuery("#raion").hide();
 
                   	if (jQuery('#role'))
         		{
         		if(!(jQuery('#role').val() != ''))
             {
-            jQuery("#role [value='dilnich']").prop('selected', true).
-        		jQuery("#dn").show();
+            jQuery("#role [value='dilnich']").prop('selected', true).jQuery("#dn").show();
             jQuery("#kusch").hide();
+            jQuery("#raion").hide();
         		}
         		else
         		{
@@ -379,6 +348,7 @@ wp_enqueue_script('my-plugin-script');
 //        }
 	add_user_meta( $user_ID, "diln", $_POST['dl'],false );
 	add_user_meta( $user_ID, "kusch", $_POST['ksch'],false );
+  add_user_meta( $user_ID, "raion", $_POST['uraion'],false );
  }
 
   //Save new field for user in users_meta table
@@ -401,9 +371,11 @@ wp_enqueue_script('my-plugin-script');
 
 add_user_meta( $user_ID, "diln", $_POST['dl'],false );
 add_user_meta( $user_ID, "kusch", $_POST['ksch'],false );
+add_user_meta( $user_ID, "raion", $_POST['uraion'],false );
 
             update_usermeta($user_id, 'diln', $_POST['dl']);
             update_usermeta($user_id, 'kusch', $_POST['ksch']);
+            update_usermeta($user_id, 'raion', $_POST['uraion']);
     }
 
 
@@ -859,7 +831,7 @@ else {
 	  //  wp_set_object_terms($post_id, $tag, 'custom_tax_like_tag', true);
 
     wp_set_object_terms( $post_id, $n_diln, 'dvk', false );
-    
+
   if ($_FILES['auto_b']) { // если основное фото было загружено
   		$attach_id_img = media_handle_upload( 'auto_b', $post_id ); // добавляем картинку в медиабиблиотеку и получаем её id
   		update_post_meta($post_id,'auto_b',$attach_id_img); // привязываем миниатюру к посту

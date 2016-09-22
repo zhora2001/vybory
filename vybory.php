@@ -17,6 +17,7 @@ add_action('wp_ajax_change_object_ajax', 'change_object'); // если нужн�
 add_action( 'wp_ajax_nopriv_add_object_ajax', 'add_object' ); // крепим на событие wp_ajax_nopriv_add_object_ajax, где add_object_ajax это параметр action, который мы добавили в перехвате отправки формы, add_object - ф-я которую надо запустить
 add_action('wp_ajax_add_object_ajax', 'add_object'); // если нужно чтобы вся бадяга работала для админов
 
+add_action('wp_ajax_change_passport_dvk', 'change_passport_dvk'); // если нужно чтобы вся бадяга работала для админов
 add_action('wp_ajax_add_passport', 'add_passport'); // если нужно чтобы вся бадяга работала для админов
 function add_passport() { // внутри функции подключаем нужный файл с обработкой
     require_once dirname(__FILE__) . '/add_passport_dvk.php';
@@ -25,6 +26,11 @@ function add_passport() { // внутри функции подключаем н
 add_action('wp_ajax_reg_problema', 'reg_problema'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
 function reg_problema() { // внутри функции подключаем нужный файл с обработкой
     require_once dirname(__FILE__) . '/reg_new_problema.php';
+}
+
+add_action('wp_ajax_reg_podiy', 'reg_podiy'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
+function reg_podiy() { // внутри функции подключаем нужный файл с обработкой
+    require_once dirname(__FILE__) . '/reg_new_podiy.php';
 }
 
 //require_once dirname(__FILE__).'/reg_user.php'; // подключаем регистрация новых пользователей
@@ -147,27 +153,16 @@ add_filter('manage_users_columns', 'add_users_comm_column', 4);
 function add_users_comm_column( $columns ){
 	$columns['diln'] = 'Дільниця.';
 	$columns['kusch'] = 'Кущ';
-  $columns['raion'] = 'Район'; // добавляет дату реги
-	//unset( $columns['posts'] ); // удаляет колонку посты
+  $columns['raion'] = 'Район';
 	return $columns;
 }
 
-/*
-add_filter('manage_posts_columns', 'add_posts_comm_column', 4);
-function add_posts_comm_column( $columns ){
-	$columns['diln'] = 'Дільниця.';
-
-	return $columns;
-}
-*/
 
 // Заповнюємо додаткові колонки в списку користувачів
 
 add_filter('manage_users_custom_column', 'fill_users_comm_column', 5, 3); // wp-admin/includes/class-wp-posts-list-table.php
 function fill_users_comm_column( $foo, $column_name, $user_id ) {
 	global $wpdb;
-
-//	$userdata = get_user_meta( $user_id, $key, true );
 
 	if( $column_name == 'diln' ){
 		$w = get_user_meta( $user_id, 'diln', true );
@@ -369,9 +364,9 @@ wp_enqueue_script('my-plugin-script');
 //  ////            mailchimp_unsubscribe(get_userdata($user_id)->user_email);
 //        }
 
-add_user_meta( $user_ID, "diln", $_POST['dl'],false );
-add_user_meta( $user_ID, "kusch", $_POST['ksch'],false );
-add_user_meta( $user_ID, "raion", $_POST['uraion'],false );
+            add_user_meta( $user_ID, "diln", $_POST['dl'],false );
+            add_user_meta( $user_ID, "kusch", $_POST['ksch'],false );
+            add_user_meta( $user_ID, "raion", $_POST['uraion'],false );
 
             update_usermeta($user_id, 'diln', $_POST['dl']);
             update_usermeta($user_id, 'kusch', $_POST['ksch']);
@@ -914,5 +909,33 @@ else {
   if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
 	else wp_send_json_success($pod->export()); // если все ок, выводим ответ в формате json с success = true и умираем
 
+	die();
+}
+
+function change_passport_dvk() {
+	$errors = ''; // сначала ошибок нет
+
+	$nonce = $_REQUEST['nonce']; // берем переданную формой строку проверки
+	if (!wp_verify_nonce($nonce, 'change_passport_dvk')) { // проверяем nonce код, второй параметр это аргумент из wp_create_nonce
+      wp_send_json_error(array('message' => 'Данні відправлені з стороньої адреси', 'redirect' => false));
+	}
+
+
+  	// запишем все поля
+  $id_p = trim(strip_tags($_REQUEST['id_p'])); // переданный id термина таксономии с вложенностью (родитель)
+  if ($id_p  > 0)
+    {
+      $params = array('join'=>'JOIN ds_postmeta as d  ON  d.post_id = t.id',
+      'where'=>"d.meta_key = 'n_dbk' and meta_value ='".$id_p."'",);
+      $pod = pods( 'pasport_dvk' , $params);
+    }
+
+if (!isset($pod))
+{
+  wp_send_json_error(array('message' => 'Паспорт не існує!', 'redirect' => false));
+}
+  //if ($errors) wp_send_json_error($errors); // если были ошибки, выводим ответ в формате json с success = false и умираем
+	//else
+   wp_send_json_success($pod->export()); // если все ок, выводим ответ в формате json с success = true и умираем
 	die();
 }

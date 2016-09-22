@@ -11,7 +11,7 @@ if (!(is_user_logged_in() && ( current_user_can('manage_options') || is_user_rol
 
 // теперь возьмем все поля и рассуем по переменным
 $n_dbk = isset($_POST['dl']) ? $_POST['dl'] : '';
-$nazva = isset($_POST['nazva']) ? $_POST['nazva'] : '';
+$nazva = isset($_POST['nazva_d']) ? $_POST['nazva_d'] : '';
 $adresa = isset($_POST['adressa']) ? $_POST['adressa'] : '';
 $vyd = isset($_POST['ksch']) ? $_POST['ksch'] : '';
 $ustanovy = isset($_POST['ustanovy']) ? $_POST['ustanovy'] : '';
@@ -37,15 +37,17 @@ else {
 
 }
 */
-$nazva = "Дільниця № ".$n_dbk;
-$n_prih = trim(strip_tags($_POST['n_prih'])); // переданный id термина таксономии с вложенностью (родитель)
+//if ( $nazva == '')
+//$nazva = "Дільниця № ".$n_dbk;
+
+$n_prih = $_POST['n_prih']; // переданный id термина таксономии с вложенностью (родитель)
+
 
 if ($n_prih != '-1' && $n_prih != '')
   $pod = pods( 'pasport_dvk' , $n_prih);
 	else {
 		$pod = pods( 'pasport_dvk');
 	}
-
  	$data = array(
 	'nazva' => $nazva,
 	'title' => $nazva,
@@ -58,19 +60,25 @@ if ($n_prih != '-1' && $n_prih != '')
 	'misce_zustr' => $misce_zustr,
 	'spysok_boss' => $spysok_boss,
 	'tochka_rostu' => $tochka_rostu
-
 );
 
 
-if ($pod != '')
-  $post_id = $pod->id();
+if ($pod->id != '')
+  $post_id = $pod->id;
+
+	if ($pod->id != '')
+	echo "::".$nazva."string"." ".$n_prih." ".$pod->id;
+	print_r($data);
+
 if( $post_id != $n_prih)
 $post_id = $pod->add( $data );
 else {
   $pod->save( $data );
 }
 
-wp_set_object_terms( $post_id, $n_diln, 'dvk', false );
+echo "string1";
+
+wp_set_object_terms( $post_id, $n_dbk, 'dvk', false );
 
 wp_send_json_success(array('message' => 'Дані про дільницю успішно внесено!', 'redirect' => $redirect_to));
 //wp_send_json_success($data);

@@ -9,9 +9,9 @@ div.form_input
   padding-bottom:10px;
 }
 
-input, textarea, select
+input[type="text"], textarea, select
 {
-background-color:  #FAFAFA;
+background-color:  #F9F9F9;
 margin-bottom: 18px;
 }
 .adres
@@ -160,4 +160,9 @@ input
      line-height: 1;
 
    }
+}
+div.povidoml
+{
+  height: 20px;
+  color: brown;
 }

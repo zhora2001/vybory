@@ -533,14 +533,17 @@ function include_scripts(){
 wp_localize_script( 'jquery', 'ajaxdata',
 	array(
    				'url' => admin_url('admin-ajax.php'),
-   				'nonce' => wp_create_nonce('add_object')
+   				'nonce' => wp_create_nonce('add_object'),
+					'reg_podiy_nonce' => wp_create_nonce('reg_podiy')
 			)
 		);
 
 		wp_localize_script( 'jquery', 'ajaxpassport',
 	array(
 			'url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('add_passport')
+			'nonce' => wp_create_nonce('add_passport'),
+			'cnonce' => wp_create_nonce('change_passport_dvk'),
+
 	)
 );
 
@@ -580,6 +583,7 @@ function is_user_role( $role, $user_id = null ) {
 	return in_array( $role, (array) $user->roles );
 }
 
+// Формуємо масиви для корисутувачів з списку дільниць
 function get_dil($pidr)
 {
 $result = csv_to_array(__DIR__.'/diln.csv',';');
@@ -590,16 +594,15 @@ $dil1 = array();
 $rayon1 = array();
 $tmp_rayon = array();
 //echo print_r($result);
-
-foreach($result as $var11)
-	{
+	foreach($result as $var11)
+		{
 //echo ($var11[1]); //
 		array_push($tmp_kus, $var11['kusch']);
 		array_push($tmp_rayon, $var11['raion']);
 		$temp_a[0] = ['diln'=>$var11['diln'], 'n_diln'=>$var11['n_diln']];
 		//$new_kusch[$i] = ['kusch'=>$var1, 'n_diln'=>$q];
 		array_push($dil1,$temp_a[0]);
-	}
+		}
 $tmp_kus = array_unique($tmp_kus);
 $tmp_rayon = array_unique($tmp_rayon);
 $temp_a = array();
@@ -647,3 +650,55 @@ $rayon = array();
 $kus = get_dil('kusch');
 $dil = get_dil('diln');
 $raion = get_dil('raion');
+
+function cut_diln($list_d)
+{
+$dil = get_dil('diln');
+$cut_d = array();
+$cut_d = explode(",", $list_d);
+$temp_a = array();
+$dil1 = array();
+
+foreach($dil as $var1)
+		{
+					foreach ($cut_d as $var11)
+					{
+						if (trim($var1['n_diln']) == trim($var11))
+							{
+								$q = $var1['diln'];
+								$temp_a[0] = ['diln'=>$q, 'n_diln'=>$var11];
+								array_push($dil1,$temp_a[0]);
+							}
+						}
+		}
+		return $dil1;
+}
+
+function cut_kusch($list_d)
+{
+$dil = get_dil('kusch');
+$cut_d = array();
+$cut_d = explode(",", $list_d);
+$temp_a = array();
+$dil1 = array();
+
+foreach($dil as $var1)
+		{
+			$cut_dd = array();
+			$cut_dd = explode(",", $var1['n_diln']);
+			foreach ($cut_dd as $var11)
+					{
+						foreach ($cut_d as $var3)
+							{
+								if ((trim($var3) == trim($var11)) && trim($var3) != '' )
+									{
+										echo $var3." ".$var11;
+										$q = $var1['kusch'];
+										$temp_a[0] = ['kusch'=>$q, 'n_diln'=>$var1['n_diln']];
+										array_push($dil1,$temp_a[0]);
+									}
+							}
+					}
+		}
+		return $dil1;
+}

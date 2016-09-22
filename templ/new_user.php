@@ -131,10 +131,14 @@ list-style-type: none;
                   <?php
             $var3 = '1';
 
-            $key = 'diln';
-            $var2 = get_user_meta( $user->ID, $key, true );
+            $key = 'raion';
+            $var2 = get_user_meta( $current_user->ID, $key, true );
+            if(is_user_role("raion"))
+            $dil1=cut_diln($var2);
+            else
+            $dil1 = get_dil('diln');
 
-            foreach($dil as $var1)
+            foreach($dil1 as $var1)
             {
               if( trim($var1['n_diln']) == trim($var2))
               {
@@ -147,8 +151,9 @@ list-style-type: none;
                 echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
                 }
             }
+//echo '<p> $var2 '.$var2.' id = '. $current_user->ID.' </p>';
             if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть дільницю</option>';
+                      echo ' <option value="" selected>Выберіть дільницю</option>';
           ?>
         </select>
   </label>
@@ -159,14 +164,23 @@ list-style-type: none;
 
         $i=1;
 
-        $key = 'kusch';
-        foreach($kus as $var1)
+        $key = 'raion';
+        $var2 = get_user_meta( $current_user->ID, $key, true );
+
+        if(is_user_role("raion"))
+          $kus1 = cut_kusch($var2);
+        else
+          $kus1 = get_dil('kusch');
+          $kus2 = get_dil('kusch');
+
+        foreach($kus1 as $var1)
         {
         $q0=$var1['kusch'];
           $q1=trim($var1['n_diln']);
         echo '<option value='.'"'.$q1.'"'."><strong>$q0</strong> - дільниці ($q1)</option>";
         $i++;
       }
+      echo print_r($kus2);
       ?>
     </select>
   </label>
@@ -198,8 +212,19 @@ list-style-type: none;
 
 $blogusers = get_users(array('role__in' => array('dilnich','kusch')));
 	foreach ($blogusers as $user) {
-		//echo '<li>' . $user->first_name.' '.$user->last_name. '</li>';
-    print_r($user);
+    $var1 = get_user_meta( $user->ID, 'diln', true );
+    $var2 = get_user_meta( $user->ID, 'kusch', true );
+    if(is_user_role('kusch', $user->ID))
+    {
+      echo '<li>' . $user->display_name.' '.
+       'Кущовий. Дільниця №'.$var2.'</li>';
+    } else
+    {
+      echo '<li>' . $user->display_name.' '.
+       'Дільничний. Дільниця №'.$var1.'</li>';
+    }
+
+    // print_r($user);
 	}
  }
  else {

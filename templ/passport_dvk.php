@@ -12,7 +12,6 @@ Template Name: Паспорт ДВК
   <script src="<?php echo get_template_directory_uri() ?>/js/passport_pr.js">
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
-
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
 
@@ -31,43 +30,70 @@ if(is_user_logged_in() && (is_user_role('dilnich')
     $var2 = get_user_meta( $current_user->ID);
 
       ?>
-<button id="btn_prihil" type="button"> Відкрити форму</button>
+<button id="btn_prihil" type="button" hidden=""> Відкрити форму</button>
+
         <div id="input_prihil" class="form_input">
-        <h1>Паспорт ДВК</h1>
+          <div id="output" class="povidoml" > </div>
+                    <h1>Паспорт ДВК</h1>
     <br>
       <form method="post" enctype="multipart/form-data" id="add_passport">
     <table class="input_prihil">
         <tr>
           <td class="im_data">
+
             Номер дільниці:
           </td>
           <td  id="nom_dil" class="val_data">
               <input type="text" id="n_diln" name="n_diln" value = "1" hidden="" disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
+              <input type="text" id="nazva_d" name="nazva_d" value = "-1" hidden=""/>
 
               <select id = "spys_diln" name="dl">
                       <?php
                 $var3 = '1';
 
+                if(is_user_role('raion'))
+                {
+                $key = 'raion';
+                $var2 = get_user_meta( $current_user->ID, $key, true );
+                      $dil1=cut_diln($var2);
+                      echo print_r($dil1);
+                      echo $var2;
+                }
+                elseif (is_user_role('kusch')) {
+                  $key = 'kusch';
+                  $var2 = get_user_meta( $current_user->ID, $key, true );
+                        $dil1=cut_diln($var2);
+                }
+                elseif (is_user_role('dilnich')) {
+                  $key = 'diln';
+                  $var2 = get_user_meta( $current_user->ID, $key, true );
+                        $dil1=cut_diln($var2);
+                }
+                else
+                $dil1 = get_dil('diln');
+
                 $key = 'diln';
                 $var2 = get_user_meta(   $current_user->id, $key, true );
-                foreach($dil as $var1)
+
+
+                foreach($dil1 as $var1)
                 {
-                  if( trim($var1['n_diln']) == trim($var2))
-                  {
+                //  if( trim($var1['n_diln']) == trim($var2))
+            //      {
                     $a =  $var1['n_diln']." ".$var1['diln'];
-                  echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
+                  echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
                   $var3 = '2';
-                  }
-                  else {
-                    if (current_user_can('manage_options'))
-                    {
-                    $a =  $var1['n_diln']." ".$var1['diln'];
-                    echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
-                  }
-                    }
+            //      }
+          //        else {
+          //          if (current_user_can('manage_options'))
+        //            {
+        //            $a =  $var1['n_diln']." ".$var1['diln'];
+        //            echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+          //        }
+            //        }
                 }
-                if ($var3 == '1')
+              //  if ($var3 == '1')
               echo ' <option value="" selected>Выберіть дільницю</option>';
               ?>
             </select>
@@ -143,8 +169,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
      </td>
         <td>
           <div >
-            <div id="output"></div>
-            <br />
+                  <br />
           <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
           </div>
         </td>
@@ -165,9 +190,7 @@ $params = array(
 //    'where' => "d1.meta_key = 'n_diln'  and d1.meta_value = '1'",
 //'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
 //    'where' => "`d`.meta_key = 'n_diln' and meta_value = '5'",
-
-
-    //'limit'   => -1  // Return all rows
+//    'limit'   => -1  // Return all rows
 );
 
 // Create and find in one shot

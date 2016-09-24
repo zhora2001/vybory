@@ -32,6 +32,8 @@ function req_come(data, statusText, xhr, form) { // ф-я срабатывающ
 
 
 jQuery(document).ready(function() { // после загрузки DOM
+    jQuery('#primary-menu').append("<li class='menu-item site-navigation' style='color:white;'> Ви війшли як "+
+    jQuery('#login_cur_user').text() +"  </li>");
 
     jQuery('#r_diln').attr('checked', true);
     jQuery('#r_kusch').attr('checked', false);

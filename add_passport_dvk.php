@@ -5,8 +5,9 @@ $nonce = $_REQUEST['nonce'];
 
 if (!wp_verify_nonce($nonce, 'add_passport')) wp_send_json_error(array('message' => 'Данні відправлені з стороньої адреси '.$nonce." ".$nonce1." ", 'redirect' => false));
 
-if (!(is_user_logged_in() && ( current_user_can('manage_options') || is_user_role("raion"))))
-   wp_send_json_error(array('message' => 'Реєстрація користувачів недоступна.', 'redirect' => false));
+if (!(is_user_logged_in() && ( current_user_can('manage_options') || is_user_role("raion")
+|| is_user_role("dilnich") || is_user_role("kusch"))))
+   wp_send_json_error(array('message' => 'Можливість вносити данні недоступна.', 'redirect' => false));
 
 
 // теперь возьмем все поля и рассуем по переменным

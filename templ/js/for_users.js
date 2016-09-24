@@ -57,7 +57,7 @@ jQuery(document).ready(function() { // после загрузки DOM
             },
             success: function(data) { // после того как ответ пришел
                 if (data.success) { // если ошибок нет
-                    lnk.text('Выходим...'); // пишем что выходим
+                    lnk.text('Входимо...'); // пишем что выходим
                     window.location.reload(true); // и обновляемся
                 } else { // если ошибки есть
                     alert(data.data.message); // просто покажим их алертом

@@ -2,6 +2,10 @@
 /*
 Template Name: Введення проблеми на дільниці
  */
+ //<?php
+ //wp_nav_menu( array( 'theme_location' => 'primary', 'items_wrap' => '<ul><li id="item-id">Список: </li>%3$s</ul>' ) );
+ //
+
  get_header(); ?>
 
  <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
@@ -41,24 +45,35 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           <select id = "spys_diln" name="dl">
                   <?php
             $var3 = '1';
-            $key = 'diln';
-            $var2 = get_user_meta(   $current_user->id, $key, true );
-            foreach($dil as $var1)
+            if(is_user_role('raion'))
             {
-              if( trim($var1['n_diln']) == trim($var2))
-              {
-                $a =  $var1['n_diln']." ".$var1['diln'];
-              echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
-              $var3 = '2';
-              }
-              else {
-                if (current_user_can('manage_options'))
-                {
-                $a =  $var1['n_diln']." ".$var1['diln'];
-                echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
-              }
-                }
+            $key = 'raion';
+            $var2 = get_user_meta( $current_user->ID, $key, true );
+                  $dil1=cut_diln($var2);
+                  echo print_r($dil1);
+                  echo $var2;
             }
+            elseif (is_user_role('kusch')) {
+              $key = 'kusch';
+              $var2 = get_user_meta( $current_user->ID, $key, true );
+                    $dil1=cut_diln($var2);
+            }
+            elseif (is_user_role('dilnich')) {
+              $key = 'diln';
+              $var2 = get_user_meta( $current_user->ID, $key, true );
+                    $dil1=cut_diln($var2);
+            }
+            else
+            $dil1 = get_dil('diln');
+
+            $key = 'diln';
+            $var2 = get_user_meta($current_user->id, $key, true );
+            foreach($dil1 as $var1)
+            {
+              $a =  $var1['n_diln']." ".$var1['diln'];
+              echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+              }
+
             if ($var3 == '1')
           echo ' <option value="" selected>Выберіть дільницю</option>';
           ?>

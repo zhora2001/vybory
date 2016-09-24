@@ -46,6 +46,8 @@ function response_go(out) { // ф-я обработки ответа от wp, в
 }
 
 jQuery(document).ready(function() {
+   jQuery('#primary-menu').append("<li class='menu-item site-navigation' style='color:white;'> Ви війшли як "+
+   jQuery('#login_cur_user').text() +"  </li>");
 
     jQuery("#spys_diln").change(function() {
         jQuery('#n_diln').attr('value',jQuery(this).val());
@@ -86,7 +88,7 @@ jQuery(document).ready(function() {
 
 
     jQuery('a.iframe').fancybox();
-//    jQuery('#input_prihil').hide();
+    jQuery('#input_prihil').hide();
     jQuery(function(u) {
         jQuery("#beathday").mask("99/99/9999", {
             placeholder: "дд.мм.рррр"

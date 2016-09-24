@@ -25,7 +25,7 @@ div.form_input .adres {
 div.form_input h1 {
   margin-top: 10px;
   margin-left: 50px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 /* line 29, ../sass/style_v.scss */
 div.form_input .input_chk {
@@ -116,68 +116,81 @@ input.btn1 {
 }
 
 /* line 94, ../sass/style_v.scss */
-.change_prihil, .view_prihil {
-  margin-top: -2px;
-  margin-left: 15px;
-  font-weight: bold;
+a.change_prihil, a.view_prihil {
+  margin-top: 5px;
+  margin-left: 0px;
   font-size: 0.8em;
   text-decoration: underline;
+  color: brown;
+}
+/* line 103, ../sass/style_v.scss */
+a.change_prihil :focus, a.view_prihil :focus {
+  color: red;
 }
 
-/* line 102, ../sass/style_v.scss */
+/* line 108, ../sass/style_v.scss */
 .various {
   margin-left: 15px;
 }
 
-/* line 109, ../sass/style_v.scss */
+/* line 115, ../sass/style_v.scss */
 .val_input {
   width: 70%;
 }
 
-/* line 114, ../sass/style_v.scss */
+/* line 120, ../sass/style_v.scss */
 ul.new_input {
   list-style: none !important;
   float: none;
 }
-/* line 118, ../sass/style_v.scss */
+/* line 124, ../sass/style_v.scss */
 ul.new_input li.im_data {
   float: left;
 }
-/* line 122, ../sass/style_v.scss */
+/* line 128, ../sass/style_v.scss */
 ul.new_input li.val_data {
   float: none;
 }
-/* line 130, ../sass/style_v.scss */
+/* line 136, ../sass/style_v.scss */
 ul.new_input .btn1 {
   margin-left: 65%;
   width: 15%;
 }
 
-/* line 144, ../sass/style_v.scss */
+/* line 150, ../sass/style_v.scss */
 .response {
   margin-top: 10px;
   color: red;
 }
 
-/* line 149, ../sass/style_v.scss */
+/* line 155, ../sass/style_v.scss */
 .prihil_nyk {
   float: none;
-  height: 20px;
 }
-/* line 152, ../sass/style_v.scss */
+/* line 158, ../sass/style_v.scss */
 .prihil_nyk p {
   line-height: 1;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  padding-bottom: 10px;
+  font-size: 0.8em;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
+  color: #767676;
+  padding-top: 8px;
+  padding-left: 5%;
 }
-/* line 159, ../sass/style_v.scss */
+/* line 168, ../sass/style_v.scss */
 .prihil_nyk a {
+  padding-top: 10px;
   line-height: 1;
+  font-size: 1.2em;
+}
+/* line 173, ../sass/style_v.scss */
+.prihil_nyk .dani_prihil {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-/* line 164, ../sass/style_v.scss */
+/* line 179, ../sass/style_v.scss */
 div.povidoml {
   height: 20px;
   color: brown;

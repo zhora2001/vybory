@@ -30,7 +30,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
     $var2 = get_user_meta( $current_user->ID);
 
       ?>
-<button id="btn_prihil" type="button" hidden=""> Відкрити форму</button>
+<button id="btn_prihil" type="button"> Відкрити форму</button>
 
         <div id="input_prihil" class="form_input">
           <div id="output" class="povidoml" > </div>
@@ -94,7 +94,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             //        }
                 }
               //  if ($var3 == '1')
-              echo ' <option value="" selected>Выберіть дільницю</option>';
+              echo ' <option value="-4" selected>Выберіть дільницю</option>';
               ?>
             </select>
 
@@ -208,7 +208,8 @@ $id = $prihil->id();
     href=<?php echo '"'.get_post_permalink($id).'"';?>
     >
     <?php
-        echo " Дільниця № ".$prihil->display( 'n_dbk')." &nbsp&nbsp".
+        echo
+        // " Дільниця № ".$prihil->display( 'n_dbk')." &nbsp&nbsp".
                   $prihil->display( 'nazva')." &nbsp&nbsp".
                   //$prihil->display( 'adressa')." &nbsp&nbsp".
                   //$prihil->display( 'ubatk')." &nbsp&nbsp".
@@ -221,7 +222,7 @@ $id = $prihil->id();
                       style = "display:none;" class="view_prihil"> Перегляд </a>
                   </span>
                   <span>
-                    <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
+                <!---    <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>  --->
                   </span>
     <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
 

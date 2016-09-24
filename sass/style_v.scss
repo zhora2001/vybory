@@ -24,7 +24,7 @@ height: 5.8em;
     h1 {
     margin-top: 10px;
     margin-left: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
       }
       .input_chk {width: auto; padding: 5px;}
     }
@@ -91,13 +91,19 @@ margin-bottom: 20px;
  input.btn1{width: 75%;}
  .n_dil {margin-bottom: 15px;}
 
-  .change_prihil, .view_prihil
+a.change_prihil, a.view_prihil
   {
-    margin-top: -2px;
-    margin-left: 15px;
-    font-weight: bold;
+    margin-top: 5px;
+    margin-left: 0px;
+    //font-weight: bold;
     font-size: 0.8em;
-    text-decoration: underline
+    text-decoration: underline;
+    color: brown;
+//    z-index: 5;
+    :focus
+    {
+color: red;
+    }
 }
 .various
 {
@@ -148,18 +154,27 @@ input
   }
 .prihil_nyk {
   float: none;
-  height: 20px;
+  //height: 20px;
    p {
     line-height: 1;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    padding-bottom: 10px;
+    font-size: 0.8em;
     -webkit-margin-before:0em;
    -webkit-margin-after:0em;
-  }
+   color: #767676;
+   padding-top: 8px;
+   padding-left: 5%;
+    }
    a {
+     padding-top: 10px;
      line-height: 1;
-
+    font-size: 1.2em;
    }
+  .dani_prihil
+  {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
 }
 div.povidoml
 {

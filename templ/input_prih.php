@@ -44,25 +44,40 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           <select id = "spys_diln" name="dl">
                   <?php
             $var3 = '1';
+            $spysok_diln = "";
+            if(is_user_role('raion'))
+            {
+            $key = 'raion';
+            $var2 = get_user_meta( $current_user->ID, $key, true );
+                  $dil1=cut_diln($var2);
+                  echo print_r($dil1);
+                  echo $var2;
+            }
+            elseif (is_user_role('kusch')) {
+              $key = 'kusch';
+              $var2 = get_user_meta( $current_user->ID, $key, true );
+                    $dil1=cut_diln($var2);
+            }
+            elseif (is_user_role('dilnich')) {
+              $key = 'diln';
+              $var2 = get_user_meta( $current_user->ID, $key, true );
+                    $dil1=cut_diln($var2);
+            }
+            else
+            $dil1 = get_dil('diln');
 
             $key = 'diln';
-            $var2 = get_user_meta(   $current_user->id, $key, true );
-            foreach($dil as $var1)
+            $var2 = get_user_meta($current_user->id, $key, true );
+            foreach($dil1 as $var1)
             {
-              if( trim($var1['n_diln']) == trim($var2))
-              {
-                $a =  $var1['n_diln']." ".$var1['diln'];
-              echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
-              $var3 = '2';
+              $a =  $var1['n_diln']." ".$var1['diln'];
+              if ($spysok_diln == "")
+              $spysok_diln = "'".$var1['n_diln']."'";
+              else
+              $spysok_diln .= ",'".$var1['n_diln']."'";
+              echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
               }
-              else {
-                if (current_user_can('manage_options'))
-                {
-                $a =  $var1['n_diln']." ".$var1['diln'];
-                echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
-              }
-                }
-            }
+
             if ($var3 == '1')
           echo ' <option value="" selected>Выберіть дільницю</option>';
           ?>
@@ -256,15 +271,16 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 $params = array(
 //'join' => 'LEFT JOIN `ds_postmeta` as `d1`  ON `d1`.`post_id` = `t`.`id`',
 //    'where' => "d1.meta_key = 'n_diln'  and d1.meta_value = '1'",
-//'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
-//    'where' => "`d`.meta_key = 'n_diln' and meta_value = '5'",
-
-
-    //'limit'   => -1  // Return all rows
+'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
+    'where' => "`d`.meta_key = 'n_diln' and meta_value in (".$spysok_diln.")",
+  'limit'   => -1  // Return all rows
 );
 
 // Create and find in one shot
-
+?>
+<div id="input_prihil" class="form_input">
+<h1>Список прихільників</h1>
+<?php
 $prihil = pods( 'add_prhilnyk', $params );
 $f = array('ufamily', 'uname', 'ubatk');
 if ( 0 < $prihil->total() ) {
@@ -275,33 +291,28 @@ $id = $prihil->id();
 <div class="prihil_nyk">
     <a class="various" data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>">
         <?php echo
-                  "Дільниця № ".$prihil->display( 'n_diln')." &nbsp&nbsp".
                   $prihil->display( 'ufamily')." &nbsp&nbsp".
                   $prihil->display( 'uname')." &nbsp&nbsp".
-                  $prihil->display( 'ubatk')." &nbsp&nbsp".
-                  $prihil->display( 'beathday')." &nbsp&nbsp".
-                  $prihil->display( 'adressa')."&nbsp&nbsp" ; ?></a>
-                  <span>
-                    <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>" style = "display:none;" class="view_prihil"> Перегляд </a>
-                  </span>
-                  <span>
-                    <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
-                  </span>
-                  <p>
+                  $prihil->display( 'ubatk')." &nbsp&nbsp </a>";
+                  ?> <a href="#" style = "display:none;" class="change_prihil"> Змінити </a>
+                    <p class='dani_prihil'>Дата нар.:
+                  <?php echo $prihil->display( 'beathday')." &nbsp&nbspТел: ".
+                  $prihil->display( 'tel_o')." &nbsp&nbsp Адреса:".
+                  $prihil->display( 'adressa')."&nbsp&nbsp" ; ?></p>
+                <p>
                   <?php
                   $auth = $prihil->display( 'author');
-                 echo $prihil->display('post_author');
-                      $a = "Додано: ".get_the_author_meta( 'first_name', $auth)." ".
-                      get_the_author_meta( 'last_name', $auth)." ".
-                      get_the_author_meta( 'login', $auth)." ".
+                // echo $prihil->display('post_author');
+                      $a = "Дільниця № ".$prihil->display( 'n_diln')." &nbsp&nbsp"."Додано: ".get_the_author_meta( 'display_name', $auth)." ".
+                  //    get_the_author_meta( 'last_name', $auth)." ".
+                  //    get_the_author_meta( 'login', $auth)." ".
+                  " &nbsp&nbsp ".
                       $prihil->display( 'date');
-
-
                   echo $a;
-
                     // get_the_author_meta( $field, $userID );$prihil->display( 'author');
                     ?>
-                  </p>
+                  <!--- <a data-fancybox-type="iframe" href="<?php echo get_post_permalink($id); ?>" style = "display:none;" class="view_prihil"> Перегляд </a> --->
+                    </p>
     <p hidden class="id_p"><?php echo $prihil->display( 'id'); ?> </p>
 
 </div>
@@ -335,6 +346,9 @@ setup_postdata($post);
 </h2>
 
 <?php endforeach; */
+?>
+</div>
+<?php
 }
 else {
 echo " <p> У Вас недостатньо повноважень!</p>";

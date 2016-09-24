@@ -9,6 +9,11 @@ function ajax_go_ch() { //ф-я перед отправкой запроса
 }
 
 
+function get_err(out) { // в случае ошибки
+    //console.log(arguments);
+    jQuery('#output').text(out.data.message);
+}
+
 function response_go_ch(out) {
     //  jQuery(this).html(out.data.ID);
     //      jQuery('#output').html(out.data.ID);
@@ -22,7 +27,8 @@ function response_go_ch(out) {
     jQuery('#spysok_boss').val(out.data.spysok_boss); // заполняем произвольное поле типа строка
 //    jQuery('#ksch').val(out.data.vyd); // заполняем произвольное поле типа строка
     jQuery('#misce_zustr').val(out.data.misce_zustr); // заполняем произвольное поле типа строка
-    jQuery('#output').html(jQuery('#spys_diln option[selected]').text());
+    jQuery('#output').text('');
+
 
     jQuery('#vv1 option[value="'+ out.data.vyd +'"]').prop('selected', true);
     jQuery('#nazva_d').attr("value",jQuery('#spys_diln option[value = '+jQuery('#spys_diln').val()+']').text());
@@ -48,6 +54,9 @@ function response_go(out) { // ф-я обработки ответа от wp, в
 
 jQuery(document).ready(function() {
 
+    jQuery('#primary-menu').append("<li class='menu-item site-navigation' style='color:white;'> Ви війшли як "+
+    jQuery('#login_cur_user').text() +"  </li>");
+
     jQuery("#spys_diln").change(function() {
         jQuery("#n_diln").attr('value',jQuery(this).val());
 
@@ -63,6 +72,7 @@ jQuery(document).ready(function() {
             },
             dataType: 'json',
             success: response_go_ch,
+            error: get_err
             //  jQuery(this).before("<input type='file' name='passport[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
         });
 
@@ -104,7 +114,7 @@ jQuery(document).ready(function() {
 
 
     jQuery('a.iframe').fancybox();
-//    jQuery('#input_prihil').hide();
+    jQuery('#input_prihil').hide();
     jQuery(function(u) {
         jQuery("#beathday").mask("99/99/9999", {
             placeholder: "дд.мм.рррр"
@@ -124,11 +134,7 @@ jQuery(document).ready(function() {
         dataType: 'json', // ответ ждем в json формате
         beforeSubmit: ajax_go, // перед отправкой вызовем функцию ajax_go()
         success: response_go, // после получении ответа вызовем response_go()
-        error: function(request, status, error) { // в случае ошибки
-            console.log(arguments);
-            jQuery('#output').html(out.data.message);
-            // напишем все в консоль
-        },
+        error:get_err,
         url: ajaxdata.url // куда слать форму, переменную с url мы определили вывели в нулевом шаге
     };
 
@@ -161,6 +167,9 @@ jQuery(document).ready(function() {
         ggg.preventDefault(); // выключим стандартное поведение ссылки
         var a1 = jQuery(this);
         var a2 = a1.closest('.prihil_nyk').find('.id_p');
+        var a3 = a1.closest('.prihil_nyk').find('.n_diln');
+        if (a3.val() > -4)
+        {
         console.log(a2);
         jQuery.ajax({
             url: ajaxchange.url,
@@ -171,8 +180,11 @@ jQuery(document).ready(function() {
             },
             dataType: 'json',
             success: response_go_ch,
+            error: get_err,
             //  jQuery(this).before("<input type='file' name='passport[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
-        });
+                }
+        );
+    }
     });
 
 });

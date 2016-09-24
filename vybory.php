@@ -424,7 +424,6 @@ add_action('admin_head', 'wph_ban_color_scheme');
 
 // Отключаем профиль для редактирования
 function gb_disable_user_profile() {
-
 $user = wp_get_current_user();
  //if( IS_PROFILE_PAGE === true )
  {
@@ -432,10 +431,13 @@ $user = wp_get_current_user();
 //  wp_die( 'Пожалуйста, свяжитесь с администрацией сайта, если хотите отредактировать свой профиль.' );
  }
 
-
  if ( !in_array('administrator', $user->roles))
 { remove_menu_page( 'profile.php' );
- remove_submenu_page( 'users.php', 'profile.php' );
+ remove_menu_page( 'edit.php' );
+ remove_menu_page( 'edit_comments.php' );
+ remove_menu_page( 'index.php' );
+ remove_menu_page( 'tools.php' );
+ remove_submenu_page( 'users.php', 'profile.php', 'edit.php' );
 }
 }
 add_action( 'admin_init', 'gb_disable_user_profile' );
@@ -448,7 +450,18 @@ function gb_admin_bar_render() {
 add_action( 'wp_before_admin_bar_render', 'gb_admin_bar_render' );
 
 
-// Перенаправление при входе на главную
+// Перенаправлення при вході в адмінку
+// add_action('init','users_redirect');
+
+function users_redirect(){
+if (is_admin())
+{
+    if(!current_user_can('manage_options')){
+    wp_redirect(site_url());
+    die();
+    }
+}
+}
 
 function gb_login_redirect( $redirect_to, $user )
 {
@@ -930,7 +943,7 @@ function change_passport_dvk() {
       $pod = pods( 'pasport_dvk' , $params);
     }
 
-if (!isset($pod))
+if (!isset($pod) || !($pod))
 {
   wp_send_json_error(array('message' => 'Паспорт не існує!', 'redirect' => false));
 }

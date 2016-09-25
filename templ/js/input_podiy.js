@@ -8,6 +8,7 @@ function response_go_ch(out) {
     //      jQuery('#output').html(out.data.ID);
     //        jQuery('#output').text(out.data.ID);
     console.log(out);
+
     jQuery('#input_prihil').show('slow');
     jQuery('#ufamily').val(out.data.ufamily);
     jQuery('#uname').val(out.data.uname);
@@ -45,6 +46,13 @@ function req_come(out) { // ф-я обработки ответа от wp, в ou
     jQuery('#output').html(t); // выведем результат
 //    jQuery("form")[0].reset();и передан redirect, делаем перенаправление
     		ajaxgo = false; // аякс запрос выполнен можно выполнять следующий
+
+        jQuery('#title_p').val('');
+        jQuery('#opys_p').val('');
+        jQuery('#kontakt').val('');
+        jQuery('#smi').val('');
+        jQuery('#propos_v').val('');
+        jQuery('#opys_p').val('');
     }
 
 

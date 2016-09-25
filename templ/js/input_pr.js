@@ -42,6 +42,28 @@ function response_go(out) { // ф-я обработки ответа от wp, в
     console.log(out); // для дебага
     jQuery('#sub').prop("disabled", false); // кнопку включим
     jQuery('#output').html(out.data); // выведем результат
+
+    jQuery('#ufamily').val('');
+    jQuery('#uname').val('');
+    jQuery('#ubatk').val('');
+    jQuery('#uname').val('');
+    jQuery('#tel_o').val(''); // заполняем произвольное поле типа строка
+    jQuery('#tel_dod').val(''); // заполняем произвольное поле типа строка
+    jQuery('#sotc_merega').val(''); // заполняем произвольное поле типа строка
+    jQuery('#adressa').val(''); // заполняем произвольное поле типа строка
+    jQuery('#beathday').val(''); // заполняем произвольное поле типа строка
+    jQuery('#id_kod').val(''); // заполняем произвольное поле типа строка
+    jQuery('#likar').val('');
+    jQuery('#deputat').val('');
+    jQuery('#derzh_sl').val('');
+    jQuery('#bezrob').val('');
+    jQuery('#pensioner').val('');
+    jQuery('#ato').val('');
+    jQuery('#invalid').val('');
+    jQuery('#autoritet').val('');
+    jQuery('#uchitel').val('');
+    jQuery('#pidpr').val('');
+    jQuery('#n_prih').attr('value', '-1');
 //    jQuery("form")[0].reset();;
 }
 

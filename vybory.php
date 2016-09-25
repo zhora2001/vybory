@@ -212,7 +212,7 @@ wp_enqueue_script('my-plugin-script');
 		                  <select id = "vv" name="dl">
  		                        <?php
                             $var3 = '1';
-                            $var2 = get_user_meta( $user->ID, $key, true );
+                            $var2 = get_user_meta( $user->ID, 'diln', true );
                             $kus = get_dil('kusch');
                             $dil = get_dil('diln');
                             $raion = get_dil('raion');

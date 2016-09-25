@@ -67,9 +67,9 @@ if ($n_prih != '-1' && $n_prih != '')
 if ($pod->id != '')
   $post_id = $pod->id;
 
-	if ($pod->id != '')
-	echo "::".$nazva."string"." ".$n_prih." ".$pod->id;
-	print_r($data);
+	//if ($pod->id != '')
+	//echo "::".$nazva."string"." ".$n_prih." ".$pod->id;
+	//print_r($data);
 
 if( $post_id != $n_prih)
 $post_id = $pod->add( $data );
@@ -77,7 +77,7 @@ else {
   $pod->save( $data );
 }
 
-echo "string1";
+//echo "string1";
 
 wp_set_object_terms( $post_id, $n_dbk, 'dvk', false );
 

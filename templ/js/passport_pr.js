@@ -12,6 +12,7 @@ function ajax_go_ch() { //ф-я перед отправкой запроса
 function get_err(out) { // в случае ошибки
     //console.log(arguments);
     jQuery('#output').text(out.data.message);
+    jQuery('#n_prih').attr('value','-1');
 }
 
 function response_go_ch(out) {
@@ -21,10 +22,14 @@ function response_go_ch(out) {
     console.log(out);
     jQuery('#input_prihil').show('slow');
     jQuery('#n_prih').attr('value',(out.data.ID));
+    if (!out.data.ID)
+    jQuery('#n_prih').attr('value','-1');
     jQuery('#adressa').val(out.data.adresa); // заполняем произвольное поле типа строка
     jQuery('#mezhi').val(out.data.mezhi); // заполняем произвольное поле типа строка
     jQuery('#pidpryems').val(out.data.pidpryems); // заполняем произвольное поле типа строка
     jQuery('#spysok_boss').val(out.data.spysok_boss); // заполняем произвольное поле типа строка
+    jQuery('#ustanovy').val(out.data.ustanovy); // заполняем произвольное поле типа строка
+
 //    jQuery('#ksch').val(out.data.vyd); // заполняем произвольное поле типа строка
     jQuery('#misce_zustr').val(out.data.misce_zustr); // заполняем произвольное поле типа строка
     jQuery('#output').text('');
@@ -50,6 +55,16 @@ function response_go(out) { // ф-я обработки ответа от wp, в
     // Ваш скрипт
     //}, 3000);
     //jQuery("form")[0].reset();;
+    jQuery('#n_prih').attr('value','-1');
+    jQuery('#adressa').val(''); // заполняем произвольное поле типа строка
+    jQuery('#mezhi').val(''); // заполняем произвольное поле типа строка
+    jQuery('#pidpryems').val(''); // заполняем произвольное поле типа строка
+    jQuery('#spysok_boss').val(''); // заполняем произвольное поле типа строка
+    jQuery('#ustanovy').val(''); // заполняем произвольное поле типа строка
+
+//    jQuery('#ksch').val(out.data.vyd); // заполняем произвольное поле типа строка
+    jQuery('#misce_zustr').val(''); // заполняем произвольное поле типа строка
+
 }
 
 jQuery(document).ready(function() {

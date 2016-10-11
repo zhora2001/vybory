@@ -583,10 +583,59 @@ function is_user_role( $role, $user_id = null ) {
 	return in_array( $role, (array) $user->roles );
 }
 
+
+function csv_to_array($filename='', $delimiter=',')
+{
+    if(!file_exists($filename) || !is_readable($filename))
+        return FALSE;
+
+    $header = NULL;
+    $data = array();
+    if (($handle = fopen($filename, 'r')) !== FALSE)
+    {
+        while (($row = fgetcsv($handle, 10000, $delimiter)) !== FALSE)
+        {
+				      if(!$header)
+                $header = ($row);
+            else
+                $data[] = array_combine($header, $row);
+
+
+        }
+        fclose($handle);
+    }
+		return $data;
+}
+
+function parse_csv($file, $options = null) {
+    $delimiter = empty($options['delimiter']) ? "," : $options['delimiter'];
+    $to_object = empty($options['to_object']) ? false : true;
+    $str = file_get_contents($file);
+    $lines = explode("\n", $str);
+    //pr($lines);
+    $field_names = explode($delimiter, array_shift($lines));
+    foreach ($lines as $line) {
+        // Skip the empty line
+        if (empty($line)) continue;
+        $fields = explode($delimiter, $line);
+        $_res = $to_object ? new stdClass : array();
+        foreach ($field_names as $key => $f) {
+            if ($to_object) {
+                $_res->{$f} = $fields[$key];
+            } else {
+                $_res[$f] = $fields[$key];
+            }
+        }
+        $res[] = $_res;
+    }
+    return $res;
+}
+
 // Формуємо масиви для корисутувачів з списку дільниць
 function get_dil($pidr)
 {
-$result = csv_to_array(__DIR__.'/diln.csv',';');
+//	echo __DIR__;
+$result = csv_to_array(__DIR__.'\diln.csv',';');
 $kus1 = array();
 $tmp_kus = array();
 $temp_a = array();
@@ -599,7 +648,8 @@ $tmp_rayon = array();
 //echo ($var11[1]); //
 		array_push($tmp_kus, $var11['kusch']);
 		array_push($tmp_rayon, $var11['raion']);
-		$temp_a[0] = ['diln'=>$var11['diln'], 'n_diln'=>$var11['n_diln']];
+		$pieces = explode("#", $var11['vul']);
+		$temp_a[0] = ['diln'=>$var11['diln'], 'n_diln'=>$var11['n_diln'], 'vul'=>$pieces];
 		//$new_kusch[$i] = ['kusch'=>$var1, 'n_diln'=>$q];
 		array_push($dil1,$temp_a[0]);
 		}
@@ -666,7 +716,8 @@ foreach($dil as $var1)
 						if (trim($var1['n_diln']) == trim($var11))
 							{
 								$q = $var1['diln'];
-								$temp_a[0] = ['diln'=>$q, 'n_diln'=>$var11];
+								$q1 = $var1['vul'];
+								$temp_a[0] = ['diln'=>$q, 'n_diln'=>$var11, 'vul'=>$q1];
 								array_push($dil1,$temp_a[0]);
 							}
 						}

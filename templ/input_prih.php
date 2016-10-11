@@ -9,6 +9,8 @@ Template Name: Введення прихільника
  <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
  <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
  </script>
+ <script src="<?php echo get_template_directory_uri() ?>/js/jquery.chained.min.js">
+ </script>
   <script src="<?php echo get_template_directory_uri() ?>/js/input_pr.js">
  </script>
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
@@ -50,9 +52,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             $key = 'raion';
             $var2 = get_user_meta( $current_user->ID, $key, true );
                   $dil1=cut_diln($var2);
-                  echo print_r($dil1);
-                  echo $var2;
-            }
+                              }
             elseif (is_user_role('kusch')) {
               $key = 'kusch';
               $var2 = get_user_meta( $current_user->ID, $key, true );
@@ -83,15 +83,57 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           ?>
         </select>
 
+
+      <?php //print_r($dil1);
+      ?>
           </td>
             <td>
           </td>
           <td>
                   </td>
-          </td>
-        </tr>
+              </tr>
+              <tr>
+                <td class="im_data">
+                  Вулиця:
+                </td>
+                <td  id="nom_dil">
+                  <select id="vulycia" name="vulycia" required/>
+                    <?php
+                    foreach($dil1 as $var1)
+                    {
+                      $a =  $var1['n_diln']." ".$var1['diln'];
+                      $vul =  $var1['vul'];
+                      foreach($vul as $var2)
+                      {
+                        if (trim($var2) != '')
+                        echo '<option value="'.$var2.'" class ="'.$var1['n_diln'].'">'.$var2.'</option>';
+                      }
+                    }
+            ?>
+          </select>
+        </td>
+          <td>
+        </td>
+        <td>
+                </td>
+      </tr>
+      <tr>
+      <td class="im_data">
+        <label for="budynok" > будинок: </label>
+      </td>
+      <td class="val_data">
+        <input type="text" name="budynok" id="budynok">
+       </td>
+     </td>
+       <td>
+     </td>
+     <td>
+             </td>
+    </tr>
+    </table>
+    <table class="input_prihil">
 
-        <tr>
+            <tr>
             <td class="im_data">
               <label for="ufamily" > Призвіще </label>
             </td>
@@ -136,10 +178,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         </tr>
         <tr>
           <td class="im_data" rowspan="2">
-             <label for="adressa">Адреса </label><br /><br />
+             <label for="adressa">Рекомендовані прихільники </label><br /><br />
             </td>
             <td class="adres" rowspan="2">
-              <textarea type="text"  name="adressa" id="adressa" required/></textarea>
+              <textarea type="text"  name="adressa" id="adressa" ></textarea>
             </td>
             <td class="im_data"  rowspan="2">
                <label for="sotc_merega">Профиль в соцмережах або скайп</label>

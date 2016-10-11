@@ -44,52 +44,6 @@ function new_user() { // внутри функции подключаем нуж
 
 //add_action('wp_ajax_nopriv_new_user', 'new_user'); // повесим функцию на аякс запрос с параметром action=register_me для неавторизованых пользователей
 
-
-function csv_to_array($filename='', $delimiter=',')
-{
-    if(!file_exists($filename) || !is_readable($filename))
-        return FALSE;
-
-    $header = NULL;
-    $data = array();
-    if (($handle = fopen($filename, 'r')) !== FALSE)
-    {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
-        {
-            if(!$header)
-                $header = ($row);
-            else
-                $data[] = array_combine($header, $row);
-        }
-        fclose($handle);
-    }
-    return $data;
-}
-
-function parse_csv($file, $options = null) {
-    $delimiter = empty($options['delimiter']) ? "," : $options['delimiter'];
-    $to_object = empty($options['to_object']) ? false : true;
-    $str = file_get_contents($file);
-    $lines = explode("\n", $str);
-    //pr($lines);
-    $field_names = explode($delimiter, array_shift($lines));
-    foreach ($lines as $line) {
-        // Skip the empty line
-        if (empty($line)) continue;
-        $fields = explode($delimiter, $line);
-        $_res = $to_object ? new stdClass : array();
-        foreach ($field_names as $key => $f) {
-            if ($to_object) {
-                $_res->{$f} = $fields[$key];
-            } else {
-                $_res[$f] = $fields[$key];
-            }
-        }
-        $res[] = $_res;
-    }
-    return $res;
-}
-
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 { die('You are not allowed to call this page directly.'); }
 
@@ -708,6 +662,8 @@ function add_object() {
 	$uname =  trim(strip_tags($_POST['uname'])); // id термина таксономии с вложенностью (его дочка)
 	$ubatk = trim(strip_tags($_POST['ubatk'])); // id обычной таксономии
   $beathday = strip_tags($_POST['beathday']); // id обычной таксономии
+  $vulycia = trim(strip_tags($_POST['vulycia'])); // переданный id термина таксономии с вложенностью (родитель)
+  $budynok = trim(strip_tags($_POST['budynok'])); // переданный id термина таксономии с вложенностью (родитель)
 
 	$tel_o = $_POST['tel_o']; // запишем название поста
   $tel_dod = $_POST['tel_dod']; // запишем название поста
@@ -822,6 +778,8 @@ else
       'autoritet'=>  $autoritet,
       'uchitel'=>  $uchitel,
       'pidpr'=>  $pidpr,
+      'vulycia'=>$vulycia,
+      'budynok'=>$budynok,
        //'id_kod_copy' => pods_attachment_import ( $fil_url)
 );
 if ($pod != '')

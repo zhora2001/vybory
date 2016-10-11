@@ -84,6 +84,8 @@ jQuery(document).ready(function() {
         jQuery(this).find(".change_prihil").hide();
         jQuery(this).find(".view_prihil").hide();
     });
+
+    jQuery("#vulycia").chained("#spys_diln");
     jQuery(".various").fancybox({
         maxWidth: 800,
         maxHeight: 600,

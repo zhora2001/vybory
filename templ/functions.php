@@ -634,8 +634,10 @@ function parse_csv($file, $options = null) {
 // Формуємо масиви для корисутувачів з списку дільниць
 function get_dil($pidr)
 {
-//	echo __DIR__;
-$result = csv_to_array(__DIR__.'\diln.csv',';');
+//	echo __DIR__.'\diln.csv';
+$result = csv_to_array(__DIR__.'/diln.csv',';');
+//print_r($result);
+
 $kus1 = array();
 $tmp_kus = array();
 $temp_a = array();

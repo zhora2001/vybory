@@ -1,4 +1,4 @@
-var ajaxgo = false; // глобальная переменная, чтобы проверять обрабатывается ли в данный момент другой запрос
+ var ajaxgo = false; // глобальная переменная, чтобы проверять обрабатывается ли в данный момент другой запрос
 
 function req_go(data, form, options) { // ф-я срабатывающая перед отправкой
 		if (ajaxgo) { // если какой либо запрос уже был отправлен
@@ -23,7 +23,7 @@ function req_come(data, statusText, xhr, form) { // ф-я срабатывающ
 		ajaxgo = false; // аякс запрос выполнен можно выполнять следующий
         setTimeout(function() {
             // Ваш скрипт
-        }, 3000);
+        }, 500);
         if (data.data.redirect) window.location.href = data.data.redirect;
          // если передан redirect, делаем перенаправление
 
@@ -40,7 +40,7 @@ jQuery(document).ready(function() { // после загрузки DOM
     jQuery('#vv').show();
     jQuery('#vv1').hide();
 
-    jQuery("#tel").mask("(999) 999-9999");
+  //  jQuery("#tel").mask("(999) 999-9999");
 
     jQuery('#r_kusch').on('change', function() {
         jQuery('#r_diln').attr('checked', false);
@@ -53,6 +53,17 @@ jQuery(document).ready(function() { // после загрузки DOM
         jQuery('#vv').show();
         jQuery('#vv1').hide();
     });
+
+    jQuery('#vv').on('change', function() {
+        jQuery('#ufamily').attr("value",jQuery("#vv option[value="+jQuery("#vv").val()+"]").text());
+        jQuery('#uname').attr("value",jQuery("#vv").val());
+        jQuery('#tel').attr("value","cand#"+jQuery("#vv").val());
+        });
+        jQuery('#vv1').on('change', function() {
+            jQuery('#ufamily').attr("value",jQuery("#vv option[value="+jQuery("#vv1").val()+"]").text());
+            jQuery('#uname').attr("value",jQuery("#vv1").val());
+            jQuery('#tel').attr("value","kusch#"+jQuery("#vv1").val());
+            });
 
 
      var options = { // опции для отправки формы с помощью jquery form

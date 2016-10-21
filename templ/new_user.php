@@ -61,7 +61,7 @@ list-style-type: none;
         <label for="ufamily"> Призвіще </label>
         </li>
           <li class="val_data">
-            <input type="text" name="ufamily" id="ufamily" required/>
+            <input type="text" name="ufamily" id="ufamily" value="Кандідат" required/>
         </li>
       </ul>
       <ul>
@@ -77,7 +77,7 @@ list-style-type: none;
           <label for="uid"> Логін (номер телефона) </label>
         </li>
        <li class="val_data">
-             <input  type="text" name="tel" id="tel" required/>
+             <input  type="text" name="tel" id="tel" value="candidat"required/>
        </li>
      </ul>
      <ul>

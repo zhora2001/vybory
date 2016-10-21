@@ -178,7 +178,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         </tr>
         <tr>
           <td class="im_data" rowspan="2">
-             <label for="adressa">Рекомендовані прихільники </label><br /><br />
+             <label for="adressa">Рекомендовані прихільники через ";"</label><br /><br />
+      
             </td>
             <td class="adres" rowspan="2">
               <textarea type="text"  name="adressa" id="adressa" ></textarea>

@@ -24,7 +24,7 @@ $spysok_boss = isset($_POST['spysok_boss'])? $_POST['spysok_boss']:'';
 $redirect_to = "http://vybory.el/?page_id=231";
 
 // теперь проверим нужные поля на заполненность и валидность
-if (!$n_dbk) wp_send_json_error(array('message' => 'Не вказано номер дільниці', 'redirect' => false));
+if (!$n_dbk) wp_send_json_error(array('message' => 'Не вказано номер округу', 'redirect' => false));
 
 /*if (!(($diln_r && $diln) || ($kusch_r && $kusch)))
 {
@@ -81,6 +81,6 @@ else {
 
 wp_set_object_terms( $post_id, $n_dbk, 'dvk', false );
 
-wp_send_json_success(array('message' => 'Дані про дільницю успішно внесено!', 'redirect' => $redirect_to));
+wp_send_json_success(array('message' => 'Дані про округ успішно внесено!', 'redirect' => $redirect_to));
 //wp_send_json_success($data);
 ?>

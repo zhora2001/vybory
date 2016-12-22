@@ -1,4 +1,8 @@
 <?php
+session_start();
+//проверяет соответствие коду CAPTCHA
+if ($_SESSION["code"] == $_POST["captcha"]) {
+  //сообщаем строку true, если код соответствует
 $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : ''; // сначала возьмем строку безопасности
 if (!wp_verify_nonce($nonce, 'login_me_nonce')) wp_send_json_error(array('message' => 'Данные присланные со сторонней страницы ', 'redirect' => false)); // проверим её специальной функцией, а если строки не совпадут отправляем json ответ с ошибкой, функция wp_send_json_error сама прекратит работу скрипта
 
@@ -27,7 +31,15 @@ $creds = array( // создаем массив с данными для логи
 );
 
 $user = wp_signon( $creds, false ); // пробуем залогинется
-if (is_wp_error($user)) wp_send_json_error(array('message' => 'Ошибочное логин/email или пароль.', 'redirect' => false));
+if (is_wp_error($user))
+wp_send_json_error(array('message' => 'Помилкові логін або пароль.', 'redirect' => false));
 else wp_send_json_success(array('message' => 'Раді Вас бачити...'.$user->display_name.'. Завантажуємось ...', 'redirect' => site_url()));
 	// иначе все прошло ок и юзера залогинили пишем что все ок и отпраляем
+}
+else {
+  //сообщаем строку false, если код не соответствует
+wp_send_json_error(array('message' => 'Введіть вірно код із зображення.', 'redirect' => false));
+
+}
+
 ?>

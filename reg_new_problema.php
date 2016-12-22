@@ -17,7 +17,7 @@ if (!wp_verify_nonce($nonce, 'problema'))
 wp_send_json_error(array('message' => 'Данні відправлені з стороньої адреси', 'redirect' => false));
 
 if (!$n_diln )
-wp_send_json_error(array('message' => 'Не вибрано номер дільниці', 'redirect' => false));
+wp_send_json_error(array('message' => 'Не вибрано номер округу', 'redirect' => false));
 
 if ( !trim($title_p) || !trim($opys_p)  )
 wp_send_json_error(array('message' => 'Не заповнені обовязкові поля', 'redirect' => false));

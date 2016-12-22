@@ -41,7 +41,7 @@ $responsive_options = responsive_get_options();
 
 <!--		<div class="grid col-940">   -->
 
-			<div class="grid col-540">
+			<div class="grid col-220">
 				<?php if ( has_nav_menu( 'footer-menu', 'responsive' ) ) {
 					wp_nav_menu( array(
 						'container'      => '',
@@ -50,20 +50,19 @@ $responsive_options = responsive_get_options();
 						'theme_location' => 'footer-menu'
 					) );
 				} ?>
-				<script type="text/javascript" charset="utf-8" async
-				src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3PhOTdcHriq7J_Ev0xUZFR5xNC7TBwjs&amp;width=500&amp;height=400&amp;
-				lang=ru_RU&amp;sourceType=constructor&amp;scroll=true">
-				</script>
-			</div><!-- end of col-540 -->
+							</div><!-- end of col-540 -->
 
-			<div class="grid col-380 fit">
+			<div class="grid col-380 fit" style="margin-top: 2em;">
+			<script src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3PhOTdcHriq7J_Ev0xUZFR5xNC7TBwjs&amp;
+					width=350&amp;height=350&amp;lang=ru_UA&amp;sourceType=constructor&amp;scroll=true" async="" type="text/javascript" charset="utf-8">
+					</script>
 				<?php echo responsive_get_social_icons() ?>
 			</div><!-- end of col-380 fit -->
 
 <!---		</div>  end of col-940 -->
 		<?php get_sidebar( 'colophon' ); ?>
 
-		<div class="grid col-300">
+		<div class="grid col-300"  style="text-align: right;">
 			<?php esc_attr_e( '&copy;', 'responsive' ); ?> <?php echo date( 'Y' ); ?><a id="copyright_link" href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 				<?php bloginfo( 'name' ); ?>
 			</a>
@@ -87,3 +86,4 @@ $responsive_options = responsive_get_options();
 <?php wp_footer(); ?>
 </body>
 </html>
+3``

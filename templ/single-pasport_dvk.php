@@ -13,7 +13,7 @@ require_once __DIR__.'/header-add_prhilnyk.php';
 ?>
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
-		<h1>Паспорт дільниці</h1>
+		<h1>Паспорт округу</h1>
 			<?php
 				// Start the Loop.
 //				while ( have_posts() ) : the_post();
@@ -22,7 +22,7 @@ require_once __DIR__.'/header-add_prhilnyk.php';
 					$prihil = pods('pasport_dvk', $post->ID );
 //					$prihil = pods('add_prhilnyk',$post->ID);
 ?>
-					<h2>Дільниця № <?php echo  $prihil->display( 'n_dbk');?> </h2>
+					<h2>Округ № <?php echo  $prihil->display( 'n_dbk');?> </h2>
 					<table class="input_prihil" >
 					<tr>
 						<td class="im_data">

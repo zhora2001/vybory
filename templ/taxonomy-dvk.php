@@ -50,7 +50,7 @@ $termin = wp_get_post_terms( $post->ID, 'dvk', false);
 				if (trim($key1['n_diln']) == trim($termin[0]->name))
 				$flag = "TRUE";
 					}
-	
+
 				if(is_user_logged_in() && ( current_user_can('manage_options') || is_user_role("raion")
 				|| is_user_role("dilnich") || is_user_role("kusch"))
 				 && !($flag == ''))
@@ -112,7 +112,7 @@ $termin = wp_get_post_terms( $post->ID, 'dvk', false);
 				endif;
 			}
 			else {
-			echo " <p> У Вас недостатньо повноважень для перегляду даних на цій дільниці!</p>";
+			echo " <p> У Вас недостатньо повноважень для перегляду даних на цьому окрузі!</p>";
 			 }
 
 			?>

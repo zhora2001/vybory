@@ -671,6 +671,8 @@ form div {
 
 #header {
 	margin: 0;
+position: relative;
+z-index: 100;
 }
 
 #footer {
@@ -2826,7 +2828,7 @@ margin-bottom: 25px;
 
 .menu a {
 font-family: 'Playfair Display SC', serif;
-font-size: 18px;
+font-size: 16px;
 font-weight: 400;
 height: 55px;
 line-height: 55px;
@@ -2887,12 +2889,30 @@ margin-left: 15px !important;
 .woocommerce ul.products li.product a
 {
 font-size: 14px;
+}
+
+
+@media screen and (max-width:767px) {
+	#widgets
+ {
+  width: 95%;
+}
+#top-widget
+{
+ width: 70%;
+}
+
+.woocommerce ul.products li.product a
+{
+font-size: 8px;
+}
+
 
 }
+
 a
 {
 color: #c57633;
-
 }
 
 .woocommerce ul.products li.product a h3
@@ -3024,7 +3044,7 @@ font-size:30px;
 .product_content
 {
 height: 300px;
-overflow: hidden;
+overflow: unset;
 }
 
 .woocommerce ul.products li.product a img
@@ -3038,39 +3058,90 @@ padding:0px;
 }
 span.price
 {
-position: absolute;
-top: 75%;
+position: relative;
+/*top: 10%; */
 left: 50%;
 transform: translate(-50%, -50%);
-letter-spacing: 3.5px;
+letter-spacing: 0.1em;
 font-family: 'Playfair Display', serif !important;
-font-weight: 700 !important;
-font-size: 22px !important;
+/*font-weight: 700 !important;*/
+font-size: 2em !important;
 margin-top: 8% !important;
 color: #e56d6f !important;
 }
+
+.ywcps-slider span.price
+{
+/*color: white !important;*/
+font-size: 3em !important;
+}
+.ywcps-wrapper div.product_content li a h3,
+.ywcps-wrapper div.product_content li a span
+{
+	font-size: 10px;
+}
+
+#wrapper .ywcps-slider  div.wrap_product_title
+{
+position: relative;
+padding-top: 0.8em;
+height: 0;
+padding-top: -0.8em;
+}
+
+ #wrapper .ywcps-slider div.product_title
+{
+position: absolute;
+top: 18em;
+left: 50%;
+font-family: 'Playfair Display', serif !important;
+transform: translate(-50%, -50%);
+padding-top: 0.5em;
+}
+
+.woocommerce .ywcps-slider ul.products li.product a h3
+{
+letter-spacing: 0.2em;
+text-align: center;
+font-family: 'Playfair Display', serif !important;
+font-weight: 700;
+}
+
+@media screen and (max-width:900px) {
+	.woocommerce .ywcps-slider ul.products li.product a h3
+	{
+		font-size: 1.5em;
+		}
+	#wrapper .ywcps-slider div.product_title
+	 {
+	 top: 16em;
+ }
+}
+
 
 #wrapper div.wrap_product_title
 {
 height: 2.5em;
 position: relative;
+padding-top: 0.8em;
 }
 
 #wrapper div.product_title
 {
-position: absolute;
-top: 50%;
+position: relative;;
+/*top: 12em;*/
 left: 50%;
 transform: translate(-50%, -50%);
+padding-top: 0.5em;
 }
 
 .woocommerce .ywcps-wrapper ul.products li.product h3
 {
-
+text-shadow: #c57633 0.1em 0.1em 0.1em;
 color: white;
 font-size: 2em;
-background-color: #c57633;
-opacity: 0.8;
+//background-color: #c57633;
+opacity: 1;
 border-radius: 4px;
 padding: 10px;
 }
@@ -3078,6 +3149,11 @@ padding: 10px;
 .ywcps-wrapper  span.price, .ywcps-wrapper a.add_to_cart_button
 {
 display:none;
+text-shadow: black 0.01em 0.02em 0.03em;
+}
+
+.ywcps-wrapper {
+/*    top: -4em; */
 }
 
 #wrapper div.ywcps-wrapper div.wrap_product_title
@@ -3090,9 +3166,14 @@ position:inherit !important;
 //display: none;
 }
 
+#footer
+{
+background-color: #3c4903;
+color:white;
+}
 #footer .widget-wrapper
 {
-background-color: inherit;
+background-color: #3c4903;
 border: 0px none;
 }
 
@@ -3101,9 +3182,10 @@ border: 0px none;
 font-size: 1.5em;
 margin: 0px;
 padding: 0px;
-color: #3c4903;
+color: white;
 font-weight: bold;
 margin-bottom: 1em;
+display: none;
 }
 
 #footer .widget-wrapper ul li a
@@ -3112,7 +3194,7 @@ margin: 0;
 padding-left: 0.5em;
 font-size: 1.3em;
 font-weight: bold;
-color: #3c4903 !important;
+color: white !important;
 }
 
 #footer .widget-wrapper ul li ul li a
@@ -3121,10 +3203,52 @@ margin: 0;
 padding-left: 0.2em;
 font-size: 1em;
 font-weight: normal;
-color: #3c4903 !important;
+color: white !important;
 }
 
 #footer  .widget_product_categories
 {
 width:auto;
 }
+
+div.owl-stage-outer
+{
+
+	left: -1em;
+}
+
+#footer a {
+    color: white;
+    font-weight: 400;
+	}
+
+	.footer-menu li a {
+    border-left: 0px solid #cccccc;
+
+border: 0px dotted;
+	}
+
+	.footer-menu ul {
+    display: block;
+		margin-top: 4em;
+		margin-left: 5em;
+line-height: 4em;
+	}
+
+	.footer-menu li {
+    display: block;
+	}
+
+#footer	ul.product-categories {
+	    padding-top: 3em;
+		}
+	 #menu-menyu-u-futeri {
+    display: block;
+		margin-top: 2em;
+		margin-left: 0.5em;
+line-height: 4em;
+padding: 2px;
+line-height: 3.5em;
+font-weight: bold;
+margin-left: 50px;
+    font-size: 13px;

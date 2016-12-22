@@ -3,13 +3,16 @@
 Template Name: Введення події на дільниці
  */
  get_header(); ?>
-
- <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.pack.js"></script>
  <script src="<?php echo get_template_directory_uri() ?>/js/jquery.maskedinput.min.js">
  </script>
-  <script src="<?php echo get_template_directory_uri() ?>/js/input_podiy.js">
+ <script src="<?php echo get_template_directory_uri() ?>/js/jquery-ui.min.js">
  </script>
+  <script src="<?php echo get_template_directory_uri() ?>/js/input_podiy.js">
+</script>
+
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery-ui.min.css" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
  <div id="main-content" class="main-content">
@@ -32,7 +35,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
   <h1>Внесення події</h1>
     <ul class="new_input">
           <li class="im_data">
-          <label>  Номер дільниці:</label>
+          <label>  Номер округу:</label>
           </li>
           <li  class="val_data" id="nom_dil">
               <input type="text" id="n_diln" name="n_diln" hidden=""/>
@@ -69,12 +72,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             foreach($dil1 as $var1)
             {
               $a =  $var1['n_diln']." ".$var1['diln'];
-              echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+              echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
               }
 
               $var3 = '2';
           if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть дільницю</option>';
+          echo ' <option value="" selected>Виберіть Округ</option>';
           ?>
         </select>
       </li>
@@ -88,7 +91,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <label for="date_p"> Дата </label>
       </li>
         <li class="val_data" style="float:left;">
-          <input type="text"  class="val_input" name="date_p" id="date_p"  required/>
+          <input type="date" class="val_input" name="date_p" id="date_p"  required/>
       </li>
       <li class="im_data">
       <label for="vyd_podii"> Вид події </label>

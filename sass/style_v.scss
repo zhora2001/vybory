@@ -1,32 +1,32 @@
 div.form_input
   {
-.im_data
-{
-  width:20%;
-  text-align: right;
-  padding-right: 10px;
-  padding-top:0px;
-  padding-bottom:10px;
-}
-
-input[type="text"], textarea, select
-{
-background-color:  #F9F9F9;
-margin-bottom: 18px;
-}
-.adres
-{
-vertical-align: top;
-height: 5.8em;
-}
-     margin-left:10px;
-     border:none;
-    h1 {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-bottom: 20px;
+    .im_data
+    {
+        width:20%;
+        text-align: right;
+        padding-right: 10px;
+        padding-top:0px;
+        padding-bottom:10px;
       }
-      .input_chk {width: auto; padding: 5px;}
+
+        input[type="text"], textarea, select
+        {
+        background-color:  #F9F9F9;
+        margin-bottom: 18px;
+        }
+        .adres
+        {
+        vertical-align: top;
+        height: 5.8em;
+        }
+             margin-left:10px;
+         border:none;
+        h1 {
+        margin-top: 10px;
+        margin-left: 50px;
+        margin-bottom: 20px;
+          }
+          .input_chk {width: auto; padding: 5px;}
     }
 
     input, textarea {
@@ -42,54 +42,61 @@ height: 5.8em;
           height: 8.8em;
         }
 
-table.input_prihil
-  {
-    border: 0px;
-  //  <!--- .input_prihil tr {height: 2.8em;} --->
-    width: 97%;
-    td, tr{ border: 0px;
-    border-collapse: collapse;
+      table.input_prihil
+        {
+          border: 0px;
+        //  <!--- .input_prihil tr {height: 2.8em;} --->
+          width: 97%;
+          td, tr{ border: 0px;
+          border-collapse: collapse;
+              }
+
+        .im_data
+        {
+        vertical-align: center;
         }
 
-  .im_data
-  {
-  vertical-align: center;
-  }
-
-  .val_data
-  {
-    vertical-align: bottom;
-    width:30%;
-  }
+        .val_data
+        {
+          vertical-align: bottom;
+          width:30%;
+        }
 }
 
 .check_b {
-text-align: right;}
-.check_b label {
+text-align: right;
+}
+.check_b label
+{
 display: block;
 margin-right: 15px;
 }
-.check_b1 {
-text-align: left;}
+.check_b1
+ {
+text-align: left;
+}
 .check_b1 label {
 display: block;
 margin-left: 5px;
 }
-.btn1 {
-//  width: 50%;
-   margin-top: 30px;
-   margin-left: 20px;
-   margin-right: 20px;
-   margin-bottom: 20px;
-}
+    .btn1 {
+    //  width: 50%;
+       margin-top: 30px;
+       margin-left: 20px;
+       margin-right: 20px;
+       margin-bottom: 20px;
+    }
 #btn_prihil
 {
 margin-left: 700px;
 margin-bottom: 20px;
 }
 
- input.btn1{width: 75%;}
- .n_dil {margin-bottom: 15px;}
+ input.btn1{width: 75%;
+ }
+ .n_dil {
+   margin-bottom: 15px;
+ }
 
 a.change_prihil, a.view_prihil
   {
@@ -100,18 +107,18 @@ a.change_prihil, a.view_prihil
     text-decoration: underline;
     color: brown;
 //    z-index: 5;
-    :focus
-    {
-color: red;
-    }
-}
+        :focus
+        {
+    color: red;
+        }
+  }
 .various
-{
-  margin-left: 15px;
+  {
+    margin-left: 15px;
 //  font-weight: bold;
 //  font-size: 0.8em;
 //  text-decoration: underline
-}
+  }
 .val_input
 {
   width: 70%;
@@ -119,26 +126,26 @@ color: red;
 
 ul.new_input
     {
-   list-style: none !important;
-  float: none;
-    li.im_data
-    {
-    float:left;
+       list-style: none !important;
+      float: none;
+            li.im_data
+            {
+            float:left;
+            }
+            li.val_data
+            {
+            float:none;
+                  >input
+                    {
+              //      width: auto;
+                    }
+            }
+        .btn1
+        {
+            margin-left: 65%;
+            width: 15%;
+        }
     }
-    li.val_data
-    {
-    float:none;
-    >input
-      {
-//      width: auto;
-      }
-    }
-    .btn1
-    {
-        margin-left: 65%;
-        width: 15%;
-    }
-  }
 input
 {
 //  'text']
@@ -152,32 +159,35 @@ input
   margin-top: 10px;
   color: red;
   }
-.prihil_nyk {
+.prihil_nyk
+{
   float: none;
   //height: 20px;
-   p {
-    line-height: 1;
-    padding-bottom: 10px;
-    font-size: 0.8em;
-    -webkit-margin-before:0em;
-   -webkit-margin-after:0em;
-   color: #767676;
-   padding-top: 8px;
-   padding-left: 5%;
+         p
+         {
+          line-height: 1;
+          padding-bottom: 10px;
+          font-size: 0.8em;
+          -webkit-margin-before:0em;
+         -webkit-margin-after:0em;
+         color: #767676;
+         padding-top: 8px;
+         padding-left: 5%;
+          }
+         a
+         {
+           padding-top: 10px;
+           line-height: 1;
+          font-size: 1.2em;
+         }
+        .dani_prihil
+        {
+          padding-bottom: 0px;
+          margin-bottom: 0px;
+        }
+}
+    div.povidoml
+    {
+      height: 20px;
+      color: brown;
     }
-   a {
-     padding-top: 10px;
-     line-height: 1;
-    font-size: 1.2em;
-   }
-  .dani_prihil
-  {
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }
-}
-div.povidoml
-{
-  height: 20px;
-  color: brown;
-}

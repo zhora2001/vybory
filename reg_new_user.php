@@ -36,7 +36,7 @@ if (!$pass1) wp_send_json_error(array('message' => 'Пароль - обязат�
 
 if (!(($diln_r && $diln) || ($kusch_r && $kusch)))
 {
-wp_send_json_error(array('message' => 'Не вибрано дільницю або кущ.', 'redirect' => false));
+wp_send_json_error(array('message' => 'Не вибрано округ або кущ.', 'redirect' => false));
 }
 else {
 	if ($diln_r && $diln)
@@ -83,7 +83,7 @@ $aa = "http://k162.hol.es/reg/"."\r\n";
 file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Посилання на сайт:".$aa );
 file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Логін:".$user_login."\r\n", FILE_APPEND );
 file_put_contents( dirname(__FILE__).'/'.trim($user_login.'.txt'), "Пароль:".$_POST['pass1'], FILE_APPEND );
-wp_send_json_success(array('message' => 'Користувач зареєстрований.', 'redirect' => 'http://vybory.el/?page_id=100'));
+wp_send_json_success(array('message' => 'Користувач зареєстрований.', 'redirect' => 'http://k162.hol.es/new_user/'));
  // говорим что все прошло ок, если нужен редирект то вместо false поставьте $redirect_to
 
 ?>

@@ -53,7 +53,10 @@ jQuery(document).ready(function() {
    jQuery('#login_cur_user').text() +"  </li>");
     jQuery("#spys_diln").change(function() {
             jQuery('#n_diln').attr('value',jQuery(this).val());
-        });
+            jQuery('#nazva_d').attr("value",jQuery('#spys_diln option[value = '+jQuery('#spys_diln').val()+']').text());
+  });
+
+    
     jQuery("#n_diln").attr('value',jQuery("#spys_diln").val());
     jQuery(".prihil_nyk").mouseover(function() {
         jQuery(this).find(".change_prihil").show();

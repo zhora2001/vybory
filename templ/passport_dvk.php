@@ -41,7 +41,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <tr>
           <td class="im_data">
 
-            Номер дільниці:
+            Номер округу:
           </td>
           <td  id="nom_dil" class="val_data">
               <input type="text" id="n_diln" name="n_diln" value = "1" hidden="" disabled required/>
@@ -82,7 +82,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                 //  if( trim($var1['n_diln']) == trim($var2))
             //      {
                     $a =  $var1['n_diln']." ".$var1['diln'];
-                  echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+                  echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
                   $var3 = '2';
             //      }
           //        else {
@@ -94,7 +94,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             //        }
                 }
               //  if ($var3 == '1')
-              echo ' <option value="-4" selected>Выберіть дільницю</option>';
+              echo ' <option value="-4" selected>Выберіть округ</option>';
               ?>
             </select>
 

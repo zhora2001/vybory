@@ -105,7 +105,7 @@ wp_clear_scheduled_hook('wp_update_themes');
 
 add_filter('manage_users_columns', 'add_users_comm_column', 4);
 function add_users_comm_column( $columns ){
-	$columns['diln'] = 'Дільниця.';
+	$columns['diln'] = 'Округ.';
 	$columns['kusch'] = 'Кущ';
   $columns['raion'] = 'Район';
 	return $columns;
@@ -160,7 +160,7 @@ wp_enqueue_script('my-plugin-script');
               </script>
         <table class="form-table" id="dn">
             <tr class="form-field">
-                <th scope="row"><label for="mail_chimp">Дільниці </label></th>
+                <th scope="row"><label for="mail_chimp">Округи </label></th>
                 <td>
                   <label for="dl">
 		                  <select id = "vv" name="dl">
@@ -176,12 +176,12 @@ wp_enqueue_script('my-plugin-script');
                               if( trim($var1['n_diln']) == trim($var2))
                               {
                               $a = $var1['n_diln']."".$var1['diln'];
-                              echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
+                              echo "<option value=".$var1['n_diln']." selected>Округ № $a </option>";
                               $var3 = '2';
                               }
                               else {
                                 $a = $var1['diln'];
-                                echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+                                echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
                                 }
                             }
                             if ($var3 == '1')
@@ -213,7 +213,7 @@ wp_enqueue_script('my-plugin-script');
                         $q0=$var1['kusch'];
                         $q1=$var1['n_diln'];
 
-                        echo "<option value=".$var1['n_diln']."><strong>$q0</strong> - дільниці ($q1])</option>";
+                        echo "<option value=".$var1['n_diln']."><strong>$q0</strong> - Округи ($q1])</option>";
                         $i++;
                       }
                       ?>
@@ -239,7 +239,7 @@ wp_enqueue_script('my-plugin-script');
                         $q0=$var1['raion'];
                         $q1=$var1['n_diln'];
 
-                        echo "<option value=".$q1."><strong>$q0</strong> район - дільниці ($q1)</option>";
+                        echo "<option value=".$q1."><strong>$q0</strong> район - Округи ($q1)</option>";
                         $i++;
                       }
                       ?>
@@ -688,7 +688,7 @@ function add_object() {
 if ($ufamily == '' ||
     $uname == '' ||
     $ubatk == '' ||
-    $adressa == '' ||
+    $vulycia == '' ||
     $n_diln == ''||
     $beathday == '' )
      $errors .= 'Не всі обовязкові поля заповненні';

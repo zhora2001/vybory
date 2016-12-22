@@ -1,6 +1,11 @@
 var ajaxgo = false; // глобальная переменная, чтобы проверять обрабатывается ли в данный момент другой запрос
 jQuery(document).ready(function() { // после загрузки DOM
     var userform = jQuery('.userform'); // пишем в переменную все формы с классом userform
+
+    jQuery("#reload-captcha").click(function() {
+      jQuery('#img-captcha').attr('src', 'captcha.php?id='+Math.random()+'');
+    });
+
     function req_go(data, form, options) { // ф-я срабатывающая перед отправкой
         if (ajaxgo) { // если какой либо запрос уже был отправлен
             form.find('.response').html('<p class="error">Необходимо дождаться ответа от предыдущего запроса.</p>'); // в див для ответов напишем ошибку
@@ -14,8 +19,8 @@ jQuery(document).ready(function() { // после загрузки DOM
     function req_come(data, statusText, xhr, form) { // ф-я срабатывающая после того как пришел ответ от сервера, внутри data будет json объект с ответом
         console.log(arguments); // это для дебага
         if (data.success) { // если все хорошо и ошибок нет
-            jQuery("#sms_form").show();
-            jQuery(".response").text("На ваш номер відправлено СМС з кодом підтвердження.");
+          //  jQuery("#sms_form").show();
+        //    jQuery(".response").text("На ваш номер відправлено СМС з кодом підтвердження.");
 
             form.find('input[type="submit"]').val('Готово'); // в кнопку напишем Готово
         } else { // если есть ошибка
@@ -26,7 +31,7 @@ jQuery(document).ready(function() { // после загрузки DOM
         setTimeout(function() {
         if (data.data.redirect) window.location.href = data.data.redirect;
             // Ваш скрипт
-        }, 3000);
+        }, 10);
          // если передан redirect, делаем перенаправление
         ajaxgo = false; // аякс запрос выполнен можно выполнять следующий
     }

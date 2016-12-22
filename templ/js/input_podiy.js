@@ -57,7 +57,6 @@ function req_come(out) { // ф-я обработки ответа от wp, в ou
 
 
 jQuery(document).ready(function() {
-
    jQuery('#primary-menu').append("<li class='menu-item site-navigation' style='color:white;'> Ви війшли як "+
    jQuery('#login_cur_user').text() +"  </li>");
 
@@ -103,10 +102,12 @@ jQuery(document).ready(function() {
     jQuery('#input_prihil').hide();
     jQuery(function(u) {
         jQuery("#date_p").mask("99/99/9999", {
-            placeholder: "дд.мм.рррр"
-        });
+           placeholder: "мм.дд.рррр"
+       });
        });
     // после загрузки страницы
+      jQuery("#date_p").datepicker(  );
+
 
     add_form = jQuery('#add_object'); // запишем форму в переменную
     var options = { // опции для отправки формы с помощью jquery form

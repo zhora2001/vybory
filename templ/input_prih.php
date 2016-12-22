@@ -38,7 +38,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
     <table class="input_prihil">
         <tr>
           <td class="im_data">
-            Номер дільниці:
+            Номер округу:
           </td>
           <td  id="nom_dil">
               <input type="text" id="n_diln" name="n_diln" value = "" hidden disabled required/>
@@ -75,11 +75,11 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               $spysok_diln = "'".$var1['n_diln']."'";
               else
               $spysok_diln .= ",'".$var1['n_diln']."'";
-              echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+              echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
               }
 
             if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть дільницю</option>';
+          echo ' <option value="" selected>Выберіть округ</option>';
           ?>
         </select>
 
@@ -97,7 +97,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                   Вулиця:
                 </td>
                 <td  id="nom_dil">
-                  <select id="vulycia" name="vulycia" required/>
+                  <select id="vulycia" name="vulycia" style="border:solid 1px pink;" required/>
                     <?php
                     foreach($dil1 as $var1)
                     {
@@ -122,7 +122,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <label for="budynok" > будинок: </label>
       </td>
       <td class="val_data">
-        <input type="text" name="budynok" id="budynok">
+        <input type="text" name="budynok" id="budynok" style="border:solid 1px pink;" required/>
        </td>
      </td>
        <td>
@@ -138,13 +138,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               <label for="ufamily" > Призвіще </label>
             </td>
             <td class="val_data">
-              <input type="text" name="ufamily" id="ufamily" required/>
+              <input type="text" name="ufamily" id="ufamily" style="border:solid 1px pink;" required/>
              </td>
              <td class="im_data">
                <label for="uid"> Ім'я </label>
              </td>
             <td class="val_data">
-                  <input  type="text" name="uname" id="uname" required/>
+                  <input  type="text" name="uname" id="uname" style="border:solid 1px pink;" required/>
             </td>
 
         </tr>
@@ -153,13 +153,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             	<label for="ubatk">По-батькові </label>
           </td>
           <td class="val_data">
-            <input  type="text" name="ubatk" id="ubatk" required/>
+            <input  type="text" name="ubatk" id="ubatk" style="border:solid 1px pink;" required/>
           </td>
           <td class="im_data">
             <label for="beathday">Дата народження </label>
           </td>
           <td class="val_data">
-            <input  type="text"  name="beathday" id="beathday" required/>
+            <input  type="text"  name="beathday" id="beathday" style="border:solid 1px pink;" required/>
           </td>
       </tr>
         <tr>
@@ -167,7 +167,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               <label for="tel_o">Телефон (осн.) </label>
             </td>
             <td class="val_data">
-              <input  type="text" name="tel_o" id="tel_o" required/>
+              <input  type="text" name="tel_o" id="tel_o" style="border:solid 1px pink;" required/>
               </td>
             <td class="im_data">
               <label for="tel_dod">Телефон (дод.)</label>
@@ -179,7 +179,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <tr>
           <td class="im_data" rowspan="2">
              <label for="adressa">Рекомендовані прихільники через ";"</label><br /><br />
-      
+
             </td>
             <td class="adres" rowspan="2">
               <textarea type="text"  name="adressa" id="adressa" ></textarea>

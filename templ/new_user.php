@@ -60,7 +60,7 @@ list-style-type: none;
         <li class="im_data">
         <label for="ufamily"> Призвіще </label>
         </li>
-          <li class="val_data">
+          <li class="val_data" style="border:solid 1px pink;">
             <input type="text" name="ufamily" id="ufamily" value="Кандідат" required/>
         </li>
       </ul>
@@ -122,7 +122,7 @@ list-style-type: none;
   <ul>
         <li class="im_data">
           <p>
-            Дільниці:
+            Округи:
         </p>
       </li>
         <li class="val_data">
@@ -143,17 +143,17 @@ list-style-type: none;
               if( trim($var1['n_diln']) == trim($var2))
               {
               $a = $var1['diln'];
-              echo "<option value=".$var1['n_diln']." selected>Дільниця № $a </option>";
+              echo "<option value=".$var1['n_diln']." selected>Округ № $a </option>";
               $var3 = '2';
               }
               else {
                 $a =  $var1['n_diln']." ".$var1['diln'];
-                echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+                echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
                 }
             }
 //echo '<p> $var2 '.$var2.' id = '. $current_user->ID.' </p>';
             if ($var3 == '1')
-                      echo ' <option value="" selected>Выберіть дільницю</option>';
+                      echo ' <option value="" selected>Выберіть округ</option>';
           ?>
         </select>
   </label>
@@ -177,7 +177,7 @@ list-style-type: none;
         {
         $q0=$var1['kusch'];
           $q1=trim($var1['n_diln']);
-        echo '<option value='.'"'.$q1.'"'."><strong>$q0</strong> - дільниці ($q1)</option>";
+        echo '<option value='.'"'.$q1.'"'."><strong>$q0</strong> - округи ($q1)</option>";
         $i++;
       }
       echo print_r($kus2);
@@ -217,11 +217,11 @@ $blogusers = get_users(array('role__in' => array('dilnich','kusch')));
     if(is_user_role('kusch', $user->ID))
     {
       echo '<li>' . $user->display_name.' '.
-       'Кущовий. Дільниця №'.$var2.'</li>';
+       'Кущовий. Округ №'.$var2.'</li>';
     } else
     {
       echo '<li>' . $user->display_name.' '.
-       'Дільничний. Дільниця №'.$var1.'</li>';
+       'Дільничний. Округ №'.$var1.'</li>';
     }
 
     // print_r($user);

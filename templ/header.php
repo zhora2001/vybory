@@ -43,7 +43,18 @@
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-main">
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-
+                      	<span style=" color: white; margin-left: 3em;
+					    line-height: 48px;"> 
+ <?php
+				 global $current_user;
+				wp_get_current_user();
+				if ($current_user->user_firstname.$current_user->user_lastname!='') {
+				echo "Ви ввійшли як <strong>". $current_user->user_firstname.' '.$current_user->user_lastname;
+				} else {
+				echo "Ви ввійшли як ".$display_user_name=$current_user->display_name;
+					}    		
+				 ?>
+			</strong> </span>
 			<div class="search-toggle">
 				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container"><?php _e( 'Search', 'twentyfourteen' ); ?></a>
 			</div>

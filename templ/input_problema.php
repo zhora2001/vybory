@@ -37,10 +37,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
   <h1>Внесення проблеми</h1>
     <ul class="new_input">
           <li class="im_data">
-          <label>  Номер дільниці:</label>
+          <label>  Номер округу:</label>
           </li>
           <li  class="val_data" id="nom_dil">
-              <input type="text" id="n_diln" name="n_diln" disabled hidden="" required/>
+              <input type="text" id="n_diln" name="n_diln"  hidden="" required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
           <select id = "spys_diln" name="dl">
                   <?php
@@ -71,11 +71,11 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             foreach($dil1 as $var1)
             {
               $a =  $var1['n_diln']." ".$var1['diln'];
-              echo "<option value=".$var1['n_diln'].">Дільниця № $a </option>";
+              echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
               }
 
             if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть дільницю</option>';
+          echo ' <option value="" selected>Выберіть округ</option>';
           ?>
         </select>
       </li>

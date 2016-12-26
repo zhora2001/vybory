@@ -44,6 +44,7 @@ Template Name: Вхід користувача
   	<div class="response1"></div> <!-- ну сюда будем пихать ответ от сервера -->
   </form>
  <?php }  ?>
+ <?php echo ulogin_panel(); ?>
  </div>
 </div><!-- #content -->
 </div><!-- #primary -->

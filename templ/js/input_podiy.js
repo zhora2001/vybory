@@ -100,13 +100,13 @@ jQuery(document).ready(function() {
 
     jQuery('a.iframe').fancybox();
     jQuery('#input_prihil').hide();
-    jQuery(function(u) {
-        jQuery("#date_p").mask("99/99/9999", {
-           placeholder: "мм.дд.рррр"
-       });
-       });
+    //jQuery(function(u) {
+        //jQuery("#date_p").mask("99/99/9999", {
+           //placeholder: "мм.дд.рррр"
+       //});
+       //});
     // после загрузки страницы
-      jQuery("#date_p").datepicker(  );
+      jQuery("#date_p").datepicker();
 
 
     add_form = jQuery('#add_object'); // запишем форму в переменную

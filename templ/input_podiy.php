@@ -96,11 +96,11 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <input type="text" class="val_input" name="title_p" id="title_p" required/>
       </li>
       <li class="im_data">
-      <label for="date_p"> Дата </label>
+      <label for="date_p">Дата</label>
       </li>
-        <li class="val_data" style="float:left;">
-          <input type="date" class="val_input" name="date_p" id="date_p"  required/>
-      </li>
+        <li class="val_data" style="float:left;background-color: #eee;">
+          <input  class="val_input" name="date_p" id="date_p"  required/>
+       </li>
       <li class="im_data">
       <label for="vyd_podii"> Вид події </label>
       </li>

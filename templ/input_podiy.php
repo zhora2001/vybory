@@ -34,16 +34,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 <form method="post" enctype="multipart/form-data" id="add_object">
   <h1>Внесення події</h1>
     <ul class="new_input">
-          <li class="im_data">
+          <li class="im_data" hidden="">
           <label>  Номер округу:</label>
           </li>
           <li  class="val_data" id="nom_dil">
               <input type="text" id="n_diln" name="n_diln" hidden=""/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
               <input type="text" id="nazva_d" name="nazva_d" value = "-1" hidden=""/>
-              <select id = "spys_diln" name="dl">
+              <select id = "spys_diln" name="dl" hidden="">
                   <?php
             $var3 = '1';
+            $var33 = '1';
 
 
             if(is_user_role('raion'))
@@ -72,12 +73,19 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             foreach($dil1 as $var1)
             {
               $a =  $var1['n_diln']." ".$var1['diln'];
-              echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+              if ($var33 == 1 )
+          {
+          echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+          $var33 = '0';
+          }
+          else {
+            echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+          }
               }
 
               $var3 = '2';
-          if ($var3 == '1')
-          echo ' <option value="" selected>Виберіть Округ</option>';
+    //      if ($var3 == '1')
+      //    echo ' <option value="" selected>Виберіть Округ</option>';
           ?>
         </select>
       </li>

@@ -249,12 +249,12 @@ wp_enqueue_script('my-plugin-script');
 
         </table>
         <p id="new-email" hidden>
-          <?php echo wp_generate_password(8, false).'@'.wp_generate_password(2, false).'me.ua'; ?>
+<!---        <?php echo wp_generate_password(8, false).'@'.wp_generate_password(2, false).'me.ua'; ?> --->
         </p>
         <script  type="text/javascript">
 
-        var a1 = jQuery('#new-email').text();
-        jQuery('#email').attr('value',a1);
+  //      var a1 = jQuery('#new-email').text();
+  //      jQuery('#email').attr('value',a1);
 
         jQuery("#dn").hide();
         jQuery("#kusch").hide();

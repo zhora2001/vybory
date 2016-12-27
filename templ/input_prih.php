@@ -37,13 +37,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <form method="post" enctype="multipart/form-data" id="add_object">
     <table class="input_prihil">
         <tr>
-          <td class="im_data">
+          <td class="im_data" hidden>
             Номер округу:
           </td>
           <td  id="nom_dil">
               <input type="text" id="n_diln" name="n_diln" value = "" hidden disabled required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
-          <select id = "spys_diln" name="dl">
+          <select id = "spys_diln" name="dl" hidden>
                   <?php
             $var3 = '1';
             $spysok_diln = "";
@@ -68,6 +68,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
             $key = 'diln';
             $var2 = get_user_meta($current_user->id, $key, true );
+            $var33 = '1';
             foreach($dil1 as $var1)
             {
               $a =  $var1['n_diln']." ".$var1['diln'];
@@ -75,11 +76,20 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               $spysok_diln = "'".$var1['n_diln']."'";
               else
               $spysok_diln .= ",'".$var1['n_diln']."'";
+
+                  if ($var33 == 1 )
+              {
               echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+              $var33 = '0';
+              }
+              else {
+                echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+
+              }
               }
 
-            if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть округ</option>';
+      //      if ($var3 == '1')
+      //    echo ' <option value="" selected>Выберіть округ</option>';
           ?>
         </select>
 
@@ -94,7 +104,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               </tr>
               <tr>
                 <td class="im_data">
-                  Вулиця:
+                  Район:
                 </td>
                 <td  id="nom_dil">
                   <select id="vulycia" name="vulycia" style="border:solid 1px pink;" required/>
@@ -119,7 +129,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       </tr>
       <tr>
       <td class="im_data">
-        <label for="budynok" > будинок: </label>
+        <label for="budynok" > Адреса: </label>
       </td>
       <td class="val_data">
         <input type="text" name="budynok" id="budynok" style="border:solid 1px pink;" required/>

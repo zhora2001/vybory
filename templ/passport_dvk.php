@@ -34,17 +34,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
         <div id="input_prihil" class="form_input">
           <div id="output" class="povidoml" > </div>
-                    <h1>Паспорт ДВК</h1>
+                    <h1>Паспорт території</h1>
     <br>
       <form method="post" enctype="multipart/form-data" id="add_passport">
     <table class="input_prihil">
         <tr>
-          <td class="im_data">
+          <td class="im_data" hidden>
 
             Номер округу:
           </td>
           <td  id="nom_dil" class="val_data">
-              <input type="text" id="n_diln" name="n_diln" value = "1" hidden="" disabled required/>
+              <input type="text" id="n_diln" name="n_diln" value = "" hidden="" required/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
               <input type="text" id="nazva_d" name="nazva_d" value = "-1" hidden=""/>
 
@@ -76,13 +76,20 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                 $key = 'diln';
                 $var2 = get_user_meta(   $current_user->id, $key, true );
 
-
+                $var33 = '1';
                 foreach($dil1 as $var1)
                 {
                 //  if( trim($var1['n_diln']) == trim($var2))
             //      {
                     $a =  $var1['n_diln']." ".$var1['diln'];
+                    if ($var33 == 1 )
+                {
+                echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+                $var33 = '0';
+                }
+                else {
                   echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
+                }
                   $var3 = '2';
             //      }
           //        else {
@@ -94,7 +101,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             //        }
                 }
               //  if ($var3 == '1')
-              echo ' <option value="-4" selected>Выберіть округ</option>';
+              //echo ' <option value="-4" selected>Выберіть округ</option>';
               ?>
             </select>
 
@@ -119,7 +126,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               <textarea type="text"  name="adressa" id="adressa" required/></textarea>
             </td>
            <td class="im_data" rowspan="2">
-               <label for="mezhi">Межі ДВК</label>
+               <label for="mezhi">Межі</label>
             </td>
             <td class="val_data"  rowspan="2">
               	<textarea   type="text"  name="mezhi" id="mezhi"/></textarea>
@@ -135,7 +142,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             <textarea type="text"  name="pidpryems" id="pidpryems"/></textarea>
           </td>
           <td class="im_data">
-            <label for="ustanov"> Установи в межах ДВК </label>
+            <label for="ustanov"> Установи в межах </label>
           </td>
          <td class="val_data">
                <textarea  type="text" name="ustanovy" id="ustanovy" /></textarea>

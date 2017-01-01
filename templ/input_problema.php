@@ -46,7 +46,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                   <?php
             $var3 = '1';
             $var33 = '1';
-            
+
             if(is_user_role('raion'))
             {
             $key = 'raion';
@@ -183,9 +183,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
 
     global $post;
-
+    $cur_user_id = get_current_user_id();
+   
     $args = array(
     	'post_type'=> 'problemy',
+      'author' => $cur_user_id,
+
       );
 
     $myposts = new WP_Query( $args );

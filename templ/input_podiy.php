@@ -8,11 +8,12 @@ Template Name: Введення події на дільниці
  </script>
  <script src="<?php echo get_template_directory_uri() ?>/js/jquery-ui.min.js">
  </script>
+ <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery-ui.min.css" type="text/css" media="screen" />
+
   <script src="<?php echo get_template_directory_uri() ?>/js/input_podiy.js">
 </script>
 
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery.fancybox.css" type="text/css" media="screen" />
- <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/jquery-ui.min.css" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style_v.css" type="text/css" media="all" />
 
  <div id="main-content" class="main-content">
@@ -34,17 +35,16 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 <form method="post" enctype="multipart/form-data" id="add_object">
   <h1>Внесення події</h1>
     <ul class="new_input">
-          <li class="im_data" hidden="">
+          <li class="im_data">
           <label>  Номер округу:</label>
           </li>
           <li  class="val_data" id="nom_dil">
               <input type="text" id="n_diln" name="n_diln" hidden=""/>
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
               <input type="text" id="nazva_d" name="nazva_d" value = "-1" hidden=""/>
-              <select id = "spys_diln" name="dl" hidden="">
+              <select id = "spys_diln" name="dl">
                   <?php
             $var3 = '1';
-            $var33 = '1';
 
 
             if(is_user_role('raion'))
@@ -73,19 +73,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             foreach($dil1 as $var1)
             {
               $a =  $var1['n_diln']." ".$var1['diln'];
-              if ($var33 == 1 )
-          {
-          echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
-          $var33 = '0';
-          }
-          else {
-            echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
-          }
+              echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
               }
 
               $var3 = '2';
-    //      if ($var3 == '1')
-      //    echo ' <option value="" selected>Виберіть Округ</option>';
+          if ($var3 == '1')
+          echo ' <option value="" selected>Виберіть Округ</option>';
           ?>
         </select>
       </li>
@@ -168,9 +161,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
 
     global $post;
-
+     $cur_user_id = get_current_user_id();
     $args = array(
     	'post_type'=> 'podiy',
+      'author' => $cur_user_id,
       );
 
     $myposts = new WP_Query( $args );

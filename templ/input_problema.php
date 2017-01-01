@@ -46,7 +46,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                   <?php
             $var3 = '1';
             $var33 = '1';
-            
+
             if(is_user_role('raion'))
             {
             $key = 'raion';
@@ -83,8 +83,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           }
               }
 
-            if ($var3 == '1')
-          echo ' <option value="" selected>Выберіть округ</option>';
+      //      if ($var3 == '1')
+      //    echo ' <option value="" selected>Выберіть округ</option>';
           ?>
         </select>
       </li>
@@ -94,10 +94,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <li class="val_data">
         <input type="text" class="val_input" name="title_p" id="title_p" required/>
       </li>
-      <li class="im_data">
+      <li class="im_data" hidden>
       <label for="status_p"> Статус проблеми </label>
       </li>
-        <li class="val_data" style="float:left;">
+        <li class="val_data" style="float:left;" hidden>
           <?php
           echo '<select id = "status_p" name="status_p">';
            $count = count($terms);
@@ -133,6 +133,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/>
       </textarea>
     </li>
+
+    <li class="im_data" >
+    <label for="propos_v">Пропозиції щодо вирішення </label><br /><br />
+    </li>
+    <li class="val_data">
+    <textarea type="text" class="val_input" name="propos_v" id="propos_v" /></textarea>
+    </li>
     <li class="im_data" >
       <label for="declar" > Фото (jpg) </label>
     </li>
@@ -146,10 +153,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       </div>
     </li>
     <br/>
-    <li class="im_data" >
+    <li class="im_data" hidden>
       <label for="smi" > Висвітлення в ЗМІ </label>
     </li>
-    <li class="val_data"  >
+    <li class="val_data"  hidden>
       <textarea type="text"  class="val_input" style="height:5em;" name="smi" id="smi"/>
     </textarea>
     </li>
@@ -159,12 +166,6 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 <li class="val_data"  >
   <input type="text"  class="val_input" name="kontakt" id="kontakt"/>
 </input>
-</li>
-<li class="im_data" >
-<label for="propos_v">Пропозиції щодо вирішення </label><br /><br />
-</li>
-<li class="val_data">
-<textarea type="text" class="val_input" name="propos_v" id="propos_v" /></textarea>
 </li>
 <li>
   <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
@@ -186,7 +187,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
     $args = array(
     	'post_type'=> 'problemy',
-      );
+      'author'=> get_current_user_id(),
+    );
 
     $myposts = new WP_Query( $args );
     //$myposts = get_posts('post_type=problemy');

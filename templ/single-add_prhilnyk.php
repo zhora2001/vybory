@@ -81,7 +81,72 @@ require_once __DIR__.'/header-add_prhilnyk.php';
 							</td>
 					</tr>
 					</table>
-<?php
+
+					Добавить поле
+					Manage Fields
+					 	Label<h6>Подпись</h6> Подпись это описательное имя для идентификации поля Pod.	Name<h6>Имя</h6> Этот атрибут используется для программной идентификации и доступа к Pod.	Field Type<h6>Типы полей</h6>Типы полей используются для определения, какие типы данных будут храниться в Pod. Это могут быть даты, текст, файлы и т.д..
+					 	Label<h6>Подпись</h6> Подпись это описательное имя для идентификации поля Pod.	Name<h6>Имя</h6> Этот атрибут используется для программной идентификации и доступа к Pod.	Field Type<h6>Типы полей</h6>Типы полей используются для определения, какие типы данных будут храниться в Pod. Это могут быть даты, текст, файлы и т.д..
+						Номер дільниці *
+						n_diln	Plain Number
+						Призвіще *
+						ufamily	Plain Text
+						Ім'я *
+						uname	Plain Text
+						По-батькові *
+						ubatk	Plain Text
+						Телефон *
+						tel_o	Phone
+						Телефон (дод.)
+						tel_dod	Phone
+						Соц.мережі
+						sotc_merega	Website
+						Адреса
+						adressa	Plain Paragraph Text
+						Дата народження
+						beathday	Date
+						ід_код
+						id_kod	Plain Text
+						Копія кода
+						kod_copy	File / Image / Video
+						Копія паспорта
+						pasport	File / Image / Video
+						Декларація
+						declar	File / Image / Video
+						Автобіографія
+						auto_b	File / Image / Video
+						Депутат
+						deputat	Yes / No
+						Лікар
+						likar	Yes / No
+						Держслужбовець
+						derzh_sl	Yes / No
+						Безробітний
+						bezrob	Yes / No
+						Пенсіонер
+						pensioner	Yes / No
+						Учасник АТО
+						ato	Yes / No
+						Інвалід
+						invalid	Yes / No
+						Авторітет
+						autoritet	Yes / No
+						Вчитель
+						uchitel	Yes / No
+						Підприємець
+						pidpr	Yes / No
+						budynok
+						budynok	Plain Text
+						vulycia
+						vulycia	Plain Text [type: text]
+						Юрист
+						urist	Yes / No
+						Студент
+						student	Yes / No
+						Викладач
+						vicladach	Yes / No
+						Аспирант
+						aspirant	Yes / No
+	<?php
 					/*
 					  Include the post format-specific template for the content. If you want to
 					 use this in a child theme, then include a file called called content-___.php

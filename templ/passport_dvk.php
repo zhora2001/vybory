@@ -48,9 +48,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               <input type="text" id="n_prih" name="n_prih" value = "-1" hidden=""/>
               <input type="text" id="nazva_d" name="nazva_d" value = "-1" hidden=""/>
 
-              <select id = "spys_diln" name="dl">
+              <select id = "spys_diln" name="dl" hidden>
                       <?php
                 $var3 = '1';
+                $spysok_diln = "";
 
                 if(is_user_role('raion'))
                 {
@@ -82,6 +83,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                 //  if( trim($var1['n_diln']) == trim($var2))
             //      {
                     $a =  $var1['n_diln']." ".$var1['diln'];
+
+                    if ($spysok_diln == "")
+                    $spysok_diln = "'".$var1['n_diln']."'";
+                    else
+                    $spysok_diln .= ",'".$var1['n_diln']."'";
+
                     if ($var33 == 1 )
                 {
                 echo "<option value=".$var1['n_diln'].">Округ № $a </option>";
@@ -198,6 +205,9 @@ $params = array(
 //'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
 //    'where' => "`d`.meta_key = 'n_diln' and meta_value = '5'",
 //    'limit'   => -1  // Return all rows
+'join' => 'JOIN `ds_postmeta` as `d`  ON `d`.`post_id` = `t`.`id`',
+    'where' => "`d`.meta_key = 'n_diln' and meta_value in (".$spysok_diln.")",
+  'limit'   => -1  // Return all rows
 );
 
 // Create and find in one shot

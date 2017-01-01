@@ -101,10 +101,10 @@ if(is_user_logged_in() && (is_user_role('dilnich')
         <li class="val_data" style="float:left;background-color: #eee;">
           <input  class="val_input" name="date_p" id="date_p"  required/>
        </li>
-      <li class="im_data">
+      <li class="im_data" hidden>
       <label for="vyd_podii"> Вид події </label>
       </li>
-      <li class="val_data">
+      <li class="val_data" hidden>
           <?php
            echo '<select id = "vyd_podii" name="vyd_podii">';
             $count = count($terms);
@@ -117,6 +117,8 @@ if(is_user_logged_in() && (is_user_role('dilnich')
           ?>
       </li>
           <br />
+            <br />
+              <br />
     <li class="im_data" >
      <label for="opys_p">Опис події </label><br /><br />
    </li>
@@ -124,6 +126,14 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <textarea type="text" class="val_input" name="opys_p" id="opys_p" required/>
       </textarea>
     </li>
+    <li class="im_data" >
+      <label for="kontakt" > Контакти </label>
+    </li>
+    <li class="val_data"  >
+      <input type="text"  class="val_input" name="kontakt" id="kontakt"/>
+    </input>
+    </li>
+
     <li class="im_data" >
       <label for="declar" > Фото (jpg) </label>
     </li>
@@ -137,20 +147,13 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       </div>
    </li>
    <br/>
-    <li class="im_data" >
+    <li class="im_data" hidden>
       <label for="smi" > Висвітлення в ЗМІ </label>
     </li>
-    <li class="val_data"  >
+    <li class="val_data"  hidden>
       <textarea type="text"  class="val_input" style="height:5em;" name="smi" id="smi"/>
     </textarea>
     </li>
-<li class="im_data" >
-  <label for="kontakt" > Контакти </label>
-</li>
-<li class="val_data"  >
-  <input type="text"  class="val_input" name="kontakt" id="kontakt"/>
-</input>
-</li>
 <li>
   <input class = "btn1" type="submit" name="button" value="Записати" id="sub"/>
 </li>
@@ -171,6 +174,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
 
     $args = array(
     	'post_type'=> 'podiy',
+      'author'=> get_current_user_id(),
       );
 
     $myposts = new WP_Query( $args );

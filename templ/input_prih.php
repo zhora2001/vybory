@@ -32,7 +32,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       ?>
 <button id="btn_prihil" type="button"> Відкрити форму</button>
         <div id="input_prihil" class="form_input">
-        <h1>Ведення прихільника</h1>
+        <h1>Прихильник</h1>
     <br>
       <form method="post" enctype="multipart/form-data" id="add_object">
     <table class="input_prihil">
@@ -104,7 +104,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
               </tr>
               <tr>
                 <td class="im_data">
-                  Район:
+                  Територія:
                 </td>
                 <td  id="nom_dil">
                   <select id="vulycia" name="vulycia" style="border:solid 1px pink;" required/>
@@ -169,7 +169,7 @@ if(is_user_logged_in() && (is_user_role('dilnich')
             <label for="beathday">Дата народження </label>
           </td>
           <td class="val_data">
-            <input  type="text"  name="beathday" id="beathday" style="border:solid 1px pink;" required/>
+            <input  type="text"  name="beathday" id="beathday" style="border:solid 1px pink;">
           </td>
       </tr>
         <tr>
@@ -258,6 +258,12 @@ if(is_user_logged_in() && (is_user_role('dilnich')
                     <label for="derzh_sl">Держслужбовець
                       <input class="input_chk" type="checkbox" id = "derzh_sl" name = "derzh_sl"/>
                     </label>
+                    <label for="urist">Юрист
+                      <input class="input_chk" type="checkbox" id = "urist" name = "urist"/>
+                    </label>
+                    <label for="urist">Аспирант
+                      <input class="input_chk" type="checkbox" id = "urist" name = "urist"/>
+                    </label>
                     <label for="bezrob">Безробітний
                       <input class="input_chk" type="checkbox" id = "bezrob" name = "bezrob"/>
                     </label>
@@ -281,9 +287,17 @@ if(is_user_logged_in() && (is_user_role('dilnich')
       <input class="input_chk" type="checkbox" id = "autoritet" name = "autoritet"/>
       Авторитетна особа
     </label>
+    <label for="vicladach">
+      <input class="input_chk" type="checkbox" id = "vicladach" name = "vicladach"/>
+    Викладач
+    </label>
     <label for="uchitel">
       <input class="input_chk" type="checkbox" id = "uchitel" name = "uchitel"/>
       Вчитель
+    </label>
+    <label for="student">
+      <input class="input_chk" type="checkbox" id = "student" name = "student"/>
+      Студент
     </label>
     <label for="pidpr">
       <input class="input_chk" type="checkbox" id = "pidpr" name = "pidpr"/>

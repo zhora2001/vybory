@@ -683,6 +683,10 @@ function add_object() {
   $autoritet = $_POST['autoritet'];
   $uchitel = $_POST['uchitel'];
   $pidpr = $_POST['pidpr'];
+  $aspirant = $_POST['aspirant'];
+  $student = $_POST['$student'];
+  $vicladach = $_POST['$vicladach'];
+  $urist = $_POST['$urist'];
 
 
 if ($ufamily == '' ||
@@ -780,6 +784,11 @@ else
       'pidpr'=>  $pidpr,
       'vulycia'=>$vulycia,
       'budynok'=>$budynok,
+      'student'=>$student,
+      'urist'=>$urist,
+      'vicladach'=>$vicladach,
+      'aspirant'=>$aspirant,
+
        //'id_kod_copy' => pods_attachment_import ( $fil_url)
 );
 if ($pod != '')

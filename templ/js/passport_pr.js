@@ -72,8 +72,31 @@ jQuery(document).ready(function() {
     jQuery('#primary-menu').append("<li class='menu-item site-navigation' style='color:white;'> Ви війшли як "+
     jQuery('#login_cur_user').text() +"  </li>");
 
+    jQuery("#n_diln").attr('value',jQuery("#spys_diln").val());
+    jQuery("#nazva_d").attr('value',jQuery("#spys_diln").val() + jQuery('#login_cur_user').text());
+
+
+    var a1 = jQuery("#n_diln").val();
+    //console.log(a2);
+    ajax_go_ch();
+    jQuery.ajax({
+        url: ajaxdata.url,
+        data: { // дополнительные параметры для отправки вместе с данными формы
+            action: 'change_passport_dvk', // этот параметр будет указывать wp какой экшн запустить, у нас это wp_ajax_nopriv_add_object_ajax
+            nonce: ajaxpassport.cnonce, // строка для проверки, что форма отправлена откуда надо
+            id_p: a1,
+        },
+        dataType: 'json',
+        success: response_go_ch,
+        error: get_err
+        //  jQuery(this).before("<input type='file' name='passport[]' />"); // добавим перед ссылкой еще один инпут типа файл с таким же нэймом
+    });
+
     jQuery("#spys_diln").change(function() {
-        jQuery("#n_diln").attr('value',jQuery(this).val());
+        jQuery('#n_diln').attr('value',jQuery(this).val());
+        //jQuery("#n_diln").val(jQuery(this).val());
+
+
 
         var a1 = jQuery(this).val();
         //console.log(a2);
